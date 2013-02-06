@@ -1,0 +1,13 @@
+body > footer {
+  position:relative;
+  padding:9px 20px;
+  height:15px;
+  color:#666;
+  font-size:11px;
+  border-top:1px solid #ccc;
+  text-align:right;
+}
+
+body > footer a {
+  color:#666;
+}

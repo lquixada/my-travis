@@ -1,0 +1,21 @@
+{
+    "title": "MyTravis Spec Runner",
+    "js": [
+        "js/lib/o.min.js",
+        "specs/matchers.js",
+        "js/lib/utils.src.js",
+        "js/controller/controller.src.js",
+        "js/controller/projs.src.js",
+        "js/model/model.src.js",
+        "js/model/projs.src.js",
+        "js/model/prefs.src.js",
+        "js/badge.src.js",
+        "specs/lib/utils.spec.js",
+        "specs/controller/controller.spec.js",
+        "specs/controller/projs.spec.js",
+        "specs/model/model.spec.js",
+        "specs/model/projs.spec.js",
+        "specs/model/prefs.spec.js",
+        "specs/badge.spec.js"
+    ]
+}

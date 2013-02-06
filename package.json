@@ -1,0 +1,21 @@
+{
+  "name": "MyTravis",
+  "version": "0.0.1",
+  "author": {
+    "name": "Leonardo Quixada"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "undefined/blob/master/LICENSE-MIT"
+    }
+  ],
+  "scripts": {
+    "test": "ophantom"
+  },
+  "dependencies": {
+    "grunt": "*",
+    "o-jasmine": "*",
+    "o-phantom": "*"
+  }
+}

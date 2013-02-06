@@ -1,0 +1,64 @@
+table {
+  margin:15px 0 0;
+  width:100%;
+}
+
+table th {
+  padding-right:15px;
+  text-align:left;
+}
+
+table td {
+  padding:10px 15px 10px 0;
+  border-top:1px solid #ddd;
+}
+
+table td:first-child {
+  padding-left:15px;
+  padding-right:0;
+}
+
+table td#no-projects {
+  padding:10px 15px;
+  background-color:#fff;
+}
+
+table td#no-projects div {
+  padding:40px 0;
+  color:#999;
+  text-align:center;
+  border:3px solid #f5f5f5;
+  border-radius:5px;
+}
+
+table tbody td a {
+  display:inline-block;
+}
+
+table tbody td img.icon-status {
+  margin-right:5px;
+}
+
+table tbody tr {
+  cursor:pointer;
+}
+
+table tbody tr:nth-child(even) {
+  background-color:#f1f1f1;
+}
+
+table tbody tr:nth-child(odd) {
+  background-color:#fff;
+}
+
+table tbody tr:hover {
+    background-color:#fdf2d6;
+}
+
+table tbody tr.failed {
+  background-color:#fcc;
+}
+
+table tbody tr.failed:hover {
+  background-color:#fbb;
+}

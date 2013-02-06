@@ -1,0 +1,110 @@
+<!doctype html>
+
+<html>
+
+<head>
+  <meta charset="utf-8">
+
+  <title>MyTravis</title>
+
+  <base target="_blank">
+
+  <link rel="stylesheet" href="css/projs.src.css">
+  <link rel="stylesheet" href="css/form.src.css">
+  <link rel="stylesheet" href="css/footer.src.css">
+  <link rel="stylesheet" href="css/header.src.css">
+  <link rel="stylesheet" href="css/author.src.css">
+  <link rel="stylesheet" href="css/popup.src.css">
+
+  <script src="js/lib/o.min.js"></script>
+  <script src="js/lib/moment.min.js"></script>
+  <script src="js/lib/utils.src.js"></script>
+  <script src="js/model/model.src.js"></script>
+  <script src="js/model/prefs.src.js"></script>
+  <script src="js/model/projs.src.js"></script>
+  <script src="js/controller/controller.src.js"></script>
+  <script src="js/controller/analytics.src.js"></script>
+  <script src="js/controller/projs.src.js"></script>
+  <script src="js/controller/form.src.js"></script>
+  <script src="js/controller/header.src.js"></script>
+  <script src="js/controller/author.src.js"></script>
+  <script src="js/init/popup.src.js"></script>
+</head>
+
+<body>
+    <span id="auto-focus" tabindex="0">prevent auto focus</span>
+
+    <header>
+        <a id="logo" href="http://travisci.org/"><img src="imgs/logo.png"></a>
+
+        <div id="bar">
+          <span id="user"></span>
+          <button id="open-prefs"><img src="imgs/icon-cog.png"></button>
+        </div>
+    </header>
+
+    <section id="form">
+      <form>
+          <label>user <input name="user" type="text"></label>
+          <label>check interval (in secs) <input name="interval" type="text" maxlength="3" required></label>
+          <button id="save-prefs" type="submit">save</button>
+          <span id="save-status"></span>
+      </form>
+    </section>
+
+    <section id="list">
+      <table border="0" cellspacing="0">
+        <thead>
+          <tr>
+            <th></th>
+            <th>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</th>
+            <th>Build</th>
+            <th>Duration</th>
+            <th>Finished At</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody></tbody>
+      </table>
+
+      <div id="overlay"></div>
+    </section>
+
+    <section id="author">
+        <div id="card">
+            <header>
+              <h4>Leonardo Quixadá</h4>
+
+              <button id="close">close</button>
+            </header>
+
+            <section>
+              <img id="photo" src="imgs/photo.jpeg">
+
+              <p>I'm a passionate javascript developer who likes dancing forró and good breakfasts :)</p>
+
+              <span class="github"><strong>Github</strong>: <a href="http://github.com/lquixada">github.com/lquixada</a></span>
+              <span class="twitter"><strong>Twitter</strong>: <a href="http://twitter.com/lquixada">@lquixada</a></span>
+            </section>
+
+            <footer>
+                <p>Make a donation to support the work of this app!</p>
+
+                <form id="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+                    <input type="hidden" name="cmd" value="_s-xclick">
+                    <input type="hidden" name="hosted_button_id" value="EN5RLK73KUCYW">
+                    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                    <img alt="" border="0" src="https://www.paypalobjects.com/pt_BR/i/scr/pixel.gif" width="1" height="1">
+                </form>
+            </footer>
+        </div>
+    </section>
+
+    <footer>
+      <a id="author" href="#">author</a> | <a href="http://travisci.org/">visit travisci.org &raquo;</a>
+    </footer>
+</body>
+
+</html>
+

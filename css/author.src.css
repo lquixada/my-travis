@@ -1,0 +1,102 @@
+section#author {
+    position:absolute;
+    display: -webkit-box;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background-color:rgba(0,0,0,.5);
+    z-index:15;
+    visibility:hidden;
+}
+
+section#author div#card {
+    position:relative;
+    margin:4% auto;
+    padding:15px;
+    width:80%;
+    background-color:#fff;
+    border:1px solid #ccc;
+    border-radius:6px;
+    box-shadow:2px 2px 8px #333;
+}
+
+section#author a:hover {
+    color:#c00;
+}
+
+section#author footer {
+    padding:7px 10px;
+    font-size:11px;
+    background-color:#eee;
+    border-radius:6px;
+    clear:both;
+}
+
+section#author footer form#paypal {
+    display:inline-block;
+    margin-left:16px;
+    vertical-align:middle;
+}
+
+section#author footer p {
+    display:inline-block;
+}
+
+
+section#author header {
+    margin:0 0 15px
+}
+
+section#author header button#close {
+    position:absolute;
+    display:block;
+    top:15px;
+    right:15px;
+    width:16px;
+    height:16px;
+    text-indent:-5000px;
+    background:#fff url(../imgs/icon-close.png) 0 0 no-repeat;
+    border:none;
+    cursor:pointer;
+}
+
+section#author header button#close:hover {
+    background-position:-16px 0;
+}
+
+section#author h4 {
+    margin:0;
+    padding:0 0 5px;
+    font-size:20px;
+    border-bottom:1px solid #ccc;
+}
+
+section#author img#photo {
+    margin-right:10px;
+    width:73px;
+    height:73px;
+    background:#eee url(../imgs/loading.gif) 50% 50% no-repeat;
+    border-radius:6px;
+    float:left;
+}
+
+section#author p {
+    margin:0;
+    padding:0;
+}
+
+section#author section {
+    margin:0 0 15px;
+    float:left;
+}
+
+section#author section p {
+    margin-bottom:10px;
+}
+
+section#author span {
+    display:block;
+}
