@@ -1,13 +1,11 @@
 {
   "manifest_version": 2,
 
-  "name": "MyTravis",
-  "description": "Monitor your projects builds from TravisCI within Chrome.",
-  "version": "0.1",
+  "name": "My Travis",
+  "description": "Monitor your projects builds from Travis CI within Chrome.",
+  "version": "0.1.1",
 
   "permissions": [
-    "tabs",
-    "storage",
     "background",
     "https://api.travis-ci.org/*"
   ],
