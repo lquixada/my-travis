@@ -8,24 +8,7 @@ module.exports = function ( grunt ) {
       files: ['js/**/*.src.js', 'specs/**/*.spec.js']
     },
 
-    concat: {
-      js: {
-        src: ['js/**/*.js'],
-        dest: 'build/'+projectName+'.src.js'
-      },
-
-      css: {
-        src: ['css/**/*.css'],
-        dest: 'build/'+projectName+'.src.css'
-      }
-    },
-
     min: {
-      dist: {
-        src: [''+projectName+'.src.js'],
-        dest: ''+projectName+'.min.js'
-      },
-
       build: {
         src: ['build/'+projectName+'.src.js'],
         dest: 'build/'+projectName+'.min.js'
@@ -34,11 +17,6 @@ module.exports = function ( grunt ) {
 
     // Not working
     cssmin: {
-      dist: {
-        src: [''+projectName+'.src.css'],
-        dest: ''+projectName+'.min.css'
-      },
-
       build: {
         src: ['build/'+projectName+'.src.css'],
         dest: 'build/'+projectName+'.min.css'
@@ -51,11 +29,6 @@ module.exports = function ( grunt ) {
 				dest: 'build'
 			}
     },
-
-    //watch: {
-        //files: ['js/**/*.js', 'css/**/*.css'],
-        //tasks: 'reload'
-    //},
 
     zip: {
       dist: {
@@ -74,7 +47,7 @@ module.exports = function ( grunt ) {
   grunt.registerTask('o:zip', 'zip:dist');
   grunt.registerTask('o:test', 'test');
   grunt.registerTask('o:imgs', 'imgs');
-  grunt.registerTask('o:build', 'o:test o:jslint concat o:jsmin o:imgs');
+  grunt.registerTask('o:build', 'o:test o:jslint o:jsmin o:imgs');
 
   
   grunt.registerMultiTask('imgs', 'Copy images to the build folder', function () {
