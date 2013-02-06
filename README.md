@@ -15,3 +15,8 @@ $ npm install
 ```bash
 $ npm test
 ```
+
+## Credits
+
+This project is developed and maintained by Leonardo Quixada.
+Licensed under the MIT License.
