@@ -33,6 +33,26 @@ ProjectController = o.clazz({
 		chrome.browserAction.setBadgeText({text: ''});
 	},
 
+	getBuildNumber: function (proj) {
+		return '#'+proj.last_build_number;
+	},
+
+	getFinishedAt: function (proj) {
+		if (proj.last_build_finished_at) {
+			return moment(proj.last_build_finished_at).fromNow();
+		}
+
+		return 'running';	
+	},
+
+	getDuration: function (proj) {
+		if (proj.last_build_duration) {
+			return formatSecs(proj.last_build_duration);
+		}
+
+		return '-';
+	},
+
 	getIcon: function (proj) {
 		switch (proj.last_build_status) {
 			case 0:  return '<img class="icon-status" src="imgs/icon-passed.png" title="passed">';
@@ -62,20 +82,12 @@ ProjectController = o.clazz({
 
 		projs.forEach(function (proj) {
 			html += [
-				'<tr href="https://travis-ci.org/'+proj.slug+'"'+(proj.last_build_status===1?'class="failed"':'')+'>',
-					'<td>',
-						that.getIcon(proj),
-					'</td>',
-					'<td>',
-						'<a href="https://travis-ci.org/'+proj.slug+'">',
-							that.getName(proj),
-						'</a>',
-					'</td>',
-					'<td>',
-						'#'+proj.last_build_number,
-					'</td>',
-					'<td>'+formatSecs(proj.last_build_duration)+'</td>',
-					'<td>'+moment(proj.last_build_finished_at || undefined).fromNow()+'</td>',
+				'<tr href="https://travis-ci.org/'+proj.slug+'" '+(proj.last_build_status===1?'class="failed"':'')+'>',
+					'<td>'+that.getIcon(proj)+'</td>',
+					'<td>'+that.getName(proj)+'</td>',
+					'<td>'+that.getBuildNumber(proj)+'</td>',
+					'<td>'+that.getDuration(proj)+'</td>',
+					'<td>'+that.getFinishedAt(proj)+'</td>',
 				'</tr>'
 			].join('');
 		});
