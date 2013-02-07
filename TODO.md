@@ -7,9 +7,9 @@
 * Divulgar no facebook: rio.js e Javascript Brasil
 * Implement grunt tasks
 * Create javascript specs
-* Deploy project on TravisCI
 * class ModelLocalStorage < Model < Source
 * Pause option: removes badge and stops updater
+* Consider removing wrench until GitHub integration
 
 
 ## Version 2
