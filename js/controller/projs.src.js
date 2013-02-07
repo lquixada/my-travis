@@ -35,9 +35,14 @@ ProjectController = o.clazz({
 
 	getIcon: function (proj) {
 		switch (proj.last_build_status) {
-			case 0:  return 'imgs/icon-passed.png';
-			case 1:  return 'imgs/icon-failed.png';
-			default: return 'imgs/icon-started.png';
+			case 0:  return '<img class="icon-status" src="imgs/icon-passed.png" title="passed">';
+			case 1:  return '<img class="icon-status" src="imgs/icon-failed.png" title="failed">';
+			default:
+		    if (proj.last_build_finished_at) {
+					return '<img class="icon-status" src="imgs/icon-errored.png" title="errored">';
+				} else {
+					return '<img class="icon-status" src="imgs/icon-started.png" title="started">';
+				}
 		}
 	},
 
@@ -59,7 +64,7 @@ ProjectController = o.clazz({
 			html += [
 				'<tr href="https://travis-ci.org/'+proj.slug+'"'+(proj.last_build_status===1?'class="failed"':'')+'>',
 					'<td>',
-						'<img class="icon-status" src="'+that.getIcon(proj)+'">',
+						that.getIcon(proj),
 					'</td>',
 					'<td>',
 						'<a href="https://travis-ci.org/'+proj.slug+'">',
