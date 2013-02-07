@@ -13,13 +13,13 @@ describe("Project Controller", function() {
 		});
 
 		it("should get the started icon", function() {
-			var proj = {last_build_status: null, last_build_finished_at: '2013-02-07T03:11:55Z'};
+			var proj = {last_build_status: null, last_build_finished_at: null};
 
 			expect(projectController.getIcon(proj)).toBe('<img class="icon-status" src="imgs/icon-started.png" title="started">');
 		});
 
 		it("should get the errored icon", function() {
-			var proj = {last_build_status: null, last_build_finished_at: null};
+			var proj = {last_build_status: null, last_build_finished_at: '2013-02-07T03:11:55Z'};
 
 			expect(projectController.getIcon(proj)).toBe('<img class="icon-status" src="imgs/icon-errored.png" title="errored">');
 		});
