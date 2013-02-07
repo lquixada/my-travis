@@ -6,11 +6,11 @@
 * Divulgar no facebook: rio.js e Javascript Brasil
 * Create javascript specs
 * class ModelLocalStorage < Model < Source
-* Pause option: removes badge and stops updater
 
 
 ## Version 2
 
+* Pause option: removes badge and stops updater
 * "Enable notifications" options
 * Check chrome.storage.sync
 * Login on Github
