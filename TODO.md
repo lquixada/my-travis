@@ -1,7 +1,6 @@
 # TODO
 
 * Improve screenshots zoom
-* Wrench só funciona com login do Github
 * Handle when property finishedAt is null
 * Figure out how to break Updater up
 * Divulgar no facebook: rio.js e Javascript Brasil
@@ -9,6 +8,7 @@
 * Create javascript specs
 * class ModelLocalStorage < Model < Source
 * Pause option: removes badge and stops updater
+* Wrench only works with login on Github
 * Consider removing wrench until GitHub integration
 
 
@@ -22,5 +22,5 @@
 
 ## Version 3
 
-* MyCI: suporte para outros CI (Jenkins, TeamCity, ...)
+* MyCI (other CIs support: Jenkins, TeamCity, ...)
 * Localizations
