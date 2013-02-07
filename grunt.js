@@ -32,7 +32,7 @@ module.exports = function ( grunt ) {
 
     zip: {
       dist: {
-        exclude: ['./.git\*', './node_modules\*', './imgs/screenshots\*'],
+        exclude: ['./.git\*', './node_modules\*', './screenshots\*'],
         src: '.',
         dest: ''+projectName+'.zip'
       }
