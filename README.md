@@ -1,4 +1,5 @@
 # MyTravis
+[![Build Status](https://travis-ci.org/lquixada/my-travis.png?branch=master)](https://travis-ci.org/lquixada/my-travis)
 
 Monitor your projects builds from TravisCI within Chrome.
 
