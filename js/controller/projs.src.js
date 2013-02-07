@@ -71,11 +71,6 @@ ProjectController = o.clazz({
 					'</td>',
 					'<td>'+formatSecs(proj.last_build_duration)+'</td>',
 					'<td>'+moment(proj.last_build_finished_at || undefined).fromNow()+'</td>',
-					'<td>',
-						'<a href="http://github.com/'+proj.slug+'/settings/hooks#travis_minibucket">',
-							'<img src="imgs/icon-wrench.png">',
-						'</a>',
-					'</td>',
 				'</tr>'
 			].join('');
 		});
