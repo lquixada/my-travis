@@ -1,7 +1,7 @@
 # MyTravis
 [![Build Status](https://travis-ci.org/lquixada/my-travis.png?branch=master)](https://travis-ci.org/lquixada/my-travis)
 
-Monitor your projects builds from TravisCI within Chrome.
+Monitor your projects builds from TravisCI within Chrome. Check it out on [Chrome Web Store](https://chrome.google.com/webstore/detail/my-travis/ddlafmkcenhiahiikbgjemcbdengmjbg).
 
 ## Development
 
