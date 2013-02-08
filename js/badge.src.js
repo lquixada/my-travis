@@ -1,9 +1,13 @@
 Badge = {
+	clear: function () {
+		chrome.browserAction.setBadgeText({text: ''});
+	},
+
 	update: function (projs) {
 		var failed = 0, running = 0;
 
 		if (projs.length === 0) {
-			chrome.browserAction.setBadgeText({text: ''});
+			this.clear();
 			return;
 		}
 		
