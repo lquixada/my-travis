@@ -1,9 +1,9 @@
 # TODO
 
+* Update Badge on user change (see fabric case)
 * Check Chrome's extension auto update feature
 * Improve screenshots zoom
 * Figure out how to break Updater up
-* Divulgar no facebook: rio.js e Javascript Brasil
 * Create javascript more specs
 
 
@@ -21,3 +21,5 @@
 
 * MyCI (other CIs support: Jenkins, TeamCity, ...)
 * Localizations
+* User History drop-down menu
+* Go mobile?
