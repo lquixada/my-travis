@@ -1,8 +1,10 @@
 Updater = {
-	url: 'https://api.travis-ci.org/repos?owner_name=%s',
+	url: 'https://api.travis-ci.org/repos',
 
-	getUrl: function (user) {
-		return this.url.replace('%s', user);
+	getUrl: function (users) {
+		users = users.split(/, */);
+
+		return this.url+('?owner_name[]='+users.join('&owner_name[]='));
 	},
 
 	render: function () {

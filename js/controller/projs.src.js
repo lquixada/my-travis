@@ -67,7 +67,7 @@ ProjectController = o.clazz({
 	},
 
 	getName: function (proj) {
-		return proj.slug.split('/')[1];
+		return proj.slug;
 	},
 
 	render: function() {
