@@ -23,8 +23,6 @@ FormController = o.clazz({
 				Updater.request({
 					user: this.user.value,
 					onComplete: function () {
-						headerController.updateUser();
-
 						that.hideOverlay();
 						that.blockSubmit(false);
 						that.setStatus('saved');
@@ -91,8 +89,6 @@ FormController = o.clazz({
 
 	restoreData: function () {
 		var prefs = Prefs.get();
-
-		$( 'span#user' ).innerHTML = prefs.user || '';
 
 		this.el().user.value = prefs.user || '';
 		this.el().interval.value = prefs.interval || '';

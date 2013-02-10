@@ -7,7 +7,7 @@ HeaderController = o.clazz({
 		});
 	},
 
-	updateUser: function () {
+	pdateUser: function () {
 		$('span#user').innerHTML = Prefs.get('user'); 
 	}
 });
