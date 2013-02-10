@@ -5,10 +5,6 @@ HeaderController = o.clazz({
 		$('button#open-prefs').addEventListener('click', function () {
 			formController.toggle();
 		});
-	},
-
-	pdateUser: function () {
-		$('span#user').innerHTML = Prefs.get('user'); 
 	}
 });
 

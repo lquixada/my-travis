@@ -72,7 +72,7 @@ ProjectController = o.clazz({
 
 	render: function() {
 		var html = '';
-		var projs = Projs.get();
+		var projs = Projs.getSorted();
 		var that = this;
 
 		if (projs.length === 0) {
