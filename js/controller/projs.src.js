@@ -67,11 +67,16 @@ ProjectController = o.clazz({
 	},
 
 	getName: function (proj) {
-		return proj.slug;
+		return proj.slug.split('/')[1];
+	},
+
+	getUser: function (proj) {
+		return proj.slug.split('/')[0];
 	},
 
 	render: function() {
 		var html = '';
+		var user = '';
 		var projs = Projs.getSorted();
 		var that = this;
 
@@ -81,6 +86,14 @@ ProjectController = o.clazz({
 		}
 
 		projs.forEach(function (proj) {
+			
+			if (user !== that.getUser(proj)) {
+				user = that.getUser(proj);
+
+				html += '<tr><th colspan="6">'+user+'</th></tr>';
+			}
+
+
 			html += [
 				'<tr href="https://travis-ci.org/'+proj.slug+'" '+(proj.last_build_status===1?'class="failed"':'')+'>',
 					'<td>'+that.getIcon(proj)+'</td>',

@@ -39,6 +39,13 @@ table tbody td img.icon-status {
   margin-right:5px;
 }
 
+table tbody th {
+	padding:5px 15px;
+	color:#fff;
+	background-color:#666;
+	cursor:default;
+}
+
 table tbody tr {
   cursor:pointer;
 }
