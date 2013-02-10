@@ -30,7 +30,7 @@ ProjectController = o.clazz({
 			'</tr>'
 		].join('');
 
-		chrome.browserAction.setBadgeText({text: ''});
+		Badge.clear();
 	},
 
 	getBuildNumber: function (proj) {
