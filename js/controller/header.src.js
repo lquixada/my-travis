@@ -1,5 +1,6 @@
 HeaderController = o.clazz({
 	extend: Controller,
+	dom: 'header',
 
 	addListeners: function () {
 		this.el('button#open-users').addEventListener('click', function () {
