@@ -10,7 +10,7 @@ AuthorController = o.clazz({
 			that.show();
 		});
 
-		this.el().querySelector('button#close').addEventListener('click', function () {
+		this.el('button#close').addEventListener('click', function () {
 			that.hide();
 		});
 
@@ -18,7 +18,7 @@ AuthorController = o.clazz({
 			that.hide();
 		});
 
-		this.el().querySelector('div#card').addEventListener('click', function (evt) {
+		this.el('div#card').addEventListener('click', function (evt) {
 			evt.stopPropagation();
 		});
 	},
