@@ -32,3 +32,10 @@ function formatSecs(secs) {
 
 	return stamp;
 }
+
+function isEmptyObject(obj) {
+	for (var name in obj) {
+		return false;
+	}
+	return true;
+}
