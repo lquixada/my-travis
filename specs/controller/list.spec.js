@@ -1,4 +1,4 @@
-describe("Project Controller", function() {
+describe("List Controller", function() {
 	describe("icons", function() {
 		it("should get the passed icon", function() {
 			var proj = {last_build_status: 0, last_build_finished_at: '2013-02-07T03:11:55Z'};

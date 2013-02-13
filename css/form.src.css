@@ -1,12 +1,12 @@
 
-section#form {
+section.form {
   position:relative;
   margin-top:-51px;
   height:50px;
   z-index:5;
 }
 
-section#form > form {
+section.form > form {
   position:absolute;
   top:9px;
   left:0;
@@ -20,7 +20,7 @@ section#form > form {
   z-index:1;
 }
 
-section#form > form button {
+section.form > form button {
     position: relative;
     overflow: visible;
     display: inline-block;
@@ -44,9 +44,9 @@ section#form > form button {
 }
 
 
-section#form > form button:hover,
-section#form > form button:focus,
-section#form > form button:active {
+section.form > form button:hover,
+section.form > form button:focus,
+section.form > form button:active {
     border-color: #2356c4;
     border-bottom-color: #2a65a0;
     background-color: #4a80f3;
@@ -58,7 +58,7 @@ section#form > form button:active {
 }
 
 
-section#form > form button:active {
+section.form > form button:active {
     border-color: #2a65a0;
     border-bottom-color: #2356c4;
     background-color: #4a80f3;
@@ -68,32 +68,35 @@ section#form > form button:active {
 }
 
 
-section#form > form fieldset {
+section.form > form fieldset {
   margin:0;
   padding:9px 15px;
   border:none;
 }
 
-section#form > form input {
+section.form > form input {
   margin:0 10px 0 2px;
   padding:1px 3px;
-  width:90px;
   vertical-align:middle;
 }
 
-section#form > form input[name="interval"] {
+section.form > form input[name="interval"] {
   width:25px;
 }
 
-section#form > form label {
+section.form > form input[name="user"] {
+  width:70px;
+}
+
+section.form > form label {
   font-weight:bold;
 }
 
-section#form > form span#save-status {
+section.form > form span#save-status {
     margin-left:5px;
     color:#0b0;
 }
 
-section#form > form.opened {
+section.form > form.opened {
   top:51px;
 }

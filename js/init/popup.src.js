@@ -1,7 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
-	formController.addListeners();
-	formController.restoreData();
-	formController.disableFieldsTabIndex(true);
+	formPrefs.addListeners();
+	formPrefs.restoreData();
+	formPrefs.disableFieldsTabIndex(true);
+
+	formUsers.addListeners();
 
 	projectController.addListeners();
 	projectController.render();
@@ -9,4 +11,3 @@ document.addEventListener('DOMContentLoaded', function () {
 	headerController.addListeners();
 	authorController.addListeners();
 });
-

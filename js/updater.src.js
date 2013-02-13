@@ -2,7 +2,7 @@ Updater = {
 	url: 'https://api.travis-ci.org/repos',
 
 	getUrl: function (users) {
-		users = users.split(/, */);
+		users = users.split(',');
 
 		return this.url+('?owner_name[]='+users.join('&owner_name[]='));
 	},
@@ -19,13 +19,11 @@ Updater = {
 	},
 
 	request: function (options) {
-		var req,
-			that = this;
-			url = this.getUrl(options.user);
+		var req, that = this;
 
-		if (options.user) {
+		if (options.users) {
 			req = new XMLHttpRequest();
-			req.open('GET', this.getUrl(options.user), true);
+			req.open('GET', this.getUrl(options.users), true);
 			req.onload = function (e) {
 				var projs = JSON.parse(e.target.responseText);
 
@@ -42,21 +40,23 @@ Updater = {
 		}
 	},
 
+	restart: function () {
+		this.stop();
+		this.start();
+	},
+
 	start: function () {
 		var options = {},
 			that = this,
 			prefs = Prefs.get(),
+			users = prefs.users,
 			interval = parseInt(prefs.interval, 10);
 
-		options.user = prefs.user;
-	 
-		this.stop();
-
-		if (options.user) {
+		if (users) {
 			console.log( 'Updater started. Polling interval: '+interval+'s' );
 
 			this.timer = setInterval(function () {
-				that.request(options);
+				that.request({users:users});
 			}, interval*1000); 
 		}
 	},
