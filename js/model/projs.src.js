@@ -1,27 +1,52 @@
 Project = o.clazz({
 	extend: Model,
 	key: 'projs',
+
+	convert: function (proj) {
+		return {
+			user: proj.slug.split('/')[0],
+			name: proj.slug.split('/')[1],
+			description: proj.description,
+			build: proj.last_build_number,
+			status: this.convertStatus(proj),
+			duration: proj.last_build_duration,
+			finishedAt: proj.last_build_finished_at
+		};
+	},
+
+	convertStatus: function (proj) {
+		switch (proj.last_build_status) {
+			case 0: return 'passed';
+			case 1: return 'failed';
+			default:
+		    if (proj.last_build_finished_at) {
+					return 'errored';
+				} else {
+					return 'started';
+				}
+		}	
+	},
 	
 	get: function () {
 		return this._super() || [];
 	},
 	
-	getSorted: function () {
-		var projs = this.get();
-			users = Prefs.getUsers();
+	store: function (projs) {
+		var that = this,
+			tmp = {};
 
-		// Convert indexed array to associative array
-		users.forEach(function (val, i) {
-			users[val] = i;
+		projs.forEach(function (projOld) {
+			var projNew = that.convert(projOld),
+				user = projNew.user;
+
+			if (!tmp[user]) {
+				tmp[user] = [];
+			}
+
+			tmp[user].push(projNew);
 		});
 
-		// Sort array by slug
-		return projs.sort(function (a, b) {
-			a = a.slug.split('/')[0];
-			b = b.slug.split('/')[0];
-			
-			return (users[a] < users[b]? -1 : (users[a] > users[b]? 1 : 0));
-		});
+		this.set(tmp);
 	}
 });
 

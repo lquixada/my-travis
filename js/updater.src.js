@@ -27,10 +27,10 @@ Updater = {
 			req.onload = function (e) {
 				var projs = JSON.parse(e.target.responseText);
 
-				Projs.set(projs);
-				that.render();
+				Projs.store(projs);
+				Badge.update(Projs.get());
 
-				Badge.update(projs);
+				that.render();
 				
 				if (options.onComplete) {
 					options.onComplete(projs);

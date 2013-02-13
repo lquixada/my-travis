@@ -1,6 +1,6 @@
 ListController = o.clazz({
 	extend: Controller,
-	dom: 'table tbody',
+	dom: 'table',
 
 	addListeners: function() {
 		this.el().addEventListener('click', function (evt) {
@@ -8,13 +8,7 @@ ListController = o.clazz({
 
 			evt.preventDefault();
 			
-			if (el.className === 'remove') {
-				var user = el.getAttribute('user');
-				Prefs.removeUser(user);
-				return;
-			}
-
-			while (el) {
+			while (el.tagName.toLowerCase() == 'tr') {
 				url = el.getAttribute('href');
 				
 				if (url) {
@@ -27,8 +21,22 @@ ListController = o.clazz({
 		});
 	},
 
+	remove: function () {
+		var tbody, tbodies = this.el().querySelectorAll('tbody');
+		
+		for (var i = 0; i < tbodies.length; i++) {
+			tbody = tbodies[i];
+			tbody.parentNode.removeChild(tbody);
+		}
+	},
+
 	clear: function () {
-		this.el().innerHTML = [
+		var tbody;
+
+		this.remove();
+
+		tbody = document.createElement('tbody');
+		tbody.innerHTML = [
 			'<tr>',
 				'<td id="no-projects" colspan="6">',
 					'<div>No project has been added until now.</div>',
@@ -36,35 +44,33 @@ ListController = o.clazz({
 			'</tr>'
 		].join('');
 
+		this.el().appendChild(tbody);
+
 		Badge.clear();
 	},
 
-	getBuildNumber: function (proj) {
-		return '#'+proj.last_build_number;
-	},
-
 	getFinishedAt: function (proj) {
-		if (proj.last_build_finished_at) {
-			return moment(proj.last_build_finished_at).fromNow();
+		if (proj.finishedAt) {
+			return moment(proj.finishedAt).fromNow();
 		}
 
 		return 'running';	
 	},
 
 	getDuration: function (proj) {
-		if (proj.last_build_duration) {
-			return formatSecs(proj.last_build_duration);
+		if (proj.duration) {
+			return formatSecs(proj.duration);
 		}
 
 		return '-';
 	},
 
 	getIcon: function (proj) {
-		switch (proj.last_build_status) {
+		switch (proj.status) {
 			case 0:  return '<img class="icon-status" src="imgs/icon-passed.png" title="passed">';
 			case 1:  return '<img class="icon-status" src="imgs/icon-failed.png" title="failed">';
 			default:
-		    if (proj.last_build_finished_at) {
+		    if (proj.finishedAt) {
 					return '<img class="icon-status" src="imgs/icon-errored.png" title="errored">';
 				} else {
 					return '<img class="icon-status" src="imgs/icon-started.png" title="started">';
@@ -72,52 +78,51 @@ ListController = o.clazz({
 		}
 	},
 
-	getName: function (proj) {
-		return proj.slug.split('/')[1];
-	},
-
 	getHref: function (proj) {
 		return 'href="https://travis-ci.org/'+proj.slug+'"';
 	},
 
 	getClassName: function (proj) {
-		return (proj.last_build_status===1?'class="failed"':'');
-	},
-
-	getUser: function (proj) {
-		return proj.slug.split('/')[0];
+		return (proj.status===1?'class="failed"':'');
 	},
 
 	render: function() {
-		var html = '';
-		var user = '';
-		var projs = Projs.getSorted();
+		var users = Prefs.getUsers();
+		var projs = Projs.get();
 		var that = this;
 
-		if (projs.length === 0) {
+		if (isEmptyObject(projs)) {
 			this.clear();
 			return;
 		}
 
-		projs.forEach(function (proj) {
-			if (user !== that.getUser(proj)) {
-				user = that.getUser(proj);
+		this.remove();
 
-				html += '<tr><th colspan="6">'+user+'</th></tr>';
-			}
+		users.forEach(function (user) {
+			var html = '';
+			var tbody;
+			var projsUser = projs[user];
 
-			html += [
-				'<tr '+that.getHref(proj)+' '+that.getClassName(proj)+'>',
-					'<td>'+that.getIcon(proj)+'</td>',
-					'<td>'+that.getName(proj)+'</td>',
-					'<td>'+that.getBuildNumber(proj)+'</td>',
-					'<td>'+that.getDuration(proj)+'</td>',
-					'<td>'+that.getFinishedAt(proj)+'</td>',
-				'</tr>'
-			].join('');
+			html += '<tr><th colspan="6">'+user+'</th></tr>';
+
+			projsUser.forEach(function (proj) {
+				html += [
+					'<tr '+that.getHref(proj)+' '+that.getClassName(proj)+'>',
+						'<td>'+that.getIcon(proj)+'</td>',
+						'<td>'+proj.name+'</td>',
+						'<td>'+'#'+proj.build+'</td>',
+						'<td>'+that.getDuration(proj)+'</td>',
+						'<td>'+that.getFinishedAt(proj)+'</td>',
+					'</tr>'
+				].join('');
+			});
+
+			tbody = document.createElement('tbody');
+			tbody.setAttribute('user', user);
+			tbody.innerHTML = html;
+
+			that.el().appendChild(tbody);
 		});
-
-		this.el().innerHTML = html;
 	}
 });
 

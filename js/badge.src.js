@@ -6,22 +6,24 @@ Badge = {
 	update: function (projs) {
 		var failed = 0, running = 0;
 
-		if (projs.length === 0) {
+		if (isEmptyObject(projs)) {
 			this.clear();
 			return;
 		}
 		
-		projs.forEach(function (proj) {
-			if (proj.last_build_status === 1) {
-				failed++;
-				return;
-			}
+		for ( var key in projs) {
+			projs[key].forEach(function (proj) {
+				if (proj.status === 1) {
+					failed++;
+					return;
+				}
 
-			if (proj.last_build_status === null) {
-				running++;
-				return;
-			}
-		});
+				if (proj.status === null) {
+					running++;
+					return;
+				}
+			});
+		}
 
 		if (running>0 && failed === 0) {
 			// Do nothing, maintain state

@@ -26,7 +26,7 @@ describe("Badge", function() {
         var projs;
         
         beforeEach(function() {
-            projs = [ {last_build_status: 0 }, {last_build_status: 0} ];
+            projs = { user: [ {status: 0 }, {status: 0} ] };
         });
         
         it("should have blank text", function() {
@@ -48,7 +48,7 @@ describe("Badge", function() {
         var projs;
 
         beforeEach(function() {
-            projs = [ {last_build_status: 1 }, {last_build_status: 0} ];
+            projs = {user: [ {status: 1 }, {status: 0} ]};
         });
         
         it("should have blank text", function() {
@@ -70,7 +70,7 @@ describe("Badge", function() {
         var projs;
 
         beforeEach(function() {
-            projs = [ {last_build_status: null }, {last_build_status: 0} ];
+            projs = {user: [ {status: null}, {status: 0} ]};
         });
         
         it("should not modify text", function() {
