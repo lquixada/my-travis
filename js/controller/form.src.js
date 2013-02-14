@@ -140,7 +140,7 @@ FormPrefsController = o.clazz({
 			evt.preventDefault();
 
 			Prefs.set('interval', this.interval.value || 60);
-			Prefs.set('notifications', this.notifications.value || false);
+			//Prefs.set('notifications', this.notifications.value || false);
 
 			that.setStatus('saved');
 
@@ -162,7 +162,7 @@ FormPrefsController = o.clazz({
 		var prefs = Prefs.get();
 		
 		this.el().find(':input[name=interval]').val(prefs.interval || '');
-		this.el().find(':input[name=notifications]').val(prefs.notifications || '');
+		//this.el().find(':input[name=notifications]').val(prefs.notifications || '');
 	}
 });
 
