@@ -35,7 +35,7 @@ ListController = o.clazz({
 				].join(''));
 			}
 
-			// Without setTimout, transition does not work
+			// Without setTimeout, transition does not work
 			setTimeout(function () {
 				button.next().toggleClass('visible');
 			}, 100);
@@ -48,16 +48,14 @@ ListController = o.clazz({
 			Prefs.removeUser(user);
 			Projs.removeUser(user);
 
-			that.update();
+			Badge.update(Projs.get());
+
+			that.render();
 		});
 
 		this.el().on('click', 'span.option.no', function () {
 			$(this).parent().removeClass('visible');
 		});
-
-		window.addEventListener('storage', function () {
-			that.update();
-		}, false);
 	},
 
 	clear: function () {
@@ -148,12 +146,6 @@ ListController = o.clazz({
 				'</td>',
 			'</tr>'
 		].join(''));
-	},
-
-	update: function () {
-		Badge.update(Projs.get());
-
-		this.render();
 	}
 });
 
