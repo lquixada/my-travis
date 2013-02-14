@@ -23,6 +23,25 @@ ListController = o.clazz({
 		});
 
 		this.el().on('click', 'button.remove', function () {
+			var button = $(this);
+
+			if (!button.next().is('.confirm')) {
+				button.after([
+					'<span class="confirm">',
+						'are you sure?',
+						'<span class="option yes">yes</span>',
+						'<span class="option no">no</span>',
+					'</span>'
+				].join(''));
+			}
+
+			// Without setTimout, transition does not work
+			setTimeout(function () {
+				button.next().toggleClass('visible');
+			}, 100);
+		});
+
+		this.el().on('click', 'span.option.yes', function () {
 			var tbody = $(this).closest('tbody'),
 				user = tbody.attr('user');
 			
@@ -30,6 +49,10 @@ ListController = o.clazz({
 			Projs.removeUser(user);
 
 			that.update();
+		});
+
+		this.el().on('click', 'span.option.no', function () {
+			$(this).parent().removeClass('visible');
 		});
 
 		window.addEventListener('storage', function () {
