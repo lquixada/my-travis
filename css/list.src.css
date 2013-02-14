@@ -1,3 +1,22 @@
+
+section#list {
+	max-height:500px;
+	min-height:150px;
+	overflow-x:hidden;
+}
+
+section#list div#overlay {
+	position:absolute;
+	display:none;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	background-color:#fff;
+	opacity:.5;
+	z-index:2;
+}
+
 table {
   margin:15px 0 0;
   width:100%;
@@ -37,6 +56,8 @@ table tbody td a {
 
 table tbody td img.icon-status {
   margin-right:5px;
+	width:10px;
+	height:10px;
 }
 
 table tbody th {
