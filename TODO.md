@@ -8,8 +8,6 @@
 * Update screenshots
 * Tab navigation
 * Switch to multiple tables
-* Disable enable notifications
-* Put alert on remove
 
 
 ## Version 0.2
