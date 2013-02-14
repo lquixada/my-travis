@@ -116,7 +116,7 @@ section#list tbody tr:nth-child(odd) {
 }
 
 section#list tbody tr:hover {
-    background-color:#fdf2d6;
+	background-color:#fdf2d6;
 }
 
 section#list tbody tr.failed {
