@@ -1,7 +1,7 @@
-document.addEventListener('DOMContentLoaded', function () {
+$(document).ready(function () {
 	formPrefs.addListeners();
 	formPrefs.restoreData();
-	formPrefs.disableFieldsTabIndex(true);
+	formPrefs.disableFieldsTabIndex();
 
 	formUsers.addListeners();
 

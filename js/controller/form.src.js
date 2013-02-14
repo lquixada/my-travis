@@ -9,22 +9,20 @@ FormController = o.clazz({
 
 	close: function () {
 		this.el().removeClass('opened');
-		this.disableFieldsTabIndex(true);
+		this.disableFieldsTabIndex();
 		this.setStatus('');
 	},
+	
+	disableFieldsTabIndex: function () {
+		this.el().find(':input').attr('tabindex', '-1' );	
+	},
 
-	disableFieldsTabIndex: function ( disable ) {
-		var fields = this.el().find('input, button');
-
-		if (disable) {
-			fields.attr('tabindex', '-1' );
-		} else {
-			fields.removeAttr('tabindex');
-		}
+	enableFieldsTabIndex: function (enable) {
+		this.el().find(':input').removeAttr('tabindex');
 	},
 
 	focus: function () {
-		this.el().find(':input').first().focus().select(); 
+		this.el().find(':input:first').get(0).focus(); 
 	},
 
 	getUpdater: function () {
@@ -34,7 +32,7 @@ FormController = o.clazz({
 	open: function () {
 		this.el().addClass('opened');
 		this.focus();
-		this.disableFieldsTabIndex(false);
+		this.enableFieldsTabIndex();
 	},
 
   setStatus: function (msg) {
@@ -42,7 +40,7 @@ FormController = o.clazz({
 	},
 
 	toggle: function () {
-		if (this.el().hasClass('opened')) {
+		if (this.el().is('.opened')) {
 			this.close();
 		} else {
 			this.open();
@@ -108,6 +106,7 @@ FormUsersController = o.clazz({
 		$('section#list div#overlay').show();
 	}
 });
+
 
 FormPrefsController = o.clazz({
 	extend: FormController,

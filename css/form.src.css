@@ -1,102 +1,89 @@
 
 section.form {
-  position:relative;
-  margin-top:-51px;
-  height:50px;
-  z-index:5;
+	position:relative;
+	margin-top:-51px;
+	height:50px;
+	z-index:5;
 }
 
-section.form > form {
-  position:absolute;
-  top:9px;
-  left:0;
-  right:0;
-  padding:9px 15px;
-  border-bottom:1px solid #ddd;
-  background-color:#eee;
-  transition:top .4s;
-  -webkit-transition:top .4s;
-  box-shadow:0 2px 8px #aaa;
-  z-index:1;
+section.form form {
+	position:absolute;
+	top:9px;
+	left:0;
+	right:0;
+	padding:9px 15px;
+	border-bottom:1px solid #ddd;
+	background-color:#eee;
+	transition:top .4s;
+	-webkit-transition:top .4s;
+	box-shadow:0 2px 8px #aaa;
+	z-index:1;
 }
 
-section.form > form button {
-    position: relative;
-    overflow: visible;
-    display: inline-block;
-    padding: 4px 10px;
-    border: 1px solid #d4d4d4;
-    margin: 0;
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
-    background-color: #ececec;
-    background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #f4f4f4), color-stop(100%, #ececec));
-    background: -webkit-linear-gradient(#f4f4f4,#ececec);
-    background: linear-gradient(#f4f4f4,#ececec);
-    background-clip: padding-box;
-    cursor: pointer;
-    outline: none;
-    text-decoration: none;
-    text-align: center;
-    font: 11px/normal sans-serif;
-    color: #666;
-    white-space: nowrap;
-}
-
-
-section.form > form button:hover,
-section.form > form button:focus,
-section.form > form button:active {
-    border-color: #2356c4;
-    border-bottom-color: #2a65a0;
-    background-color: #4a80f3;
-    background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #6699fa), color-stop(100%, #4a80f3));
-    background: -webkit-linear-gradient(#6699fa,#4a80f3);
-    background: linear-gradient(#6699fa,#4a80f3);
-    text-decoration: none;
-    color: #fff;
+section.form button {
+	position: relative;
+	overflow: visible;
+	display: inline-block;
+	padding: 4px 10px;
+	border: 1px solid #d4d4d4;
+	margin: 0;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	background-color: #ececec;
+	background: -webkit-linear-gradient(#f4f4f4,#ececec);
+	background-clip: padding-box;
+	cursor: pointer;
+	outline: none;
+	text-decoration: none;
+	text-align: center;
+	font: 11px/normal sans-serif;
+	color: #666;
+	white-space: nowrap;
 }
 
 
-section.form > form button:active {
-    border-color: #2a65a0;
-    border-bottom-color: #2356c4;
-    background-color: #4a80f3;
-    background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #4a80f3), color-stop(100%, #6699fa));
-    background: -webkit-linear-gradient(#4a80f3,#6699fa);
-    background: linear-gradient(#4a80f3,#6699fa);
+section.form button:hover,
+section.form button:focus,
+section.form button:active {
+	border-color: #2356c4;
+	border-bottom-color: #2a65a0;
+	background-color: #4a80f3;
+	background: -webkit-linear-gradient(#6699fa,#4a80f3);
+	text-decoration: none;
+	color: #fff;
 }
 
 
-section.form > form fieldset {
-  margin:0;
-  padding:9px 15px;
-  border:none;
+section.form button:active {
+	border-color: #2a65a0;
+	border-bottom-color: #2356c4;
+	background-color: #4a80f3;
+	background: -webkit-linear-gradient(#4a80f3,#6699fa);
 }
 
-section.form > form input {
-  margin:0 10px 0 2px;
-  padding:1px 3px;
-  vertical-align:middle;
+section.form input {
+	margin:0 10px 0 2px;
+	padding:1px 3px;
+	vertical-align:middle;
 }
 
-section.form > form input[name="interval"] {
-  width:25px;
+section.form input[name="interval"] {
+	width:25px;
 }
 
-section.form > form input[name="user"] {
-  width:70px;
+section.form input[name="user"] {
+	width:120px;
 }
 
-section.form > form label {
-  font-weight:bold;
+section.form label {
+	font-weight:bold;
 }
 
-section.form > form span#save-status {
-    margin-left:5px;
-    color:#0b0;
+section.form span.status {
+	margin-left:5px;
+	color:#0b0;
 }
 
-section.form > form.opened {
-  top:51px;
+section.form form.opened {
+	top:51px;
 }

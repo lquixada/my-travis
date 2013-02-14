@@ -12,7 +12,7 @@ ListController = o.clazz({
 		});
 
 		this.el().on('click', 'button.remove', function () {
-			var tbody = $( this ).closest('tbody'),
+			var tbody = $(this).closest('tbody'),
 				user = tbody.attr('user');
 			
 			Prefs.removeUser(user);
