@@ -22,11 +22,7 @@ Updater = {
 		var req, that = this;
 
 		if (options.users) {
-			req = new XMLHttpRequest();
-			req.open('GET', this.getUrl(options.users), true);
-			req.onload = function (e) {
-				var projs = JSON.parse(e.target.responseText);
-
+			$.getJSON(this.getUrl(options.users), function (projs) {
 				Projs.store(projs);
 				Badge.update(Projs.get());
 
@@ -35,8 +31,7 @@ Updater = {
 				if (options.onComplete) {
 					options.onComplete(projs);
 				}
-			};
-			req.send(null);
+			});
 		}
 	},
 

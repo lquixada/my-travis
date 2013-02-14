@@ -51,11 +51,11 @@ table tbody tr {
 }
 
 table tbody tr:nth-child(even) {
-  background-color:#f1f1f1;
+  background-color:#fff;
 }
 
 table tbody tr:nth-child(odd) {
-  background-color:#fff;
+  background-color:#f1f1f1;
 }
 
 table tbody tr:hover {

@@ -5,8 +5,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	formUsers.addListeners();
 
-	projectController.addListeners();
 	projectController.render();
+	projectController.addListeners();
 
 	headerController.addListeners();
 	authorController.addListeners();

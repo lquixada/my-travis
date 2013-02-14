@@ -5,30 +5,30 @@ AuthorController = o.clazz({
 	addListeners: function () {
 		var that = this;
 
-		$('a#author').addEventListener('click', function (evt) {
+		$('a#author').on('click', function (evt) {
 			evt.preventDefault();
 			that.show();
 		});
 
-		this.el('button#close').addEventListener('click', function () {
+		this.el().on('click', function () {
 			that.hide();
 		});
 
-		this.el().addEventListener('click', function () {
-			that.hide();
-		});
-
-		this.el('div#card').addEventListener('click', function (evt) {
+		this.el().on('click', 'div#card', function (evt) {
 			evt.stopPropagation();
+		});
+
+		this.el().on('click', 'button#close', function () {
+			that.hide();
 		});
 	},
 
 	hide: function () {
-		this.el().style.visibility = 'hidden';
+		this.el().css('visibility', 'hidden');
 	},
 
 	show: function () {
-		this.el().style.visibility = 'visible';
+		this.el().css('visibility', 'visible');
 	} 
 });
 

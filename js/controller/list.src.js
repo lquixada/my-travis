@@ -3,48 +3,28 @@ ListController = o.clazz({
 	dom: 'table',
 
 	addListeners: function() {
-		this.el().addEventListener('click', function (evt) {
-			var url, el = evt.target;
+		var that = this;
 
-			evt.preventDefault();
-			
-			while (el.tagName.toLowerCase() == 'tr') {
-				url = el.getAttribute('href');
-				
-				if (url) {
-					window.open(url);
-					break;
-				}
-
-				el = el.parentNode;
-			}
+		this.el().on('click', 'tr', function () {
+			url = this.getAttribute('href');
+			window.open(url);
 		});
 	},
 
 	remove: function () {
-		var tbody, tbodies = this.el().querySelectorAll('tbody');
-		
-		for (var i = 0; i < tbodies.length; i++) {
-			tbody = tbodies[i];
-			tbody.parentNode.removeChild(tbody);
-		}
+		this.el().find('tbody').remove();
 	},
 
 	clear: function () {
-		var tbody;
-
 		this.remove();
 
-		tbody = document.createElement('tbody');
-		tbody.innerHTML = [
+		this.el().append([
 			'<tr>',
 				'<td id="no-projects" colspan="6">',
 					'<div>No project has been added until now.</div>',
 				'</td>',
 			'</tr>'
-		].join('');
-
-		this.el().appendChild(tbody);
+		].join(''));
 
 		Badge.clear();
 	},
@@ -66,24 +46,15 @@ ListController = o.clazz({
 	},
 
 	getIcon: function (proj) {
-		switch (proj.status) {
-			case 0:  return '<img class="icon-status" src="imgs/icon-passed.png" title="passed">';
-			case 1:  return '<img class="icon-status" src="imgs/icon-failed.png" title="failed">';
-			default:
-		    if (proj.finishedAt) {
-					return '<img class="icon-status" src="imgs/icon-errored.png" title="errored">';
-				} else {
-					return '<img class="icon-status" src="imgs/icon-started.png" title="started">';
-				}
-		}
+		return '<img class="icon-status" src="imgs/icon-'+proj.status+'.png" title="'+proj.status+'">';
 	},
 
 	getHref: function (proj) {
-		return 'href="https://travis-ci.org/'+proj.slug+'"';
+		return 'href="https://travis-ci.org/'+proj.user+'/'+proj.name+'"';
 	},
 
 	getClassName: function (proj) {
-		return (proj.status===1?'class="failed"':'');
+		return (proj.status==='failed'?'class="failed"':'');
 	},
 
 	render: function() {
@@ -91,7 +62,7 @@ ListController = o.clazz({
 		var projs = Projs.get();
 		var that = this;
 
-		if (isEmptyObject(projs)) {
+		if (users.length=== 0) {
 			this.clear();
 			return;
 		}
@@ -99,29 +70,31 @@ ListController = o.clazz({
 		this.remove();
 
 		users.forEach(function (user) {
-			var html = '';
-			var tbody;
+			var html;
 			var projsUser = projs[user];
 
+			html = '<tbody user="'+user+'">';
 			html += '<tr><th colspan="6">'+user+'</th></tr>';
 
-			projsUser.forEach(function (proj) {
-				html += [
-					'<tr '+that.getHref(proj)+' '+that.getClassName(proj)+'>',
-						'<td>'+that.getIcon(proj)+'</td>',
-						'<td>'+proj.name+'</td>',
-						'<td>'+'#'+proj.build+'</td>',
-						'<td>'+that.getDuration(proj)+'</td>',
-						'<td>'+that.getFinishedAt(proj)+'</td>',
-					'</tr>'
-				].join('');
-			});
+			if (projsUser) {
+				projsUser.forEach(function (proj) {
+					html += [
+						'<tr '+that.getHref(proj)+' '+that.getClassName(proj)+'>',
+							'<td>'+that.getIcon(proj)+'</td>',
+							'<td>'+proj.name+'</td>',
+							'<td>'+'#'+proj.build+'</td>',
+							'<td>'+that.getDuration(proj)+'</td>',
+							'<td>'+that.getFinishedAt(proj)+'</td>',
+						'</tr>'
+					].join('');
+				});
+			} else {
+				html += '<tr><td colspan="6"><em>no projects found.</em></td></tr>';
+			}
 
-			tbody = document.createElement('tbody');
-			tbody.setAttribute('user', user);
-			tbody.innerHTML = html;
+			html += '</tbody>'
 
-			that.el().appendChild(tbody);
+			that.el().append(html);
 		});
 	}
 });

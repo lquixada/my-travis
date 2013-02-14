@@ -1,8 +1,3 @@
-
-function $(query) {
-	return document.querySelector(query);
-}
-
 function formatSecs(secs) {
 	var stamp = '';
 
@@ -33,9 +28,3 @@ function formatSecs(secs) {
 	return stamp;
 }
 
-function isEmptyObject(obj) {
-	for (var name in obj) {
-		return false;
-	}
-	return true;
-}

@@ -2,6 +2,7 @@
     "title": "MyTravis Spec Runner",
     "js": [
         "js/lib/o.min.js",
+        "js/lib/jquery-1.9.1.min.js",
         "specs/matchers.js",
         "js/lib/utils.src.js",
         "js/lib/jsonrequest.src.js",
@@ -11,6 +12,7 @@
         "js/model/projs.src.js",
         "js/model/prefs.src.js",
         "js/badge.src.js",
+
         "specs/lib/utils.spec.js",
         "specs/lib/jsonrequest.spec.js",
         "specs/controller/controller.spec.js",

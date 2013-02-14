@@ -1,49 +1,44 @@
 FormController = o.clazz({
 	extend: Controller,
 
-	blockSubmit: function ( block ) {
-		var type = (block?'button':'submit');
+	blockSubmit: function ( enable ) {
+		var type = (enable?'button':'submit');
 
-		this.el('button').setAttribute('type', type);
+		this.el().find('button').attr('type', type);
 	},
 
 	close: function () {
-		this.el().className = '';
+		this.el().removeClass('opened');
 		this.disableFieldsTabIndex(true);
 		this.setStatus('');
 	},
 
 	disableFieldsTabIndex: function ( disable ) {
-		var fields = this.el().querySelectorAll('input, button');
+		var fields = this.el().find('input, button');
 
-		for (var i = 0; i < fields.length; i++) {
-			if (disable) {
-				fields[i].setAttribute('tabindex', '-1' );
-			} else {
-				fields[i].removeAttribute('tabindex' );
-			}
+		if (disable) {
+			fields.attr('tabindex', '-1' );
+		} else {
+			fields.removeAttr('tabindex');
 		}
 	},
 
 	focus: function () {
-		this.el().elements[0].focus(); 
-		this.el().elements[0].select();
+		this.el().find(':input').first().focus().select(); 
 	},
 
 	open: function () {
-		this.el().className = 'opened';
+		this.el().addClass('opened');
 		this.focus();
 		this.disableFieldsTabIndex(false);
 	},
 
-	setStatus: function ( statusMsg ) {
-		this.el('span.status').innerHTML = statusMsg;
+  setStatus: function (msg) {
+    this.el().find('span.status').html(msg);
 	},
 
 	toggle: function () {
-		var opened = (this.el().className === 'opened');
-		
-		if (opened) {
+		if (this.el().hasClass('opened')) {
 			this.close();
 		} else {
 			this.open();
@@ -59,7 +54,7 @@ FormUsersController = o.clazz({
 	addListeners: function () {
 		var that = this;
 
-		this.el().addEventListener('submit', function ( evt ) {
+		this.el().on('submit', function ( evt ) {
 			var users, Updater = chrome.extension.getBackgroundPage().Updater;
 			
 			evt.preventDefault();
@@ -74,7 +69,7 @@ FormUsersController = o.clazz({
 
 			// Forces a request right away
 			Updater.request({
-				user: Prefs.get('users'),
+				users: Prefs.get('users'),
 				onComplete: function () {
 					that.clear();
 					that.hideOverlay();
@@ -92,21 +87,21 @@ FormUsersController = o.clazz({
 	},
 
 	clear: function () {
-		this.el().user.value = '';
+		this.el().find(':input[name=user]').val('');
 	},
 
 	close: function () {
-		$('button#open-users').focus();
+		$('header button#open-users').focus();
 
 		this._super();
 	},
 
 	hideOverlay: function () {
-		$('section#list div#overlay').style.display = 'none';
+		$('section#list div#overlay').hide();
 	},
 
 	showOverlay: function () {
-		$('section#list div#overlay').style.display = 'block';
+		$('section#list div#overlay').show();
 	}
 });
 
@@ -117,7 +112,7 @@ FormPrefsController = o.clazz({
 	addListeners: function () {
 		var that = this;
 
-		this.el().addEventListener('submit', function ( evt ) {
+		this.el().on('submit', function ( evt ) {
 			var Updater = chrome.extension.getBackgroundPage().Updater;
 
 			evt.preventDefault();
@@ -136,7 +131,7 @@ FormPrefsController = o.clazz({
 	},
 
 	close: function () {
-		$('button#open-prefs').focus();
+		$('header button#open-prefs').focus();
 
 		this._super();
 	},
@@ -144,8 +139,8 @@ FormPrefsController = o.clazz({
 	restoreData: function () {
 		var prefs = Prefs.get();
 		
-		this.el().interval.value = prefs.interval || '';
-		this.el().notifications.value = prefs.notifications || '';
+		this.el().find(':input[name=interval]').val(prefs.interval || '');
+		this.el().find(':input[name=notifications]').val(prefs.notifications || '');
 	}
 });
 

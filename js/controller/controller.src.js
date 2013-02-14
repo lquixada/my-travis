@@ -3,19 +3,11 @@ Controller = o.clazz( {
 		throw 'not implemented error';
 	},
 
-	el: function (query) {
+	el: function () {
 		if (!this.element) {
-			this.element = this.$(this.dom);
-		}
-
-		if (query) {
-			return this.element.querySelector(query);
+			this.element = $(this.dom);
 		}
 		
 		return this.element;
-	},
-
-	$: function (query) {
-		return document.querySelector(query);
 	}
 });
