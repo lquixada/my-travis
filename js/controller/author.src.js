@@ -1,14 +1,6 @@
 AuthorController = o.clazz({
 	extend: Controller,
 	dom: 'section#author',
-	
-	init: function () {
-		var that = this;
-
-		$(document).ready(function () {
-			that.addListeners();
-		});
-	},
 
 	addListeners: function () {
 		var that = this;
@@ -31,6 +23,10 @@ AuthorController = o.clazz({
 		});
 	},
 
+	boot: function () {
+		this.addListeners();
+	},
+
 	hide: function () {
 		this.el().css('visibility', 'hidden');
 	},
@@ -40,4 +36,4 @@ AuthorController = o.clazz({
 	} 
 });
 
-new AuthorController();
+authorController = new AuthorController();

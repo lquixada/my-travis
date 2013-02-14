@@ -53,15 +53,6 @@ FormUsersController = o.clazz({
 	extend: FormController,
 	dom: 'section#form-user form',
 	
- 	init: function () {
-		var that = this;
-
-		$(document).ready(function () {
-			that.addListeners();
-			that.disableFieldsTabIndex();
-		});
-	},
-
 	addListeners: function () {
 		var that = this;
 
@@ -97,6 +88,11 @@ FormUsersController = o.clazz({
 		});
 	},
 
+	boot: function () {
+		this.addListeners();
+	  this.disableFieldsTabIndex();	
+	},
+
 	clear: function () {
 		this.el().find(':input[name=user]').val('');
 	},
@@ -116,20 +112,12 @@ FormUsersController = o.clazz({
 	}
 });
 
+formUsersController = new FormUsersController();
+
 
 FormPrefsController = o.clazz({
 	extend: FormController,
 	dom: 'section#form-prefs form',
-	
-	init: function () {
-		var that = this;
-
-		$(document).ready(function () {
-			that.addListeners();
-			that.restoreData();
-			that.disableFieldsTabIndex();
-		});
-	},
 	
 	addListeners: function () {
 		var that = this;
@@ -152,6 +140,12 @@ FormPrefsController = o.clazz({
 		});
 	},
 
+	boot: function() {
+		this.addListeners();
+		this.restoreData();
+		this.disableFieldsTabIndex();
+	},
+
 	close: function () {
 		$('header button#open-prefs').focus();
 
@@ -166,5 +160,4 @@ FormPrefsController = o.clazz({
 	}
 });
 
-formUsers = new FormUsersController();
-formPrefs = new FormPrefsController();
+formPrefsController = new FormPrefsController();

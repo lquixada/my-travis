@@ -28,18 +28,18 @@ describe("Project Model", function() {
 
 		beforeEach(function() {
 			proj = {
-					id: 436531,
-					slug: "lquixada/my-travis",
-					description: "Monitor your projects builds from TravisCI within Chrome.",
-					last_build_id: 4770908,
-					last_build_number: "13",
-					last_build_status: 0,
-					last_build_result: 0,
-					last_build_duration: 28,
-					last_build_language: null,
-					last_build_started_at: "2013-02-13T16:02:12Z",
-					last_build_finished_at: "2013-02-13T16:02:40Z"
-				};
+				id: 436531,
+				slug: "lquixada/my-travis",
+				description: "Monitor your projects builds from TravisCI within Chrome.",
+				last_build_id: 4770908,
+				last_build_number: "13",
+				last_build_status: 0,
+				last_build_result: 0,
+				last_build_duration: 28,
+				last_build_language: null,
+				last_build_started_at: "2013-02-13T16:02:12Z",
+				last_build_finished_at: "2013-02-13T16:02:40Z"
+			};
 		});
 		
 		it("should convert slug", function() {

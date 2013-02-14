@@ -2,15 +2,6 @@ ListController = o.clazz({
 	extend: Controller,
 	dom: 'table',
 	
-	init: function () {
-		var that = this;
-
-		$(document).ready(function () {
-			that.render();
-			that.addListeners();
-		});
-	},
-
 	addListeners: function() {
 		var that = this;
 
@@ -56,6 +47,11 @@ ListController = o.clazz({
 		this.el().on('click', 'span.option.no', function () {
 			$(this).parent().removeClass('visible');
 		});
+	},
+
+	boot: function () {
+		this.render();
+	  this.addListeners();	
 	},
 
 	clear: function () {
