@@ -5,13 +5,11 @@
 * Figure out how to break Updater up
 * Create javascript more specs
 * Casper
-* Visual
-	* Solve form folding
-	* icon delete
-	* icon user
-	* hover no projects
 * Update screenshots
 * Tab navigation
+* Switch to multiple tables
+* Disable enable notifications
+* Put alert on remove
 
 
 ## Version 0.2

@@ -1,4 +1,4 @@
-body > footer {
+footer#main-footer {
   position:relative;
   padding:9px 20px;
   height:15px;
@@ -8,6 +8,6 @@ body > footer {
   text-align:right;
 }
 
-body > footer a {
+footer#main-footer a {
   color:#666;
 }

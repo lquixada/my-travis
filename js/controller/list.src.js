@@ -39,16 +39,21 @@ ListController = o.clazz({
 
 	clear: function () {
 		this.remove();
-
-		this.el().append([
-			'<tr>',
-				'<td id="no-projects" colspan="6">',
-					'<div>No project has been added until now.</div>',
-				'</td>',
-			'</tr>'
-		].join(''));
+		this.showMessage();
 
 		Badge.clear();
+	},
+
+	compileProjTemplate: function (proj) {
+		return [
+			'<tr '+this.getHref(proj)+' '+this.getClassName(proj)+'>',
+				'<td>'+this.getIcon(proj)+'</td>',
+				'<td>'+proj.name+'</td>',
+				'<td>'+'#'+proj.build+'</td>',
+				'<td>'+this.getDuration(proj)+'</td>',
+				'<td>'+this.getFinishedAt(proj)+'</td>',
+			'</tr>'
+		].join('');
 	},
 
 	getClassName: function (proj) {
@@ -97,31 +102,29 @@ ListController = o.clazz({
 		this.remove();
 
 		users.forEach(function (user) {
-			var projsUser = projs[user];
-
 			html += '<tbody user="'+user+'">';
-			html += '<tr><th colspan="6">'+user+' <button class="remove">x</button></th></tr>';
+			html += '<tr><th colspan="6">'+user+' <button class="remove" title="remove user"></button></th></tr>';
 
-			if (projsUser) {
-				projsUser.forEach(function (proj) {
-					html += [
-						'<tr '+that.getHref(proj)+' '+that.getClassName(proj)+'>',
-							'<td>'+that.getIcon(proj)+'</td>',
-							'<td>'+proj.name+'</td>',
-							'<td>'+'#'+proj.build+'</td>',
-							'<td>'+that.getDuration(proj)+'</td>',
-							'<td>'+that.getFinishedAt(proj)+'</td>',
-						'</tr>'
-					].join('');
-				});
+			if (projs[user]) {
+				html += projs[user].map(this.compileProjTemplate, this).join('');
 			} else {
-				html += '<tr><td colspan="6"><em>no projects found.</em></td></tr>';
+				html += '<tr><td class="message" colspan="6"><em>no projects found.</em></td></tr>';
 			}
-
+			
 			html += '</tbody>';
-		});
+		}, this);
 
 		this.el().append(html);
+	},
+
+	showMessage: function () {
+		this.el().append([
+			'<tr>',
+				'<td class="message" colspan="6">',
+					'<div id="no-projects">No project has been added until now.</div>',
+				'</td>',
+			'</tr>'
+		].join(''));
 	},
 
 	update: function () {

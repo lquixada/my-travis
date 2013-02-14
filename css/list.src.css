@@ -1,8 +1,22 @@
-
 section#list {
 	max-height:500px;
 	min-height:150px;
 	overflow-x:hidden;
+}
+
+section#list button.remove {
+	margin:0;
+	padding:0;
+	width:14px;
+	height:14px;
+	background:transparent url(../imgs/icon-remove.png) no-repeat 0 0;
+	border:none;
+	float:right;
+	cursor:pointer;
+}
+
+section#list button.remove:hover {
+	background-position:-14px 0;
 }
 
 section#list div#overlay {
@@ -32,22 +46,23 @@ section#list td {
   border-top:1px solid #ddd;
 }
 
-section#list td:first-child {
-  padding-left:15px;
-  padding-right:0;
-}
-
-section#list td#no-projects {
-  padding:10px 15px;
-  background-color:#fff;
-}
-
-section#list td#no-projects div {
+section#list td div#no-projects {
+	margin-right:15px;
   padding:40px 0;
   color:#999;
   text-align:center;
   border:3px solid #f5f5f5;
   border-radius:5px;
+}
+
+section#list td.message {
+	background-color:#fff;
+	cursor:default;
+}
+
+section#list td:first-child {
+  padding-left:15px;
+  padding-right:0;
 }
 
 section#list tbody td a {

@@ -9,8 +9,8 @@ FormController = o.clazz({
 
 	close: function () {
 		this.el().removeClass('opened');
-		this.disableFieldsTabIndex();
 		this.setStatus('');
+		this.disableFieldsTabIndex();
 	},
 	
 	disableFieldsTabIndex: function () {
@@ -58,6 +58,7 @@ FormUsersController = o.clazz({
 
 		$(document).ready(function () {
 			that.addListeners();
+			that.disableFieldsTabIndex();
 		});
 	},
 

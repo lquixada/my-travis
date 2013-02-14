@@ -1,27 +1,27 @@
-body > header {
+header#main-header {
   position:relative;
   background: -webkit-linear-gradient(#444,#111);
   z-index:10;
 }
 
-body > header a {
+header#main-header a {
     display:inline-block;
 }
 
 
-body > header a#logo {
+header#main-header a#logo {
     margin:9px 15px;
 }
 
-body > header div#bar {
+header#main-header div#bar {
     position:absolute;
     top:16px;
     right:20px;
     color:#ddd;
 }
 
-body > header div#bar button {
-    margin:0;
+header#main-header div#bar button {
+    margin:0 0 0 3px;
     padding:0;
     background:none;
     border:none;
@@ -29,18 +29,18 @@ body > header div#bar button {
     vertical-align:middle;
 }
 
-body > header div#bar button img {
+header#main-header div#bar button img {
     margin:0;
     width:18px;
     font-size:13px;
 }
 
 
-body > header div#bar span#user:after {
+header#main-header div#bar span#user:after {
     content: " |";
 }
 
-body > header div#bar span#user:empty:after {
+header#main-header div#bar span#user:empty:after {
     content: " ";
 }
 
