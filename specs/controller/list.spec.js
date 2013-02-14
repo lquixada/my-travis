@@ -8,9 +8,9 @@ describe("List Controller", function() {
 		it("should clear the html", function() {
 			var table = $('<table></table>');
 
-			spyOn(projectController, 'el').andReturn(table);
+			spyOn(listController, 'el').andReturn(table);
 
-			projectController.clear();
+			listController.clear();
 
 			expect(table.find('#no-projects').length).toBe(1);
 		});
@@ -19,9 +19,9 @@ describe("List Controller", function() {
 			var table = $('<table></table>');
 
 			spyOn(chrome.browserAction, 'setBadgeText'); 
-			spyOn(projectController, 'el').andReturn(table);
+			spyOn(listController, 'el').andReturn(table);
 
-			projectController.clear();
+			listController.clear();
 
 			expect(chrome.browserAction.setBadgeText).toHaveBeenCalled();
 			expect(chrome.browserAction.setBadgeText.calls[0].args[0]).toBeJson({text: ''});
