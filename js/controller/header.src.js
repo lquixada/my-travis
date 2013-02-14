@@ -3,11 +3,11 @@ HeaderController = o.clazz({
 	dom: 'header',
 
 	addListeners: function () {
-		$('header').find('button#open-users').on('click', function () {
+		this.el().on('click', 'button#open-users', function () {
 			formUsers.toggle();
 		});
 
-		$('header').find('button#open-prefs').on('click', function () {
+		this.el().on('click', 'button#open-prefs', function () {
 			formPrefs.toggle();
 		});
 	}

@@ -2,9 +2,9 @@ Updater = {
 	url: 'https://api.travis-ci.org/repos',
 
 	getUrl: function (users) {
-		users = users.split(',');
+		users = '?owner_name[]='+users.join('&owner_name[]=');
 
-		return this.url+('?owner_name[]='+users.join('&owner_name[]='));
+		return this.url+users;
 	},
 
 	render: function () {
@@ -51,7 +51,7 @@ Updater = {
 			console.log( 'Updater started. Polling interval: '+interval+'s' );
 
 			this.timer = setInterval(function () {
-				that.request({users:users});
+				that.request({users:Prefs.getUsers()});
 			}, interval*1000); 
 		}
 	},

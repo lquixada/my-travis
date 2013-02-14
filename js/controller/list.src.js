@@ -3,16 +3,21 @@ ListController = o.clazz({
 	dom: 'table',
 
 	addListeners: function() {
-		var that = this;
-
 		this.el().on('click', 'tr', function () {
-			url = this.getAttribute('href');
-			window.open(url);
-		});
-	},
+			var url = this.getAttribute('href');
 
-	remove: function () {
-		this.el().find('tbody').remove();
+			if (url) {
+				window.open(url);
+			}
+		});
+
+		this.el().on('click', 'button.remove', function () {
+			var tbody = $( this ).closest('tbody'),
+				user = tbody.attr('user');
+			
+			Prefs.removeUser(user);
+			tbody.remove();
+		});
 	},
 
 	clear: function () {
@@ -29,12 +34,8 @@ ListController = o.clazz({
 		Badge.clear();
 	},
 
-	getFinishedAt: function (proj) {
-		if (proj.finishedAt) {
-			return moment(proj.finishedAt).fromNow();
-		}
-
-		return 'running';	
+	getClassName: function (proj) {
+		return (proj.status==='failed'?'class="failed"':'');
 	},
 
 	getDuration: function (proj) {
@@ -45,22 +46,31 @@ ListController = o.clazz({
 		return '-';
 	},
 
-	getIcon: function (proj) {
-		return '<img class="icon-status" src="imgs/icon-'+proj.status+'.png" title="'+proj.status+'">';
+	getFinishedAt: function (proj) {
+		if (proj.finishedAt) {
+			return moment(proj.finishedAt).fromNow();
+		}
+
+		return 'running';	
 	},
 
 	getHref: function (proj) {
 		return 'href="https://travis-ci.org/'+proj.user+'/'+proj.name+'"';
 	},
 
-	getClassName: function (proj) {
-		return (proj.status==='failed'?'class="failed"':'');
+	getIcon: function (proj) {
+		return '<img class="icon-status" src="imgs/icon-'+proj.status+'.png" title="'+proj.status+'">';
+	},
+
+	remove: function () {
+		this.el().find('tbody').remove();
 	},
 
 	render: function() {
 		var users = Prefs.getUsers();
 		var projs = Projs.get();
 		var that = this;
+		var html = '';
 
 		if (users.length=== 0) {
 			this.clear();
@@ -70,11 +80,10 @@ ListController = o.clazz({
 		this.remove();
 
 		users.forEach(function (user) {
-			var html;
 			var projsUser = projs[user];
 
-			html = '<tbody user="'+user+'">';
-			html += '<tr><th colspan="6">'+user+'</th></tr>';
+			html += '<tbody user="'+user+'">';
+			html += '<tr><th colspan="6">'+user+' <button class="remove">x</button></th></tr>';
 
 			if (projsUser) {
 				projsUser.forEach(function (proj) {
@@ -92,10 +101,10 @@ ListController = o.clazz({
 				html += '<tr><td colspan="6"><em>no projects found.</em></td></tr>';
 			}
 
-			html += '</tbody>'
-
-			that.el().append(html);
+			html += '</tbody>';
 		});
+
+		this.el().append(html);
 	}
 });
 

@@ -27,6 +27,10 @@ FormController = o.clazz({
 		this.el().find(':input').first().focus().select(); 
 	},
 
+	getUpdater: function () {
+		return chrome.extension.getBackgroundPage().Updater;
+	},
+
 	open: function () {
 		this.el().addClass('opened');
 		this.focus();
@@ -55,7 +59,7 @@ FormUsersController = o.clazz({
 		var that = this;
 
 		this.el().on('submit', function ( evt ) {
-			var users, Updater = chrome.extension.getBackgroundPage().Updater;
+			var users, Updater = that.getUpdater();
 			
 			evt.preventDefault();
 
@@ -69,7 +73,7 @@ FormUsersController = o.clazz({
 
 			// Forces a request right away
 			Updater.request({
-				users: Prefs.get('users'),
+				users: Prefs.getUsers(),
 				onComplete: function () {
 					that.clear();
 					that.hideOverlay();
@@ -112,8 +116,8 @@ FormPrefsController = o.clazz({
 	addListeners: function () {
 		var that = this;
 
-		this.el().on('submit', function ( evt ) {
-			var Updater = chrome.extension.getBackgroundPage().Updater;
+		this.el().on('submit', function (evt) {
+			var Updater = that.getUpdater();
 
 			evt.preventDefault();
 
