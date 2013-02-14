@@ -29,10 +29,12 @@ ListController = o.clazz({
 			Prefs.removeUser(user);
 			Projs.removeUser(user);
 
-			Badge.update(Projs.get());
-
-			that.render();
+			that.update();
 		});
+
+		window.addEventListener('storage', function () {
+			that.update();
+		}, false);
 	},
 
 	clear: function () {
@@ -120,6 +122,12 @@ ListController = o.clazz({
 		});
 
 		this.el().append(html);
+	},
+
+	update: function () {
+		Badge.update(Projs.get());
+
+		this.render();
 	}
 });
 
