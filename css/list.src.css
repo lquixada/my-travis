@@ -39,8 +39,7 @@ section#list span.confirm {
 	float:right;
 	overflow:hidden;
 	white-space:nowrap;
-	transition:width .4s;
-	-webkit-transition:width .4s;
+	-webkit-transition:width .3s;
 }
 
 section#list span.confirm.visible {

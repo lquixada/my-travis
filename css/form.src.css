@@ -13,7 +13,6 @@ section.form form {
 	padding:9px 15px;
 	border-bottom:1px solid #ddd;
 	background-color:#eee;
-	transition:top .4s;
 	-webkit-transition:top .4s;
 	box-shadow:0 2px 8px #aaa;
 	z-index:1;
