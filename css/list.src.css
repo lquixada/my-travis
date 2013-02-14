@@ -17,32 +17,32 @@ section#list div#overlay {
 	z-index:2;
 }
 
-table {
+section#list table {
   margin:15px 0 0;
   width:100%;
 }
 
-table th {
+section#list th {
   padding-right:15px;
   text-align:left;
 }
 
-table td {
+section#list td {
   padding:10px 15px 10px 0;
   border-top:1px solid #ddd;
 }
 
-table td:first-child {
+section#list td:first-child {
   padding-left:15px;
   padding-right:0;
 }
 
-table td#no-projects {
+section#list td#no-projects {
   padding:10px 15px;
   background-color:#fff;
 }
 
-table td#no-projects div {
+section#list td#no-projects div {
   padding:40px 0;
   color:#999;
   text-align:center;
@@ -50,43 +50,43 @@ table td#no-projects div {
   border-radius:5px;
 }
 
-table tbody td a {
+section#list tbody td a {
   display:inline-block;
 }
 
-table tbody td img.icon-status {
+section#list tbody td img.icon-status {
   margin-right:5px;
 	width:10px;
 	height:10px;
 }
 
-table tbody th {
+section#list tbody th {
 	padding:5px 15px;
 	color:#fff;
 	background-color:#666;
 	cursor:default;
 }
 
-table tbody tr {
+section#list tbody tr {
   cursor:pointer;
 }
 
-table tbody tr:nth-child(even) {
+section#list tbody tr:nth-child(even) {
   background-color:#fff;
 }
 
-table tbody tr:nth-child(odd) {
+section#list tbody tr:nth-child(odd) {
   background-color:#f1f1f1;
 }
 
-table tbody tr:hover {
+section#list tbody tr:hover {
     background-color:#fdf2d6;
 }
 
-table tbody tr.failed {
+section#list tbody tr.failed {
   background-color:#fcc;
 }
 
-table tbody tr.failed:hover {
+section#list tbody tr.failed:hover {
   background-color:#fbb;
 }
