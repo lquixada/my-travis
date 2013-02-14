@@ -5,7 +5,6 @@
         "js/lib/jquery-1.9.1.min.js",
         "specs/matchers.js",
         "js/lib/utils.src.js",
-        "js/lib/jsonrequest.src.js",
         "js/controller/controller.src.js",
         "js/controller/list.src.js",
         "js/model/model.src.js",
@@ -14,7 +13,6 @@
         "js/badge.src.js",
 
         "specs/lib/utils.spec.js",
-        "specs/lib/jsonrequest.spec.js",
         "specs/controller/controller.spec.js",
         "specs/controller/list.spec.js",
         "specs/model/model.spec.js",
