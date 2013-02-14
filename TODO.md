@@ -10,7 +10,7 @@
 	* icon delete
 	* icon user
 	* hover no projects
-* Update Screenshots
+* Update screenshots
 * Tab navigation
 
 
