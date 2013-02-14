@@ -23,8 +23,9 @@ Updater = {
 
 		if (options.users) {
 			$.getJSON(this.getUrl(options.users), function (projs) {
-				Projs.store(projs);
-				Badge.update(Projs.get());
+				projs = Projs.store(projs);
+
+				Badge.update(projs);
 
 				that.render();
 				

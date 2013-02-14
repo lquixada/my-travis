@@ -47,6 +47,8 @@ Project = o.clazz({
 		});
 
 		this.set(tmp);
+
+		return tmp;
 	}
 });
 

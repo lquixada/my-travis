@@ -1,7 +1,15 @@
 HeaderController = o.clazz({
 	extend: Controller,
 	dom: 'header',
+	
+	init: function () {
+		var that = this;
 
+		$(document).ready(function () {
+			that.addListeners();
+		});
+	},
+	
 	addListeners: function () {
 		this.el().on('click', 'button#open-users', function () {
 			formUsers.toggle();
@@ -13,4 +21,4 @@ HeaderController = o.clazz({
 	}
 });
 
-headerController = new HeaderController();
+new HeaderController();

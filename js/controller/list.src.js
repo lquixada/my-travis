@@ -1,6 +1,15 @@
 ListController = o.clazz({
 	extend: Controller,
 	dom: 'table',
+	
+	init: function () {
+		var that = this;
+
+		$(document).ready(function () {
+			that.render();
+			that.addListeners();
+		});
+	},
 
 	addListeners: function() {
 		this.el().on('click', 'tr', function () {

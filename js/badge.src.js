@@ -3,6 +3,11 @@ Badge = {
 		chrome.browserAction.setBadgeText({text: ''});
 	},
 
+	set: function (failed) {
+		chrome.browserAction.setBadgeText({text: (failed?''+failed:' ')});
+		chrome.browserAction.setBadgeBackgroundColor({color: (failed?'#f00':'#0c0')});
+	},
+
 	update: function (projs) {
 		var failed = 0, running = 0;
 
@@ -30,7 +35,6 @@ Badge = {
 			return;
 		}
 
-		chrome.browserAction.setBadgeText({text: (failed?''+failed:' ')});
-		chrome.browserAction.setBadgeBackgroundColor({color: (failed?'#f00':'#0c0')});
+		this.set(failed);
 	}
 };

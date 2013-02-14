@@ -52,7 +52,15 @@ FormController = o.clazz({
 FormUsersController = o.clazz({
 	extend: FormController,
 	dom: 'section#form-user form',
-  
+	
+ 	init: function () {
+		var that = this;
+
+		$(document).ready(function () {
+			that.addListeners();
+		});
+	},
+
 	addListeners: function () {
 		var that = this;
 
@@ -111,6 +119,16 @@ FormUsersController = o.clazz({
 FormPrefsController = o.clazz({
 	extend: FormController,
 	dom: 'section#form-prefs form',
+	
+	init: function () {
+		var that = this;
+
+		$(document).ready(function () {
+			that.addListeners();
+			that.restoreData();
+			that.disableFieldsTabIndex();
+		});
+	},
 	
 	addListeners: function () {
 		var that = this;
