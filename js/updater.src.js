@@ -13,7 +13,7 @@ Updater = {
 
 		views.forEach(function (view) {
 			if (view.location.href == popupUrl) {
-				view.projectController.render();
+				view.listController.render();
 			}
 		});
 	},
@@ -21,7 +21,7 @@ Updater = {
 	request: function (options) {
 		var req, that = this;
 
-		if (options.users) {
+		if (options.users.length) {
 			$.getJSON(this.getUrl(options.users), function (projs) {
 				projs = Projs.store(projs);
 
@@ -42,13 +42,11 @@ Updater = {
 	},
 
 	start: function () {
-		var options = {},
-			that = this,
-			prefs = Prefs.get(),
-			users = prefs.users,
-			interval = parseInt(prefs.interval, 10);
+		var that = this,
+			users = Prefs.getUsers(),
+			interval = parseInt(Prefs.get('interval'), 10);
 
-		if (users) {
+		if (users.length) {
 			console.log( 'Updater started. Polling interval: '+interval+'s' );
 
 			this.timer = setInterval(function () {

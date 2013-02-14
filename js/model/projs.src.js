@@ -30,6 +30,14 @@ Project = o.clazz({
 	get: function () {
 		return this._super() || [];
 	},
+
+	removeUser: function (user) {
+		var projs = this.get();
+
+		delete projs[user];
+
+		this.set(projs);
+	},
 	
 	store: function (projs) {
 		var that = this,

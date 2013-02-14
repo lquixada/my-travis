@@ -1,11 +1,16 @@
 # TODO
 
-* Update Badge on user change (see fabric case)
 * Check Chrome's extension auto update feature
 * Improve screenshots zoom
 * Figure out how to break Updater up
 * Create javascript more specs
 * Casper
+* Visual
+	* Solve form folding
+	* icon delete
+	* icon user
+	* hover no projects
+* Update Screenshots
 
 
 ## Version 0.2

@@ -12,6 +12,8 @@ ListController = o.clazz({
 	},
 
 	addListeners: function() {
+		var that = this;
+
 		this.el().on('click', 'tr', function () {
 			var url = this.getAttribute('href');
 
@@ -25,7 +27,11 @@ ListController = o.clazz({
 				user = tbody.attr('user');
 			
 			Prefs.removeUser(user);
-			tbody.remove();
+			Projs.removeUser(user);
+
+			Badge.update(Projs.get());
+
+			that.render();
 		});
 	},
 
@@ -117,4 +123,4 @@ ListController = o.clazz({
 	}
 });
 
-projectController = new ListController();
+listController = new ListController();

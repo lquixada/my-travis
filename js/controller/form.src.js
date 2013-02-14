@@ -17,7 +17,7 @@ FormController = o.clazz({
 		this.el().find(':input').attr('tabindex', '-1' );	
 	},
 
-	enableFieldsTabIndex: function (enable) {
+	enableFieldsTabIndex: function () {
 		this.el().find(':input').removeAttr('tabindex');
 	},
 
