@@ -1,0 +1,37 @@
+* {
+	margin:0;
+	padding:0;
+}
+
+body {
+	padding-left:50px;
+	height:42px;
+	color:#666;
+	font:12px Arial, Helvetica, Freesans, sans-serif;
+	ackground:-webkit-linear-gradient(#444,#111);
+}
+
+h1 {
+	margin:10px 0 2px;
+	font-size:14px;
+	letter-spacing:-1px;
+}
+
+span.status {
+	position:absolute;
+	display:inline-block;
+	top:5px;
+	left:5px;
+	width:40px;
+	height:40px;
+	background:transparent url(../imgs/icons-notification.png) no-repeat 0 0;
+	float:left;
+}
+
+span.status.failed {
+	background-position:0 0;
+}
+
+span.status.passed {
+	background-position:-40px 0;
+}

@@ -8,6 +8,7 @@
 * Update screenshots
 * Tab navigation
 * Switch to multiple tables
+* Notification: projects ellipsis
 
 
 ## Version 0.2

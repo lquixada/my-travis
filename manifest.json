@@ -6,8 +6,13 @@
   "version": "0.2",
 
   "permissions": [
+		"notifications",
     "background",
     "https://api.travis-ci.org/*"
+  ],
+  
+	"web_accessible_resources": [
+    "icon-app-48.png"
   ],
 
   "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",

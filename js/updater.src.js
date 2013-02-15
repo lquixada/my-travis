@@ -26,6 +26,7 @@ Updater = {
 				projs = Projs.store(projs);
 				
 				Badge.update(projs);
+				Notification.update(projs);
 
 				that.render();
 
