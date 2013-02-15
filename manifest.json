@@ -18,7 +18,7 @@
   "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
 
   "background": {
-    "page": "background.html"
+    "page": "html/background.html"
   },
 
   "icons": {
@@ -29,6 +29,6 @@
 
   "browser_action": {
     "default_icon": "imgs/icon-app-19.png",
-    "default_popup": "popup.html"
+    "default_popup": "html/popup.html"
   }
 }

@@ -98,7 +98,7 @@ ListController = o.clazz({
 	},
 
 	getIcon: function (proj) {
-		return '<img class="icon-status" src="imgs/icon-'+proj.status+'.png" title="'+proj.status+'">';
+		return '<img class="icon-status" src="../imgs/icon-'+proj.status+'.png" title="'+proj.status+'">';
 	},
 
 	remove: function () {

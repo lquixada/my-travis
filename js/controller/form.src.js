@@ -157,7 +157,7 @@ FormPrefsController = o.clazz({
 		var prefs = Prefs.get();
 		
 		this.el().find(':input[name=interval]').val(prefs.interval || '');
-		this.el().find(':input[name=notifications]').val(prefs.notifications || '');
+		this.el().find(':input[name=notifications]').attr('checked', prefs.notifications || false);
 	}
 });
 

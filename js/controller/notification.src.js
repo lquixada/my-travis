@@ -1,4 +1,3 @@
-
 NotificationController = o.clazz({
 	extend: Controller,
 	dom: 'body',
@@ -37,12 +36,17 @@ NotificationController = o.clazz({
 				&& $(arr2).not(arr1).length == 0);
 	},
 
+	open: function () {
+		var notification = webkitNotifications.createHTMLNotification('../html/notification.html');
+		notification.show();
+	},
+
 	render: function (failed) {
 		var len = failed.length;
 
 		if (len) {
 			this.setIcon('failed');
-			this.setTitle(len+(len>1?' builds':' build')+' failed.');
+			this.setTitle(len+(len>1?' builds':' build')+' failing.');
 			this.setText('Projects: '+failed.join(', '));
 		} else {
 			this.setIcon('passed');
@@ -64,30 +68,26 @@ NotificationController = o.clazz({
 	},
 
 	update: function (projs) {
-		var notification,
-			prefs = Prefs.get(),
-			notifications = prefs.notifications,
+		var prefs = Prefs.get(),
 			failedOld = prefs.failed,
 			failedNew = this.getFailed(projs);
 
-		if (!notifications) {
+		if (!prefs.notifications) {
 			return;
 		}
 
 		if (!failedOld) {
-			failedOld = failedNew;
-
 			// Save for later
-			Prefs.set('failed', failedNew);
+			Prefs.set('failed', failedOld = failedNew);
 		}
 
+		// Only open, if there's something new
 		if (!this.isSame(failedOld, failedNew)) {
 			// Update registry
 			Prefs.set('failed', failedNew);
 
 			// Open notification
-			notification = webkitNotifications.createHTMLNotification('notification.html');
-			notification.show();
+			this.open();
 		}
 	}
 });
