@@ -8,7 +8,7 @@ Updater = {
 	},
 	
 	render: function () {
-		var popupUrl = chrome.extension.getURL('popup.html');
+		var popupUrl = chrome.extension.getURL('html/popup.html');
 		var views = chrome.extension.getViews();
 
 		views.forEach(function (view) {
@@ -23,6 +23,7 @@ Updater = {
 
 		if (options.users.length) {
 			$.getJSON(this.getUrl(options.users), function (projs) {
+				projs[0].last_build_status = 0;
 				projs = Projs.store(projs);
 				
 				Badge.update(projs);

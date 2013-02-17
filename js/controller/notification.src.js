@@ -1,93 +1,115 @@
 NotificationController = o.clazz({
 	extend: Controller,
-	dom: 'body',
 
-	boot: function () {
-		var that = this,
-			failed = Prefs.get('failed');
+	compare: function (stored, fetched) {
+		var storedStatus, fetchedStatus;
+		var result = {
+			passed: [],
+			failed: []
+		};
 
-		this.render(failed);
+		for (var slug in fetched) {
+			storedStatus = stored[slug];
+			fetchedStatus = fetched[slug];
+
+			if (storedStatus == 'passed' && fetchedStatus == 'failed') {
+				result.failed.push(slug);
+				continue;
+			}
+
+			if (storedStatus == 'failed' && fetchedStatus == 'passed') {
+				result.passed.push(slug);
+				continue;
+			}
+		}
+
+		return result;
+	},
+
+	// Creates a hash-table for tracking projects status
+	format: function (projs) {
+		var formatted = {};
+
+		for (var user in projs) {
+			projs[user].forEach(function (proj) {
+				formatted[proj.user+'/'+proj.name] = this.getStatus(proj);
+			}, this);
+		}
+
+		return formatted;
+	},
+
+	getResult: function () {
+		return this.result || {passed: [], failed: []};
+	},
+
+	getStatus: function (proj) {
+		switch (proj.status) {
+			case 'passed':
+				return 'passed';
+			case 'failed':
+			case 'errored':
+				return 'failed';
+			default:
+				return '?';
+		}
+	},
+
+	getStored: function () {
+		return Prefs.get('statuses');
+	},
+
+	hasFailed: function () {
+		return this.result.failed.length > 0;
+	},
+
+	hasPassed: function () {
+		return this.result.passed.length > 0;
+	},
+
+	notify: function (projs) {
+		var result,
+			stored = this.getStored(),
+			fetched = this.format(projs);
+
+		if (!stored) {
+			this.store(stored = fetched);
+		}
+
+		this.result = this.compare(stored, fetched);
+
+		if (this.hasFailed()) {
+			this.open('failed');
+		}
+
+		if (this.hasPassed()) {
+			this.open('passed');
+		}
+		
+		// Update stored
+		this.store(fetched);
+	},
+
+	open: function (type) {
+		var file = '../html/notification.html?'+type;
+		var notification = webkitNotifications.createHTMLNotification(file);
+
+		notification.show();
 
 		setTimeout(function () {
-			that.close();
+			notification.close();
 		}, 3000);
 	},
 
-	close: function () {
-		window.close();
-	},
-
-	getFailed: function (projs) {
-		var failed = [];
-
-		for (var key in projs) {
-			projs[key].forEach(function (proj) {
-				if (proj.status === 'failed') {
-					failed.push(proj.name);
-				}
-			});
-		}
-
-		return failed;
-	},
-
-	isSame: function (arr1, arr2) {
-		return ($(arr1).not(arr2).length == 0
-				&& $(arr2).not(arr1).length == 0);
-	},
-
-	open: function () {
-		var notification = webkitNotifications.createHTMLNotification('../html/notification.html');
-		notification.show();
-	},
-
-	render: function (failed) {
-		var len = failed.length;
-
-		if (len) {
-			this.setIcon('failed');
-			this.setTitle(len+(len>1?' builds':' build')+' failing.');
-			this.setText('Projects: '+failed.join(', '));
-		} else {
-			this.setIcon('passed');
-			this.setTitle('All builds passing.');
-			this.setText('Congratulations!');
-		}
-	},
-
-	setIcon: function (status) {
-		this.el().find('span.status').addClass(status);
-	},
-
-	setText: function (msg) {
-		this.el().find('p').html(msg);
-	},
-
-	setTitle: function (msg) {
-		this.el().find('h1').html(msg);
+	store: function (obj) {
+		Prefs.set('statuses', obj);
 	},
 
 	update: function (projs) {
-		var prefs = Prefs.get(),
-			failedOld = prefs.failed,
-			failedNew = this.getFailed(projs);
+		var prefs = Prefs.get();
 
-		if (!prefs.notifications) {
-			return;
-		}
-
-		if (!failedOld) {
-			// Save for later
-			Prefs.set('failed', failedOld = failedNew);
-		}
-
-		// Only open, if there's something new
-		if (!this.isSame(failedOld, failedNew)) {
-			// Update registry
-			Prefs.set('failed', failedNew);
-
-			// Open notification
-			this.open();
+		if (prefs.notifications) {
+			this.notify(projs);
 		}
 	}
 });

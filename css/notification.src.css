@@ -5,10 +5,9 @@
 
 body {
 	padding-left:50px;
-	height:42px;
+	min-height:40px;
 	color:#666;
 	font:12px Arial, Helvetica, Freesans, sans-serif;
-	ackground:-webkit-linear-gradient(#444,#111);
 }
 
 h1 {
@@ -34,4 +33,9 @@ span.status.failed {
 
 span.status.passed {
 	background-position:-40px 0;
+}
+
+ul {
+	margin-left:16px;
+	margin-bottom:5px;
 }

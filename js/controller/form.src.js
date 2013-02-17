@@ -67,7 +67,7 @@ FormUsersController = o.clazz({
 
 			that.showOverlay();
 			that.blockSubmit(true);
-			that.setStatus('<img src="imgs/loading.gif">');
+			that.setStatus('<img src="../imgs/loading.gif">');
 
 			// Forces a request right away
 			Updater.request({
@@ -126,7 +126,6 @@ FormPrefsController = o.clazz({
 			var Updater = that.getUpdater();
 
 			evt.preventDefault();
-
 
 			Prefs.set('interval', this.interval.value || 60);
 			Prefs.set('notifications', this.notifications.checked || false);
