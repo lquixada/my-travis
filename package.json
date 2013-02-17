@@ -11,7 +11,7 @@
     }
   ],
   "scripts": {
-    "test": "ophantom"
+    "test": "o-phantom"
   },
   "dependencies": {
     "grunt": "*",
