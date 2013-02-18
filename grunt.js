@@ -10,15 +10,14 @@ module.exports = function ( grunt ) {
 
     min: {
       build: {
-        src: ['build/'+projectName+'.src.js'],
+        src: ['js/**/*.src.js'],
         dest: 'build/'+projectName+'.min.js'
-      },
+      }
     },
 
-    // Not working
     cssmin: {
       build: {
-        src: ['build/'+projectName+'.src.css'],
+        src: ['css/**/*.src.css'],
         dest: 'build/'+projectName+'.min.css'
       }
     },
@@ -43,11 +42,10 @@ module.exports = function ( grunt ) {
   grunt.registerTask('o:cssmin', 'cssmin:build');
   grunt.registerTask('o:jsmin', 'min:build');
   grunt.registerTask('o:jslint', 'lint');
-  grunt.registerTask('o:min', 'min:dist');
   grunt.registerTask('o:zip', 'zip:dist');
   grunt.registerTask('o:test', 'test');
   grunt.registerTask('o:imgs', 'imgs');
-  grunt.registerTask('o:build', 'o:test o:jslint o:jsmin o:imgs');
+  grunt.registerTask('o:build', 'o:test o:jslint o:jsmin o:cssmin o:imgs');
 
   
   grunt.registerMultiTask('imgs', 'Copy images to the build folder', function () {
