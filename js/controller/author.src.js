@@ -1,4 +1,4 @@
-AuthorController = o.clazz({
+AuthorController = o.Class({
 	extend: Controller,
 	dom: 'section#author',
 

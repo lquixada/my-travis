@@ -1,4 +1,4 @@
-Preferences = o.clazz({
+Preferences = o.Class({
 	extend: Model,
 	key: 'prefs',
 

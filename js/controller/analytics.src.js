@@ -1,4 +1,4 @@
-Analytics = o.clazz({
+Analytics = o.Class({
   init: function () {
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', 'UA-38205716-1']);

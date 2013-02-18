@@ -2,8 +2,8 @@ title: "MyTravis Spec Runner"
 js:
   - js/lib/o.min.js
   - js/lib/jquery-1.9.1.min.js
-  - specs/matchers.js
   - js/lib/utils.src.js
+  - specs/matchers.js
 
   - js/controller/controller.src.js
   - js/controller/list.src.js

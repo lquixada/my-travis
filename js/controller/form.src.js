@@ -1,4 +1,4 @@
-FormController = o.clazz({
+FormController = o.Class({
 	extend: Controller,
 
 	blockSubmit: function ( enable ) {
@@ -49,7 +49,7 @@ FormController = o.clazz({
 });
 
 
-FormUsersController = o.clazz({
+FormUsersController = o.Class({
 	extend: FormController,
 	dom: 'section#form-user form',
 	
@@ -115,7 +115,7 @@ FormUsersController = o.clazz({
 formUsersController = new FormUsersController();
 
 
-FormPrefsController = o.clazz({
+FormPrefsController = o.Class({
 	extend: FormController,
 	dom: 'section#form-prefs form',
 	

@@ -1,4 +1,4 @@
-Project = o.clazz({
+Project = o.Class({
 	extend: Model,
 	key: 'projs',
 

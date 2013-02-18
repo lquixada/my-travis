@@ -1,4 +1,4 @@
-Controller = o.clazz( {
+Controller = o.Class( {
 	addListeners: function() {
 		throw 'not implemented error';
 	},

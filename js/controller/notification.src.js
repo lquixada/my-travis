@@ -1,4 +1,4 @@
-NotificationController = o.clazz({
+NotificationController = o.Class({
 	extend: Controller,
 
 	compare: function (stored, fetched) {

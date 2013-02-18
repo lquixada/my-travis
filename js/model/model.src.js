@@ -1,4 +1,4 @@
-Model = o.clazz( {
+Model = o.Class( {
 	clear: function () {
 		delete localStorage[this._getKey()];
 	},

@@ -1,4 +1,4 @@
-ListController = o.clazz({
+ListController = o.Class({
 	extend: Controller,
 	dom: 'table',
 	

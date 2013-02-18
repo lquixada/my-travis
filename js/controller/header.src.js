@@ -1,4 +1,4 @@
-HeaderController = o.clazz({
+HeaderController = o.Class({
 	extend: Controller,
 	dom: 'header',
 	
