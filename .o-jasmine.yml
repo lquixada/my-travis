@@ -4,6 +4,7 @@ js:
   - js/lib/jquery-1.9.1.min.js
   - specs/matchers.js
   - js/lib/utils.src.js
+
   - js/controller/controller.src.js
   - js/controller/list.src.js
   - js/model/model.src.js
