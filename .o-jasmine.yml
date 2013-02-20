@@ -7,6 +7,7 @@ js:
 
   - js/controller/controller.src.js
   - js/controller/list.src.js
+  - js/controller/notification.src.js
   - js/model/model.src.js
   - js/model/projs.src.js
   - js/model/prefs.src.js
@@ -15,6 +16,7 @@ js:
   - specs/lib/utils.spec.js
   - specs/controller/controller.spec.js
   - specs/controller/list.spec.js
+  - specs/controller/notification.spec.js
   - specs/model/model.spec.js
   - specs/model/projs.spec.js
   - specs/model/prefs.spec.js

@@ -1,7 +1,21 @@
 NotificationController = o.Class({
 	extend: Controller,
 
-	compare: function (stored, fetched) {
+	getResult: function () {
+		return this.result || {passed: [], failed: []};
+	},
+	
+	update: function (projs) {
+		var prefs = Prefs.get();
+
+		if (prefs.notifications) {
+			this._notify(projs);
+		}
+	},
+  
+	// private
+	
+	_compare: function (stored, fetched) {
 		var storedStatus, fetchedStatus;
 		var result = {
 			passed: [],
@@ -27,23 +41,21 @@ NotificationController = o.Class({
 	},
 
 	// Creates a hash-table for tracking projects status
-	format: function (projs) {
+	_format: function (projs) {
 		var formatted = {};
 
 		for (var user in projs) {
 			projs[user].forEach(function (proj) {
-				formatted[proj.user+'/'+proj.name] = this.getStatus(proj);
+				var slug = proj.user+'/'+proj.name;
+
+				formatted[slug] = this._getStatus(proj);
 			}, this);
 		}
 
 		return formatted;
 	},
 
-	getResult: function () {
-		return this.result || {passed: [], failed: []};
-	},
-
-	getStatus: function (proj) {
+	_getStatus: function (proj) {
 		switch (proj.status) {
 			case 'passed':
 				return 'passed';
@@ -55,42 +67,42 @@ NotificationController = o.Class({
 		}
 	},
 
-	getStored: function () {
+	_getStored: function () {
 		return Prefs.get('statuses');
 	},
 
-	hasFailed: function () {
-		return this.result.failed.length > 0;
+	_hasFailed: function () {
+		return this.getResult().failed.length > 0;
 	},
 
-	hasPassed: function () {
-		return this.result.passed.length > 0;
+	_hasPassed: function () {
+		return this.getResult().passed.length > 0;
 	},
 
-	notify: function (projs) {
+	_notify: function (projs) {
 		var result,
-			stored = this.getStored(),
-			fetched = this.format(projs);
+			stored = this._getStored(),
+			fetched = this._format(projs);
 
 		if (!stored) {
-			this.store(stored = fetched);
+			this._store(stored = fetched);
 		}
 
-		this.result = this.compare(stored, fetched);
+		this.result = this._compare(stored, fetched);
 
-		if (this.hasFailed()) {
-			this.open('failed');
+		if (this._hasFailed()) {
+			this._open('failed');
 		}
 
-		if (this.hasPassed()) {
-			this.open('passed');
+		if (this._hasPassed()) {
+			this._open('passed');
 		}
 		
 		// Update stored
-		this.store(fetched);
+		this._store(fetched);
 	},
 
-	open: function (type) {
+	_open: function (type) {
 		var file = '../html/notification.html?'+type;
 		var notification = webkitNotifications.createHTMLNotification(file);
 
@@ -101,16 +113,8 @@ NotificationController = o.Class({
 		}, 3000);
 	},
 
-	store: function (obj) {
+	_store: function (obj) {
 		Prefs.set('statuses', obj);
-	},
-
-	update: function (projs) {
-		var prefs = Prefs.get();
-
-		if (prefs.notifications) {
-			this.notify(projs);
-		}
 	}
 });
 

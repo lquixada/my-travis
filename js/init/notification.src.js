@@ -1,37 +1,21 @@
 $(document).ready(function () {
-	var result;
 	var type = document.location.search.slice(1);
-
-	Notification = chrome.extension.getBackgroundPage().Notification;
-
-	if (type==='passed') {
-		passed = Notification.getResult().passed;
-		len = passed.length;
+	var Notification = chrome.extension.getBackgroundPage().Notification;
+	var result = Notification.getResult();
+	var slugs = result[type];
+	var len = slugs.length;
 	
-		if (len>0) {
-			$('h1').html(len+(len>1?' builds':' build')+' has been fixed.');
-			$('span.status').addClass('passed');
-
-			passed.forEach(function (proj) {
-				$('ul').append('<li>'+proj+'</li>');
-			});
-		}
-
-		return;
+	if (type==='passed') {
+		msg = ' has been fixed';
 	}
 
 	if (type==='failed') {
-		failed = Notification.getResult().failed;
-		len = failed.length;
-	
-		if (len>0) {
-			$('h1').html(len+(len>1?' builds':' build')+' has failed.');
-			$('span.status').addClass('failed');
-			failed.forEach(function (proj) {
-				$('ul').append('<li>'+proj+'</li>');
-			});
-		}
-
-		return;
+		msg = ' has failed';
 	}
+
+	$('h1').html(len+' build'+(len>1?'s':'')+msg);
+	$('span.status').addClass(type);
+	$('ul').append(slugs.map(function (slug) {
+		return '<li>'+slug+'</li>';
+	}));
 });
