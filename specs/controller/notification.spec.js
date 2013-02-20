@@ -123,6 +123,28 @@ describe("Notification", function() {
 
 				expect(Notification._open).toHaveBeenCalledWith('failed');
 			});
+
+			it("if project was passing, runned and has failed", function() {
+				Notification.update({
+					'user1': [
+						{user:'user1', name: 'proj1', status: 'passed'}
+					]
+				});
+
+				Notification.update({
+					'user1': [
+						{user:'user1', name: 'proj1', status: 'started'}
+					]
+				});
+
+				Notification.update({
+					'user1': [
+						{user:'user1', name: 'proj1', status: 'failed'}
+					]
+				});
+
+				expect(Notification._open).toHaveBeenCalledWith('failed');
+			});
 		});
 		
 
@@ -147,6 +169,28 @@ describe("Notification", function() {
 				Notification.update({
 					'user1': [
 						{user:'user1', name: 'proj1', status: 'errored'}
+					]
+				});
+
+				Notification.update({
+					'user1': [
+						{user:'user1', name: 'proj1', status: 'passed'}
+					]
+				});
+
+				expect(Notification._open).toHaveBeenCalledWith('passed');
+			});
+
+			it("if project was failing, runned and has passed", function() {
+				Notification.update({
+					'user1': [
+						{user:'user1', name: 'proj1', status: 'failed'}
+					]
+				});
+
+				Notification.update({
+					'user1': [
+						{user:'user1', name: 'proj1', status: 'started'}
 					]
 				});
 

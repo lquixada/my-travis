@@ -56,15 +56,11 @@ NotificationController = o.Class({
 	},
 
 	_getStatus: function (proj) {
-		switch (proj.status) {
-			case 'passed':
-				return 'passed';
-			case 'failed':
-			case 'errored':
-				return 'failed';
-			default:
-				return '?';
+		if (proj.status==='errored') {
+			return 'failed';
 		}
+
+		return proj.status;
 	},
 
 	_getStored: function () {
@@ -113,8 +109,20 @@ NotificationController = o.Class({
 		}, 3000);
 	},
 
-	_store: function (obj) {
-		Prefs.set('statuses', obj);
+	_store: function (fetched) {
+		var tmp = {},
+			stored = this._getStored() || {};
+
+		for (var slug in fetched) {
+			if (fetched[slug]==='started') {
+				// Retain state for future comparisons
+				tmp[slug] = stored[slug];
+			} else {
+				tmp[slug] = fetched[slug];
+			}
+		}
+
+		Prefs.set('statuses', tmp);
 	}
 });
 
