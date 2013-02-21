@@ -8,17 +8,6 @@ UpdaterService = o.Class({
 
 		return this.url+users;
 	},
-	
-	render: function () {
-		var popupUrl = chrome.extension.getURL('html/popup.html');
-		var views = chrome.extension.getViews();
-
-		views.forEach(function (view) {
-			if (view.location.href == popupUrl) {
-				view.listController.render();
-			}
-		});
-	},
 
 	request: function (options) {
 		var req, that = this;
@@ -30,7 +19,7 @@ UpdaterService = o.Class({
 				Badge.update(projs);
 				Notification.update(projs);
 
-				that.render();
+				updaterController.render();
 
 				if (options.onComplete) {
 					options.onComplete(projs);

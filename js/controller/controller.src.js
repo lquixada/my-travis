@@ -1,5 +1,5 @@
 Controller = o.Class( {
-	addListeners: function() {
+	addListeners: function () {
 		throw 'not implemented error';
 	},
 
@@ -9,5 +9,9 @@ Controller = o.Class( {
 		}
 		
 		return this.element;
+	},
+	
+	render: function () {
+		throw 'not implemented error';
 	}
 });
