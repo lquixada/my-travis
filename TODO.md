@@ -1,7 +1,6 @@
 # TODO
 
 * Improve screenshots zoom
-* Extract Source methods (getUrl, request) from UpdaterService class
 * Create javascript more specs
 * Update screenshots
 

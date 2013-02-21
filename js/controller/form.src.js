@@ -69,21 +69,17 @@ FormUsersController = o.Class({
 			that.blockSubmit(true);
 			that.setStatus('<img src="../imgs/loading.gif">');
 
-			// Forces a request right away
-			Updater.request({
-				users: Prefs.getUsers(),
-				onComplete: function () {
-					that.clear();
-					that.hideOverlay();
-					that.blockSubmit(false);
-					that.setStatus('saved');
+			TravisAPI.get(Prefs.getUsers(), function () {
+				that.clear();
+				that.hideOverlay();
+				that.blockSubmit(false);
+				that.setStatus('saved');
 
-					Updater.restart();
+				Updater.restart();
 
-					setTimeout(function () {
-						that.close();
-					}, 1000);
-				}
+				setTimeout(function () {
+					that.close();
+				}, 1000);
 			});
 		});
 	},

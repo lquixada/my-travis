@@ -75,3 +75,18 @@ ModelLocalStorage = o.Class( {
 });
 
 
+Source = o.Class({
+	get: function () {
+		throw 'not implemented error';
+	}
+});
+
+
+JSONSource = o.Class({
+	extend: Source,
+	url: '',
+
+	get: function (url, onComplete) {
+		$.getJSON(url, onComplete);
+	}
+});
