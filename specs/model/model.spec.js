@@ -7,19 +7,19 @@ describe("Model", function() {
     });
     
     it("should have a not have a default key", function() {
-        model = new Model();
+        model = new ModelLocalStorage();
         
         expect(model.key).toBeUndefined();
     });
     
     it("should not store json object without a key", function() {
-        model = new Model();
+        model = new ModelLocalStorage();
         
         expect(function () { model.set(json); }).toThrow();
     });
 
     it("should store a json object with a key", function() {
-        model = new Model();
+        model = new ModelLocalStorage();
         model.key = 'test';
         model.set(json);
 
@@ -28,7 +28,7 @@ describe("Model", function() {
     });
 
     it("should get a json object", function() {
-        model = new Model();
+        model = new ModelLocalStorage();
         model.key = 'test';
         model.set(json);
         
@@ -36,14 +36,14 @@ describe("Model", function() {
     });
 
     it("should be null if json not given", function() {
-        model = new Model();
+        model = new ModelLocalStorage();
         model.key = 'test';
         
         expect(model.get()).toBeNull();
     });
 
     it("should reset value", function() {
-        model = new Model();
+        model = new ModelLocalStorage();
         model.key = 'test';
         model.set(json);
         model.clear();

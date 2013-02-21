@@ -1,5 +1,5 @@
 Project = o.Class({
-	extend: Model,
+	extend: ModelLocalStorage,
 	key: 'projs',
 
 	convert: function (proj) {

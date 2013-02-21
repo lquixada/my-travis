@@ -1,5 +1,22 @@
 Model = o.Class( {
 	clear: function () {
+		throw 'not implemented error';
+	},
+
+	get: function () {
+		throw 'not implemented error';
+	},
+
+	set: function (value) {
+		throw 'not implemented error';
+	}
+});
+
+
+ModelLocalStorage = o.Class( {
+	extend: Model,
+	
+	clear: function () {
 		delete localStorage[this._getKey()];
 	},
 

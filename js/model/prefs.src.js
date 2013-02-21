@@ -1,5 +1,5 @@
 Preferences = o.Class({
-	extend: Model,
+	extend: ModelLocalStorage,
 	key: 'prefs',
 
 	addUser: function (user) {
