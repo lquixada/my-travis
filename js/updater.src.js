@@ -23,7 +23,6 @@ Updater = {
 
 		if (options.users.length) {
 			$.getJSON(this.getUrl(options.users), function (projs) {
-				projs[0].last_build_status = 0;
 				projs = Projs.store(projs);
 				
 				Badge.update(projs);
