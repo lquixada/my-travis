@@ -2,7 +2,11 @@ HeaderController = o.Class({
 	extend: Controller,
 	dom: 'header',
 	
-	addListeners: function () {
+	boot: function() {
+		this._addListeners();
+	},
+	
+	_addListeners: function () {
 		this.el().on('click', 'button#open-users', function () {
 			formPrefsController.close();
 			formUsersController.toggle();
@@ -12,10 +16,6 @@ HeaderController = o.Class({
 			formUsersController.close();
 			formPrefsController.toggle();
 		});
-	},
-	
-	boot: function() {
-		this.addListeners();
 	}
 });
 

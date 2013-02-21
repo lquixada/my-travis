@@ -2,16 +2,20 @@ AuthorController = o.Class({
 	extend: Controller,
 	dom: 'section#author',
 
-	addListeners: function () {
+	boot: function () {
+		this._addListeners();
+	},
+
+	_addListeners: function () {
 		var that = this;
 
 		$('a#author').on('click', function (evt) {
 			evt.preventDefault();
-			that.show();
+			that._show();
 		});
 
 		this.el().on('click', function () {
-			that.hide();
+			that._hide();
 		});
 
 		this.el().on('click', 'div#card', function (evt) {
@@ -19,19 +23,15 @@ AuthorController = o.Class({
 		});
 
 		this.el().on('click', 'button#close', function () {
-			that.hide();
+			that._hide();
 		});
 	},
 
-	boot: function () {
-		this.addListeners();
-	},
-
-	hide: function () {
+	_hide: function () {
 		this.el().css('visibility', 'hidden');
 	},
 
-	show: function () {
+	_show: function () {
 		this.el().css('visibility', 'visible');
 	} 
 });
