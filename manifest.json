@@ -3,7 +3,7 @@
 
   "name": "My Travis",
   "description": "Monitor your projects builds from Travis CI within Chrome.",
-  "version": "0.2",
+  "version": "0.3",
 
   "permissions": [
 		"notifications",
