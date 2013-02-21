@@ -1,4 +1,6 @@
-Updater = {
+UpdaterService = o.Class({
+	extend: Service,
+	
 	url: 'https://api.travis-ci.org/repos',
 
 	getUrl: function (users) {
@@ -61,4 +63,6 @@ Updater = {
 
 		clearInterval(this.timer);
 	}
-};
+});
+
+Updater = new UpdaterService();
