@@ -5,10 +5,9 @@ js:
   - js/lib/utils.src.js
   - specs/matchers.js
 
-  - js/controller/controller.src.js
+  - js/app.src.js
   - js/controller/list.src.js
   - js/controller/notification.src.js
-  - js/model/model.src.js
   - js/model/projs.src.js
   - js/model/prefs.src.js
   - js/badge.src.js

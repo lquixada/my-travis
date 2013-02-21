@@ -1,3 +1,37 @@
+Service = o.Class( {
+	restart: function() {
+		throw 'not implemented error';
+	},
+	
+	start: function() {
+		throw 'not implemented error';
+	},
+
+	stop: function() {
+		throw 'not implemented error';
+	}
+});
+
+
+Controller = o.Class( {
+	addListeners: function () {
+		throw 'not implemented error';
+	},
+
+	el: function () {
+		if (!this.element) {
+			this.element = $(this.dom);
+		}
+		
+		return this.element;
+	},
+	
+	render: function () {
+		throw 'not implemented error';
+	}
+});
+
+
 Model = o.Class( {
 	clear: function () {
 		throw 'not implemented error';
@@ -39,3 +73,5 @@ ModelLocalStorage = o.Class( {
 		return this.key;
 	}
 });
+
+
