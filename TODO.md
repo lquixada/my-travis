@@ -1,10 +1,7 @@
 # TODO
 
 * Improve screenshots zoom
-* Figure out how to break Updater up:
-	* Source: getUrl, request
-	* Cron: start, stop, restart
-	* Controller: render
+* Extract Source methods (getUrl, request) from UpdaterService class
 * Create javascript more specs
 * Update screenshots
 
