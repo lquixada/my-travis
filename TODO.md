@@ -1,10 +1,11 @@
 # TODO
 
-* Check Chrome's extension auto update feature
 * Improve screenshots zoom
-* Figure out how to break Updater up
+* Figure out how to break Updater up:
+	* Source: getUrl, request
+	* Cron: start, stop, restart
+	* Controller: render
 * Create javascript more specs
-* Casper
 * Update screenshots
 
 
