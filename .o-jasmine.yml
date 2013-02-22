@@ -6,6 +6,7 @@ js:
   - specs/matchers.js
 
   - js/app.src.js
+  - js/controller/analytics.src.js
   - js/controller/list.src.js
   - js/controller/notification.src.js
   - js/model/projs.src.js
@@ -14,6 +15,7 @@ js:
 
   - specs/lib/utils.spec.js
   - specs/controller/controller.spec.js
+  - specs/controller/analytics.spec.js
   - specs/controller/list.spec.js
   - specs/controller/notification.spec.js
   - specs/model/model.spec.js
