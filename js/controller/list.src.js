@@ -1,5 +1,5 @@
 ListController = o.Class({
-	extend: Controller,
+	extend: DOMController,
 	dom: 'table',
 	
 	addListeners: function() {

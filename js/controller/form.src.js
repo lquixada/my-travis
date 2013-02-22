@@ -1,5 +1,5 @@
 FormController = o.Class({
-	extend: Controller,
+	extend: DOMController,
 
 	blockSubmit: function ( enable ) {
 		var type = (enable?'button':'submit');

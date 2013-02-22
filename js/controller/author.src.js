@@ -1,5 +1,5 @@
 AuthorController = o.Class({
-	extend: Controller,
+	extend: DOMController,
 	dom: 'section#author',
 
 	boot: function () {

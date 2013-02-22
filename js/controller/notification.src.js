@@ -1,5 +1,5 @@
 NotificationController = o.Class({
-	extend: Controller,
+	extend: DOMController,
 
 	getResult: function () {
 		return this.result || {passed: [], failed: []};

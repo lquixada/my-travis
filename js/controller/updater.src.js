@@ -1,5 +1,5 @@
 UpdaterController = o.Class({
-	extend: Controller,
+	extend: DOMController,
 
 	render: function () {
 		var popupUrl = chrome.extension.getURL('html/popup.html');

@@ -18,18 +18,23 @@ Controller = o.Class( {
 		throw 'not implemented error';
 	},
 
+	render: function () {
+		throw 'not implemented error';
+	}
+});
+
+
+DOMController = o.Class( {
+	extend: Controller,
+  
 	el: function () {
 		if (!this.element) {
 			this.element = $(this.dom);
 		}
 		
 		return this.element;
-	},
-	
-	render: function () {
-		throw 'not implemented error';
 	}
-});
+}); 
 
 
 Model = o.Class( {

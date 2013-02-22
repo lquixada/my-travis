@@ -1,5 +1,5 @@
 HeaderController = o.Class({
-	extend: Controller,
+	extend: DOMController,
 	dom: 'header',
 	
 	boot: function() {

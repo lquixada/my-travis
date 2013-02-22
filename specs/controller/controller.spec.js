@@ -1,7 +1,7 @@
 
-describe("Controller", function() {
+describe("DOMController", function() {
     it("should get main element", function() {
-        var controller = new Controller();
+        var controller = new DOMController();
 				controller.dom = 'body';
 
         expect(controller.el().get(0)).toBe(document.body);
@@ -9,7 +9,7 @@ describe("Controller", function() {
     
     it("should cache element", function() {
 
-        controller = new Controller();
+        controller = new DOMController();
         
         spyOn(window, '$').andReturn({});
 
