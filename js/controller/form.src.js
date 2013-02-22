@@ -1,42 +1,16 @@
 FormController = o.Class({
 	extend: DOMController,
 
-	blockSubmit: function ( enable ) {
-		var type = (enable?'button':'submit');
-
-		this.el().find('button').attr('type', type);
-	},
-
 	close: function () {
 		this.el().removeClass('opened');
-		this.setStatus('');
-		this.disableFieldsTabIndex();
-	},
-	
-	disableFieldsTabIndex: function () {
-		this.el().find(':input').attr('tabindex', '-1' );	
-	},
-
-	enableFieldsTabIndex: function () {
-		this.el().find(':input').removeAttr('tabindex');
-	},
-
-	focus: function () {
-		this.el().find(':input:first').get(0).focus(); 
-	},
-
-	getUpdater: function () {
-		return chrome.extension.getBackgroundPage().Updater;
+		this._setStatus('');
+		this._disableFieldsTabIndex();
 	},
 
 	open: function () {
 		this.el().addClass('opened');
-		this.focus();
-		this.enableFieldsTabIndex();
-	},
-
-  setStatus: function (msg) {
-    this.el().find('span.status').html(msg);
+		this._focus();
+		this._enableFieldsTabIndex();
 	},
 
 	toggle: function () {
@@ -45,6 +19,34 @@ FormController = o.Class({
 		} else {
 			this.open();
 		}
+	},
+
+	// private
+
+	_blockSubmit: function ( enable ) {
+		var type = (enable?'button':'submit');
+
+		this.el().find('button').attr('type', type);
+	},
+	
+	_disableFieldsTabIndex: function () {
+		this.el().find(':input').attr('tabindex', '-1' );	
+	},
+
+	_enableFieldsTabIndex: function () {
+		this.el().find(':input').removeAttr('tabindex');
+	},
+
+	_focus: function () {
+		this.el().find(':input:first').get(0).focus(); 
+	},
+
+	_getUpdater: function () {
+		return chrome.extension.getBackgroundPage().Updater;
+	},
+
+  _setStatus: function (msg) {
+    this.el().find('span.status').html(msg);
 	}
 });
 
@@ -52,12 +54,25 @@ FormController = o.Class({
 FormUsersController = o.Class({
 	extend: FormController,
 	dom: 'section#form-user form',
+
+	boot: function () {
+		this._addListeners();
+	  this._disableFieldsTabIndex();	
+	},
+
+	close: function () {
+		$('header button#open-users').focus();
+
+		this._super();
+	},
 	
-	addListeners: function () {
+	// private
+	
+	_addListeners: function () {
 		var that = this;
 
 		this.el().on('submit', function ( evt ) {
-			var users, Updater = that.getUpdater();
+			var users, Updater = that._getUpdater();
 			
 			evt.preventDefault();
 
@@ -65,15 +80,15 @@ FormUsersController = o.Class({
 
 			Prefs.addUser(this.user.value);
 
-			that.showOverlay();
-			that.blockSubmit(true);
-			that.setStatus('<img src="../imgs/loading.gif">');
+			that._showOverlay();
+			that._blockSubmit(true);
+			that._setStatus('<img src="../imgs/loading.gif">');
 
 			TravisAPI.get(Prefs.getUsers(), function () {
-				that.clear();
-				that.hideOverlay();
-				that.blockSubmit(false);
-				that.setStatus('saved');
+				that._clear();
+				that._hideOverlay();
+				that._blockSubmit(false);
+				that._setStatus('saved');
 
 				Updater.restart();
 
@@ -84,26 +99,15 @@ FormUsersController = o.Class({
 		});
 	},
 
-	boot: function () {
-		this.addListeners();
-	  this.disableFieldsTabIndex();	
-	},
-
-	clear: function () {
+	_clear: function () {
 		this.el().find(':input[name=user]').val('');
 	},
 
-	close: function () {
-		$('header button#open-users').focus();
-
-		this._super();
-	},
-
-	hideOverlay: function () {
+	_hideOverlay: function () {
 		$('section#list div#overlay').hide();
 	},
 
-	showOverlay: function () {
+	_showOverlay: function () {
 		$('section#list div#overlay').show();
 	}
 });
@@ -114,19 +118,34 @@ formUsersController = new FormUsersController();
 FormPrefsController = o.Class({
 	extend: FormController,
 	dom: 'section#form-prefs form',
+
+	boot: function() {
+		this._addListeners();
+		this._restoreData();
+		this._disableFieldsTabIndex();
+	},
+
+	_close: function () {
+		$('header button#open-prefs').focus();
+
+		this._super();
+	},
 	
-	addListeners: function () {
+
+	// private
+	
+	_addListeners: function () {
 		var that = this;
 
 		this.el().on('submit', function (evt) {
-			var Updater = that.getUpdater();
+			var Updater = that._getUpdater();
 
 			evt.preventDefault();
 
 			Prefs.set('interval', this.interval.value || 60);
 			Prefs.set('notifications', this.notifications.checked || false);
 
-			that.setStatus('saved');
+			that._setStatus('saved');
 
 			Updater.restart();
 
@@ -136,19 +155,7 @@ FormPrefsController = o.Class({
 		});
 	},
 
-	boot: function() {
-		this.addListeners();
-		this.restoreData();
-		this.disableFieldsTabIndex();
-	},
-
-	close: function () {
-		$('header button#open-prefs').focus();
-
-		this._super();
-	},
-
-	restoreData: function () {
+	_restoreData: function () {
 		var prefs = Prefs.get();
 		
 		this.el().find(':input[name=interval]').val(prefs.interval || '');
