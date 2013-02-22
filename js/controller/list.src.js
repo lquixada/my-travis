@@ -2,7 +2,43 @@ ListController = o.Class({
 	extend: DOMController,
 	dom: 'table',
 	
-	addListeners: function() {
+	boot: function () {
+		this.render();
+	  this._addListeners();	
+	},
+
+	render: function() {
+		var users = Prefs.getUsers();
+		var projs = Projs.get();
+		var that = this;
+		var html = '';
+
+		if (users.length=== 0) {
+			this._clear();
+			return;
+		}
+
+		this._remove();
+
+		users.forEach(function (user) {
+			html += '<tbody user="'+user+'">';
+			html += '<tr><th colspan="6">'+user+' <button class="remove" title="remove user"></button></th></tr>';
+
+			if (projs[user]) {
+				html += projs[user].map(this._compileProjTemplate, this).join('');
+			} else {
+				html += '<tr><td class="message" colspan="6"><em>no projects found.</em></td></tr>';
+			}
+			
+			html += '</tbody>';
+		}, this);
+
+		this.el().append(html);
+	},
+
+	// private
+	
+	_addListeners: function() {
 		var that = this;
 
 		this.el().on('click', 'tr', function () {
@@ -49,35 +85,30 @@ ListController = o.Class({
 		});
 	},
 
-	boot: function () {
-		this.render();
-	  this.addListeners();	
-	},
-
-	clear: function () {
-		this.remove();
-		this.showMessage();
+	_clear: function () {
+		this._remove();
+		this._showMessage();
 
 		Badge.clear();
 	},
 
-	compileProjTemplate: function (proj) {
+	_compileProjTemplate: function (proj) {
 		return [
-			'<tr '+this.getHref(proj)+' '+this.getClassName(proj)+'>',
-				'<td>'+this.getIcon(proj)+'</td>',
+			'<tr '+this._getHref(proj)+' '+this._getClassName(proj)+'>',
+				'<td>'+this._getIcon(proj)+'</td>',
 				'<td>'+proj.name+'</td>',
 				'<td>'+'#'+proj.build+'</td>',
-				'<td>'+this.getDuration(proj)+'</td>',
-				'<td>'+this.getFinishedAt(proj)+'</td>',
+				'<td>'+this._getDuration(proj)+'</td>',
+				'<td>'+this._getFinishedAt(proj)+'</td>',
 			'</tr>'
 		].join('');
 	},
 
-	getClassName: function (proj) {
+	_getClassName: function (proj) {
 		return (proj.status==='failed'?'class="failed"':'');
 	},
 
-	getDuration: function (proj) {
+	_getDuration: function (proj) {
 		if (proj.duration) {
 			return formatSecs(proj.duration);
 		}
@@ -85,7 +116,7 @@ ListController = o.Class({
 		return '-';
 	},
 
-	getFinishedAt: function (proj) {
+	_getFinishedAt: function (proj) {
 		if (proj.finishedAt) {
 			return moment(proj.finishedAt).fromNow();
 		}
@@ -93,48 +124,19 @@ ListController = o.Class({
 		return 'running';	
 	},
 
-	getHref: function (proj) {
+	_getHref: function (proj) {
 		return 'href="https://travis-ci.org/'+proj.user+'/'+proj.name+'"';
 	},
 
-	getIcon: function (proj) {
+	_getIcon: function (proj) {
 		return '<img class="icon-status" src="../imgs/icon-'+proj.status+'.png" title="'+proj.status+'">';
 	},
 
-	remove: function () {
+	_remove: function () {
 		this.el().find('tbody').remove();
 	},
 
-	render: function() {
-		var users = Prefs.getUsers();
-		var projs = Projs.get();
-		var that = this;
-		var html = '';
-
-		if (users.length=== 0) {
-			this.clear();
-			return;
-		}
-
-		this.remove();
-
-		users.forEach(function (user) {
-			html += '<tbody user="'+user+'">';
-			html += '<tr><th colspan="6">'+user+' <button class="remove" title="remove user"></button></th></tr>';
-
-			if (projs[user]) {
-				html += projs[user].map(this.compileProjTemplate, this).join('');
-			} else {
-				html += '<tr><td class="message" colspan="6"><em>no projects found.</em></td></tr>';
-			}
-			
-			html += '</tbody>';
-		}, this);
-
-		this.el().append(html);
-	},
-
-	showMessage: function () {
+	_showMessage: function () {
 		this.el().append([
 			'<tr>',
 				'<td class="message" colspan="6">',

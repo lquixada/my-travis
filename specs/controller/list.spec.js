@@ -10,7 +10,7 @@ describe("List Controller", function() {
 
 			spyOn(listController, 'el').andReturn(table);
 
-			listController.clear();
+			listController._clear();
 
 			expect(table.find('#no-projects').length).toBe(1);
 		});
@@ -21,7 +21,7 @@ describe("List Controller", function() {
 			spyOn(chrome.browserAction, 'setBadgeText'); 
 			spyOn(listController, 'el').andReturn(table);
 
-			listController.clear();
+			listController._clear();
 
 			expect(chrome.browserAction.setBadgeText).toHaveBeenCalled();
 			expect(chrome.browserAction.setBadgeText.calls[0].args[0]).toBeJson({text: ''});
