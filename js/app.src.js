@@ -14,11 +14,13 @@ Service = o.Class( {
 
 
 Controller = o.Class( {
-	addListeners: function () {
+	render: function () {
 		throw 'not implemented error';
 	},
-
-	render: function () {
+	
+	// private
+	
+	_addListeners: function () {
 		throw 'not implemented error';
 	}
 });

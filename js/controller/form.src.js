@@ -72,7 +72,7 @@ FormUsersController = o.Class({
 		var that = this;
 
 		this.el().on('submit', function ( evt ) {
-			var users, Updater = that._getUpdater();
+			var Updater = that._getUpdater();
 			
 			evt.preventDefault();
 
@@ -80,15 +80,10 @@ FormUsersController = o.Class({
 
 			Prefs.addUser(this.user.value);
 
-			that._showOverlay();
-			that._blockSubmit(true);
-			that._setStatus('<img src="../imgs/loading.gif">');
+			that._lock();
 
 			TravisAPI.get(Prefs.getUsers(), function () {
-				that._clear();
-				that._hideOverlay();
-				that._blockSubmit(false);
-				that._setStatus('saved');
+				that._unlock();
 
 				Updater.restart();
 
@@ -107,8 +102,21 @@ FormUsersController = o.Class({
 		$('section#list div#overlay').hide();
 	},
 
+	_lock: function () {
+		this._showOverlay();
+		this._blockSubmit(true);
+		this._setStatus('<img src="../imgs/loading.gif">');
+	},
+
 	_showOverlay: function () {
 		$('section#list div#overlay').show();
+	},
+
+	_unlock: function () {
+		this._clear();
+		this._hideOverlay();
+		this._blockSubmit(false);
+		this._setStatus('saved');
 	}
 });
 

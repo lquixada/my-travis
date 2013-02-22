@@ -20,7 +20,7 @@ describe("DOMController", function() {
     });
 
     it("should have a signature addListeners()", function() {
-        expect(function () { controller.addListeners(); }).toThrow('not implemented error');
+        expect(function () { controller._addListeners(); }).toThrow('not implemented error');
     });
 });
 
