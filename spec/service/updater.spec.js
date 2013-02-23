@@ -1,13 +1,15 @@
 describe("Updater Service", function() {
 	describe("polling", function() {
 		beforeEach(function() {
-			Prefs.addUser('user1');
+			Prefs.clear();
+
 			jasmine.Clock.useMock();
+			
 			spyOn(TravisAPI, 'get');
 		});
 		
 		it("should call Travis API every 60 seconds", function() {
-			Prefs.set('interval', '');
+			Prefs.addUser('user1');
 
 			Updater.start();
 
@@ -17,6 +19,7 @@ describe("Updater Service", function() {
 		});
 		
 		it("should call TravisAPI acording to configuration", function() {
+			Prefs.addUser('user1');
 			Prefs.set('interval', 10);
 
 			Updater.start();
