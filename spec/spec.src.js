@@ -13,10 +13,10 @@ $.ajax({
 
 beforeEach(function() {
 	$('div#main').html(fixture);
-
+	
   this.addMatchers({
     toBeArray: function () {
-      return toString.call(this.actual) === '[object Array]';
+      return $.isArray(this.actual);
     },
     
     toBeJson: function (object) {
