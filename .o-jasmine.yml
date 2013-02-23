@@ -13,6 +13,8 @@ js:
   - js/controller/notification.src.js
   - js/model/projs.src.js
   - js/model/prefs.src.js
+  - js/model/travis.src.js
+  - js/service/updater.src.js
   - js/badge.src.js
 
   - spec/lib/utils.spec.js
@@ -23,4 +25,5 @@ js:
   - spec/model/model.spec.js
   - spec/model/projs.spec.js
   - spec/model/prefs.spec.js
+  - spec/service/updater.spec.js
   - spec/badge.spec.js
