@@ -25,5 +25,6 @@ js:
   - spec/model/model.spec.js
   - spec/model/projs.spec.js
   - spec/model/prefs.spec.js
+  - spec/model/travis.spec.js
   - spec/service/updater.spec.js
   - spec/badge.spec.js
