@@ -1,9 +1,11 @@
 title: "MyTravis Spec Runner"
+css:
+  - spec/spec.src.css
 js:
   - js/lib/o.min.js
   - js/lib/jquery-1.9.1.min.js
   - js/lib/utils.src.js
-  - specs/matchers.js
+  - spec/spec.src.js
 
   - js/app.src.js
   - js/controller/analytics.src.js
@@ -13,12 +15,12 @@ js:
   - js/model/prefs.src.js
   - js/badge.src.js
 
-  - specs/lib/utils.spec.js
-  - specs/controller/controller.spec.js
-  - specs/controller/analytics.spec.js
-  - specs/controller/list.spec.js
-  - specs/controller/notification.spec.js
-  - specs/model/model.spec.js
-  - specs/model/projs.spec.js
-  - specs/model/prefs.spec.js
-  - specs/badge.spec.js
+  - spec/lib/utils.spec.js
+  - spec/controller/controller.spec.js
+  - spec/controller/analytics.spec.js
+  - spec/controller/list.spec.js
+  - spec/controller/notification.spec.js
+  - spec/model/model.spec.js
+  - spec/model/projs.spec.js
+  - spec/model/prefs.spec.js
+  - spec/badge.spec.js
