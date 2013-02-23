@@ -6,6 +6,8 @@ AuthorController = o.Class({
 		this._addListeners();
 	},
 
+	// private
+
 	_addListeners: function () {
 		var that = this;
 
