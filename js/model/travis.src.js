@@ -3,14 +3,14 @@ TravisAPISource = o.Class({
 	
 	url: 'https://api.travis-ci.org/repos',
 
-	getUrl: function (users) {
+	getURL: function (users) {
 		users = '?owner_name[]='+users.join('&owner_name[]=');
 
 		return this.url+users;
 	},
 
 	get: function (users, onComplete) {
-		this._super(this.getUrl(users), onComplete);
+		this._super(this.getURL(users), onComplete);
 	}
 });
 
