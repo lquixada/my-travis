@@ -1,6 +1,23 @@
 UpdaterService = o.Class({
 	extend: Service,
 
+	exec: function (callback) {
+		var users = Prefs.getUsers();
+
+		TravisAPI.get(users, function (projs) {
+			projs = Projs.store(projs);
+
+			Badge.update(projs);
+			Notification.update(projs);
+
+			updaterController.render();
+
+			if (callback) {
+				callback(projs);
+			}
+		});	
+	},
+
 	restart: function () {
 		this.stop();
 		this.start();
@@ -15,7 +32,7 @@ UpdaterService = o.Class({
 			console.log('Updater started. Polling interval: '+interval+'s');
 
 			this.timer = setInterval(function () {
-				that._exec();
+				that.exec();
 			}, interval*1000); 
 		}
 	},
@@ -24,21 +41,6 @@ UpdaterService = o.Class({
 		console.log('Updater stopped.');
 
 		clearInterval(this.timer);
-	},
-
-	// private
-	
-	_exec: function () {
-		var users = Prefs.getUsers();
-
-		TravisAPI.get(users, function (projs) {
-			projs = Projs.store(projs);
-
-			Badge.update(projs);
-			Notification.update(projs);
-
-			updaterController.render();	
-		});	
 	}
 });
 

@@ -82,7 +82,7 @@ FormUsersController = o.Class({
 
 			that._lock();
 
-			TravisAPI.get(Prefs.getUsers(), function () {
+			Updater.exec(function () {
 				that._unlock();
 
 				Updater.restart();
