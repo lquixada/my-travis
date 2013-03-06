@@ -3,6 +3,8 @@
 * Improve screenshots zoom
 * Create javascript more specs
 * Update screenshots
+* Create Changelog
+* Handle cases when travis api is down
 
 
 ## Issues
