@@ -3,24 +3,12 @@
 * Improve screenshots zoom
 * Create javascript more specs
 * Update screenshots
-* Create Changelog
-* Handle cases when travis api is down
 
 
 ## Issues
 
 * Tab navigation
 * browserAction to toggle popup (see if it's possible)
-
-
-## Version 0.2
-
-* Multiple user support
-
-
-## Version 0.3
-
-* Notifications
 
 
 ## Version 0.4
@@ -38,6 +26,7 @@
 ## Version 0.6
 
 * Localizations
+* Service status
 
 
 ## Version 0.7
