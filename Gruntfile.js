@@ -40,7 +40,7 @@ module.exports = function ( grunt ) {
 
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
-	grunt.loadNpmTasks('grunt-css');
+	grunt.loadNpmTasks('grunt-contrib-cssmin');
 
   // Aliased tasks (for readability purposes on "build" task)
   grunt.registerTask('o:cssmin', 'cssmin:build');

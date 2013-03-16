@@ -17,7 +17,7 @@
     "grunt": "*",
     "grunt-contrib-jshint": "*",
     "grunt-contrib-uglify": "*",
-    "grunt-css": "*",
+    "grunt-contrib-cssmin": "*",
     "o-jasmine": "*",
     "o-phantom": "*"
   }
