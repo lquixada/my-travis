@@ -1,15 +1,16 @@
 $(document).ready(function () {
+	var msg;
 	var type = document.location.search.slice(1);
 	var Notification = chrome.extension.getBackgroundPage().Notification;
 	var result = Notification.getResult();
 	var slugs = result[type];
 	var len = slugs.length;
 	
-	if (type==='passed') {
+	if (type === 'passed') {
 		msg = ' has been fixed';
 	}
 
-	if (type==='failed') {
+	if (type === 'failed') {
 		msg = ' has failed';
 	}
 

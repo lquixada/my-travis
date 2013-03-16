@@ -1,4 +1,6 @@
-Project = o.Class({
+/*globals ModelLocalStorage */
+
+var Project = o.Class({
 	extend: ModelLocalStorage,
 	key: 'projs',
 
@@ -16,14 +18,16 @@ Project = o.Class({
 
 	convertStatus: function (proj) {
 		switch (proj.last_build_status) {
-			case 0: return 'passed';
-			case 1: return 'failed';
-			default:
-		    if (proj.last_build_finished_at) {
-					return 'errored';
-				} else {
-					return 'started';
-				}
+		case 0:
+			return 'passed';
+		case 1:
+			return 'failed';
+		default:
+			if (proj.last_build_finished_at) {
+				return 'errored';
+			} else {
+				return 'started';
+			}
 		}	
 	},
 	
@@ -60,4 +64,4 @@ Project = o.Class({
 	}
 });
 
-Projs = new Project();
+var Projs = new Project();

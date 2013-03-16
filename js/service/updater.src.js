@@ -1,4 +1,6 @@
-UpdaterService = o.Class({
+/*globals Service, Badge, Notification, Prefs, Projs, TravisAPI, updaterController */
+
+var UpdaterService = o.Class({
 	extend: Service,
 
 	exec: function (callback) {
@@ -44,4 +46,4 @@ UpdaterService = o.Class({
 	}
 });
 
-Updater = new UpdaterService();
+var Updater = new UpdaterService();

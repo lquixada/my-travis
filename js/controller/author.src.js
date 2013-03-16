@@ -1,4 +1,6 @@
-AuthorController = o.Class({
+/*globals DOMController */
+
+var AuthorController = o.Class({
 	extend: DOMController,
 	dom: 'section#author',
 
@@ -38,4 +40,4 @@ AuthorController = o.Class({
 	} 
 });
 
-authorController = new AuthorController();
+var authorController = new AuthorController();

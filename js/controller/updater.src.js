@@ -1,4 +1,6 @@
-UpdaterController = o.Class({
+/*globals DOMController */
+
+var UpdaterController = o.Class({
 	extend: DOMController,
 	
 	render: function () {
@@ -6,12 +8,12 @@ UpdaterController = o.Class({
 		var views = chrome.extension.getViews();
 
 		views.forEach(function (view) {
-			if (view.location.href == popupUrl) {
+			if (view.location.href === popupUrl) {
 				view.listController.render();
 			}
 		});
 	}
 });
 
-updaterController = new UpdaterController();
+var updaterController = new UpdaterController();
 

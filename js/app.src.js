@@ -1,8 +1,8 @@
-Service = o.Class( {
+var Service = o.Class( {
 	restart: function() {
 		throw 'not implemented error';
 	},
-	
+
 	start: function() {
 		throw 'not implemented error';
 	},
@@ -13,33 +13,33 @@ Service = o.Class( {
 });
 
 
-Controller = o.Class( {
+var Controller = o.Class( {
 	render: function () {
 		throw 'not implemented error';
 	},
-	
+
 	// private
-	
+
 	_addListeners: function () {
 		throw 'not implemented error';
 	}
 });
 
 
-DOMController = o.Class( {
+var DOMController = o.Class( {
 	extend: Controller,
-  
+
 	el: function () {
 		if (!this.element) {
 			this.element = $(this.dom);
 		}
-		
+
 		return this.element;
 	}
 }); 
 
 
-Model = o.Class( {
+var Model = o.Class( {
 	clear: function () {
 		throw 'not implemented error';
 	},
@@ -54,9 +54,9 @@ Model = o.Class( {
 });
 
 
-ModelLocalStorage = o.Class( {
+var ModelLocalStorage = o.Class( {
 	extend: Model,
-	
+
 	clear: function () {
 		delete localStorage[this._getKey()];
 	},
@@ -69,9 +69,9 @@ ModelLocalStorage = o.Class( {
 	set: function (value) {
 		localStorage[this._getKey()] = JSON.stringify(value);
 	},
-	
+
 	// private
-	
+
 	_getKey: function () {
 		if (!this.key) {
 			throw 'key not specified error.';
@@ -82,14 +82,14 @@ ModelLocalStorage = o.Class( {
 });
 
 
-Source = o.Class({
+var Source = o.Class({
 	get: function () {
 		throw 'not implemented error';
 	}
 });
 
 
-JSONSource = o.Class({
+var JSONSource = o.Class({
 	extend: Source,
 	url: '',
 

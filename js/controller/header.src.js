@@ -1,4 +1,6 @@
-HeaderController = o.Class({
+/*globals DOMController, formPrefsController, formUsersController */
+
+var HeaderController = o.Class({
 	extend: DOMController,
 	dom: 'header',
 	
@@ -19,4 +21,4 @@ HeaderController = o.Class({
 	}
 });
 
-headerController = new HeaderController();
+var headerController = new HeaderController();

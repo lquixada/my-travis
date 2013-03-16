@@ -1,4 +1,6 @@
-TravisAPISource = o.Class({
+/*globals JSONSource */
+
+var TravisAPISource = o.Class({
 	extend: JSONSource,
 	
 	url: 'https://api.travis-ci.org/repos',
@@ -15,4 +17,4 @@ TravisAPISource = o.Class({
 });
 
 
-TravisAPI = new TravisAPISource();
+var TravisAPI = new TravisAPISource();

@@ -1,4 +1,6 @@
-FormController = o.Class({
+/*globals DOMController, Updater, Prefs */
+
+var FormController = o.Class({
 	extend: DOMController,
 
 	close: function () {
@@ -45,19 +47,19 @@ FormController = o.Class({
 		return chrome.extension.getBackgroundPage().Updater;
 	},
 
-  _setStatus: function (msg) {
-    this.el().find('span.status').html(msg);
+	_setStatus: function (msg) {
+		this.el().find('span.status').html(msg);
 	}
 });
 
 
-FormUsersController = o.Class({
+var FormUsersController = o.Class({
 	extend: FormController,
 	dom: 'section#form-user form',
 
 	boot: function () {
 		this._addListeners();
-	  this._disableFieldsTabIndex();	
+		this._disableFieldsTabIndex();	
 	},
 
 	close: function () {
@@ -120,10 +122,10 @@ FormUsersController = o.Class({
 	}
 });
 
-formUsersController = new FormUsersController();
+var formUsersController = new FormUsersController();
 
 
-FormPrefsController = o.Class({
+var FormPrefsController = o.Class({
 	extend: FormController,
 	dom: 'section#form-prefs form',
 
@@ -171,4 +173,4 @@ FormPrefsController = o.Class({
 	}
 });
 
-formPrefsController = new FormPrefsController();
+var formPrefsController = new FormPrefsController();

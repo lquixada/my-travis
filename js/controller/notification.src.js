@@ -1,4 +1,6 @@
-NotificationController = o.Class({
+/*globals DOMController, Prefs, webkitNotifications */
+
+var NotificationController = o.Class({
 	extend: DOMController,
 
 	getResult: function () {
@@ -26,12 +28,12 @@ NotificationController = o.Class({
 			storedStatus = stored[slug];
 			fetchedStatus = fetched[slug];
 
-			if (storedStatus == 'passed' && fetchedStatus == 'failed') {
+			if (storedStatus === 'passed' && fetchedStatus === 'failed') {
 				result.failed.push(slug);
 				continue;
 			}
 
-			if (storedStatus == 'failed' && fetchedStatus == 'passed') {
+			if (storedStatus === 'failed' && fetchedStatus === 'passed') {
 				result.passed.push(slug);
 				continue;
 			}
@@ -126,4 +128,4 @@ NotificationController = o.Class({
 	}
 });
 
-Notification = new NotificationController();
+var Notification = new NotificationController();

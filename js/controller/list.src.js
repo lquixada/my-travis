@@ -1,10 +1,12 @@
-ListController = o.Class({
+/*globals DOMController, Prefs, Projs, Badge, moment, formatSecs */
+
+var ListController = o.Class({
 	extend: DOMController,
 	dom: 'table',
 	
 	boot: function () {
 		this.render();
-	  this._addListeners();	
+		this._addListeners();	
 	},
 
 	render: function() {
@@ -55,9 +57,9 @@ ListController = o.Class({
 			if (!button.next().is('.confirm')) {
 				button.after([
 					'<span class="confirm">',
-						'are you sure?',
-						'<span class="option yes">yes</span>',
-						'<span class="option no">no</span>',
+					'are you sure?',
+					'<span class="option yes">yes</span>',
+					'<span class="option no">no</span>',
 					'</span>'
 				].join(''));
 			}
@@ -95,11 +97,11 @@ ListController = o.Class({
 	_compileProjTemplate: function (proj) {
 		return [
 			'<tr '+this._getHref(proj)+' '+this._getClassName(proj)+'>',
-				'<td>'+this._getIcon(proj)+'</td>',
-				'<td>'+proj.name+'</td>',
-				'<td>'+'#'+proj.build+'</td>',
-				'<td>'+this._getDuration(proj)+'</td>',
-				'<td>'+this._getFinishedAt(proj)+'</td>',
+			'<td>'+this._getIcon(proj)+'</td>',
+			'<td>'+proj.name+'</td>',
+			'<td>'+'#'+proj.build+'</td>',
+			'<td>'+this._getDuration(proj)+'</td>',
+			'<td>'+this._getFinishedAt(proj)+'</td>',
 			'</tr>'
 		].join('');
 	},
@@ -139,12 +141,12 @@ ListController = o.Class({
 	_showMessage: function () {
 		this.el().append([
 			'<tr>',
-				'<td class="message" colspan="6">',
-					'<div id="no-projects">No project has been added until now.</div>',
-				'</td>',
+			'<td class="message" colspan="6">',
+			'<div id="no-projects">No project has been added until now.</div>',
+			'</td>',
 			'</tr>'
 		].join(''));
 	}
 });
 
-listController = new ListController();
+var listController = new ListController();

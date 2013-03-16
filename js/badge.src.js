@@ -1,4 +1,4 @@
-Badge = {
+var Badge = {
 	clear: function () {
 		chrome.browserAction.setBadgeText({text: ''});
 	},
