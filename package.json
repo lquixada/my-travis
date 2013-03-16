@@ -13,9 +13,11 @@
   "scripts": {
     "test": "o-phantom"
   },
-  "dependencies": {
+  "devDependencies": {
     "grunt": "*",
-    "grunt-css": "<0.4.0",
+    "grunt-contrib-jshint": "*",
+    "grunt-contrib-uglify": "*",
+    "grunt-css": "*",
     "o-jasmine": "*",
     "o-phantom": "*"
   }

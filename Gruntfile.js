@@ -4,11 +4,11 @@ module.exports = function ( grunt ) {
 	var projectName = 'mytravis';
 
   grunt.initConfig({
-    lint: {
+    jshint: {
       files: ['js/**/*.src.js', 'specs/**/*.spec.js']
     },
 
-    min: {
+    uglify: {
       build: {
         src: ['js/**/*.src.js'],
         dest: 'build/'+projectName+'.min.js'
@@ -38,22 +38,26 @@ module.exports = function ( grunt ) {
     }
   });
 
+	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-css');
+
   // Aliased tasks (for readability purposes on "build" task)
   grunt.registerTask('o:cssmin', 'cssmin:build');
-  grunt.registerTask('o:jsmin', 'min:build');
-  grunt.registerTask('o:jslint', 'lint');
+  grunt.registerTask('o:jsmin', 'uglify:build');
+  grunt.registerTask('o:jslint', 'jshint');
   grunt.registerTask('o:zip', 'zip:dist');
   grunt.registerTask('o:test', 'test');
   grunt.registerTask('o:imgs', 'imgs');
-  grunt.registerTask('o:build', 'o:test o:jslint o:jsmin o:cssmin o:imgs');
+  grunt.registerTask('o:build', ['o:test', 'o:jslint', 'o:jsmin', 'o:cssmin', 'o:imgs']);
 
   
   grunt.registerMultiTask('imgs', 'Copy images to the build folder', function () {
     var done = this.async();
 
     if (fs.existsSync(this.data.src)) {
-      grunt.utils.spawn({ cmd: 'cp', args: ['-R', this.data.src, this.data.dest]}, function (err, result, code) {
-				grunt.helper('writeOutput', result.err, 'Image files copied successfully.', code);
+      grunt.util.spawn({ cmd: 'cp', args: ['-R', this.data.src, this.data.dest]}, function (err, result, code) {
+				writeOutput(result.err, 'Image files copied successfully.', code);
         
         done(code>0? false: true);
       } );
@@ -69,8 +73,8 @@ module.exports = function ( grunt ) {
     options = ['--exclude'].concat(this.data.exclude);
     options = options.concat(['-r', this.data.dest, this.data.src]);
     
-    grunt.utils.spawn({cmd: 'zip', args: options}, function (err, result, code) {
-		  grunt.helper('writeOutput', result.err, result.stdout, code);
+    grunt.util.spawn({cmd: 'zip', args: options}, function (err, result, code) {
+		  writeOutput(result.err, result.stdout, code);
 
 			done(code>0? false: true);
     });
@@ -80,8 +84,8 @@ module.exports = function ( grunt ) {
   grunt.registerTask('test', 'Run specs using npm test', function () {
     var done = this.async();
 
-    grunt.utils.spawn({ cmd: 'npm', args: ['test'] }, function (err, result, code) {
-		  grunt.helper('writeOutput', result.err, result.stdout, code);
+    grunt.util.spawn({ cmd: 'npm', args: ['test'] }, function (err, result, code) {
+		  writeOutput(result.err, result.stdout, code);
       
       done(code>0? false: true);
     });
@@ -89,10 +93,9 @@ module.exports = function ( grunt ) {
 
 
 	// Helpers
-	
-	grunt.task.registerHelper("writeOutput", function (errorMsg, successMsg, code) {
+	function writeOutput(errorMsg, successMsg, code) {
     var output = errorMsg || successMsg;
 
     grunt.log.writeln( '\n'+output+'\n' );
-  });
+	}
 };
