@@ -1,8 +1,14 @@
 # TODO
 
+* Implement EventBus?
+* Update jQuery to version 2.0
+* Controller namespace? Header.Ctrl or Ctrl.Header?
+* Templates: try Handlebars
+* Promises: try q
 * Improve screenshots zoom
 * Create javascript more specs
 * Update screenshots
+* Code Style Guidelines
 
 
 ## Issues
