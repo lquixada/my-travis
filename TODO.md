@@ -2,9 +2,11 @@
 
 * Implement EventBus?
 * Update jQuery to version 2.0
-* Controller namespace? Header.Ctrl or Ctrl.Header?
 * Templates: try Handlebars
 * Promises: try q
+* Controllers:
+	* Convert Controller to singletons
+	* Use namespace. Ex: Header.Ctrl or Ctrl.Header?
 * Improve screenshots zoom
 * Create javascript more specs
 * Update screenshots
