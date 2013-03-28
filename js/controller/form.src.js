@@ -71,7 +71,16 @@ var FormUsersController = o.Class({
 	// private
 	
 	_addListeners: function () {
-		var that = this;
+		var that = this,
+			client = new LiteMQ.Client();
+
+		client.sub('button-open-users-pressed', function () {
+			that.toggle();
+		});
+		
+		client.sub('button-open-prefs-pressed', function () {
+			that.close();
+		});
 
 		this.el().on('submit', function ( evt ) {
 			var Updater = that._getUpdater();
@@ -145,7 +154,16 @@ var FormPrefsController = o.Class({
 	// private
 	
 	_addListeners: function () {
-		var that = this;
+		var that = this,
+			client = new LiteMQ.Client();
+		
+		client.sub('button-open-users-pressed', function () {
+			that.close();
+		});
+		
+		client.sub('button-open-prefs-pressed', function () {
+			that.toggle();
+		});
 
 		this.el().on('submit', function (evt) {
 			var Updater = that._getUpdater();

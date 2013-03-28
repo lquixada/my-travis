@@ -9,14 +9,14 @@ var HeaderController = o.Class({
 	},
 	
 	_addListeners: function () {
+		var client = new LiteMQ.Client();
+
 		this.el().on('click', 'button#open-users', function () {
-			formPrefsController.close();
-			formUsersController.toggle();
+			client.pub('button-open-users-pressed');
 		});
 
 		this.el().on('click', 'button#open-prefs', function () {
-			formUsersController.close();
-			formPrefsController.toggle();
+			client.pub('button-open-prefs-pressed');
 		});
 	}
 });
