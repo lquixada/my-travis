@@ -1,10 +1,11 @@
-/*globals Service, Badge, Notification, Prefs, Projs, TravisAPI, updaterController */
+/*globals Service, Badge, Notification, Prefs, Projs, TravisAPI */
 
 var UpdaterService = o.Class({
 	extend: Service,
 
 	exec: function (callback) {
-		var users = Prefs.getUsers();
+		var that = this,
+		  users = Prefs.getUsers();
 
 		TravisAPI.get(users, function (projs) {
 			projs = Projs.store(projs);
@@ -12,7 +13,7 @@ var UpdaterService = o.Class({
 			Badge.update(projs);
 			Notification.update(projs);
 
-			updaterController.render();
+			that.client.pub('request-travisapi-done');
 
 			if (callback) {
 				callback(projs);
@@ -21,6 +22,7 @@ var UpdaterService = o.Class({
 	},
 
 	init: function () {
+		this.client = new LiteMQ.Client();
 		this._addListeners();
 	},
 
@@ -52,17 +54,17 @@ var UpdaterService = o.Class({
 	// private
 	
 	_addListeners: function () {
-		var that = this,
-			client = new LiteMQ.Client();
+		var that = this;
 
-		client.sub('form-prefs-submitted', function () {
+		this.client.sub('form-prefs-submitted', function () {
 			that.restart();
 		});
 
-		client.sub('form-users-submitted', function () {
+		this.client.sub('form-users-submitted', function () {
 			that.stop();
+
+			// Do a request right away!
 			that.exec(function () {
-				client.pub('request-travisapi-done');
 				that.restart();
 			});
 		});

@@ -49,6 +49,7 @@ var ListController = o.Class({
 		});
 		
 		client.sub('request-travisapi-done', function () {
+			that.render();
 			that._unlock();
 		});
 
