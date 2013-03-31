@@ -1,4 +1,6 @@
-var Badge = {
+var BadgeController = o.Class({
+	extend: Controller,
+
 	clear: function () {
 		chrome.browserAction.setBadgeText({text: ''});
 	},
@@ -37,4 +39,6 @@ var Badge = {
 
 		this.set(failed);
 	}
-};
+});
+
+var Badge = new BadgeController();

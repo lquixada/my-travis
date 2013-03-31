@@ -14,11 +14,11 @@ js:
   - js/controller/form.src.js
   - js/controller/list.src.js
   - js/controller/notification.src.js
+  - js/controller/badge.src.js
   - js/model/projs.src.js
   - js/model/prefs.src.js
   - js/model/travis.src.js
   - js/service/updater.src.js
-  - js/badge.src.js
 
   - spec/lib/utils.spec.js
   - spec/controller/controller.spec.js
@@ -27,9 +27,9 @@ js:
   - spec/controller/form.spec.js
   - spec/controller/list.spec.js
   - spec/controller/notification.spec.js
+  - spec/controller/badge.spec.js
   - spec/model/model.spec.js
   - spec/model/projs.spec.js
   - spec/model/prefs.spec.js
   - spec/model/travis.spec.js
   - spec/service/updater.spec.js
-  - spec/badge.spec.js
