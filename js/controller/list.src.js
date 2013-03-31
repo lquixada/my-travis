@@ -2,7 +2,7 @@
 
 var ListController = o.Class({
 	extend: DOMController,
-	dom: 'table',
+	dom: 'section#list',
 	
 	boot: function () {
 		this.render();
@@ -35,7 +35,7 @@ var ListController = o.Class({
 			html += '</tbody>';
 		}, this);
 
-		this.el().append(html);
+		this.el('table').append(html);
 	},
 
 	// private
@@ -53,7 +53,7 @@ var ListController = o.Class({
 			that._unlock();
 		});
 
-		this.el().on('click', 'tr', function () {
+		this.el('table').on('click', 'tr', function () {
 			var url = this.getAttribute('href');
 
 			if (url) {
@@ -61,7 +61,7 @@ var ListController = o.Class({
 			}
 		});
 
-		this.el().on('click', 'button.remove', function () {
+		this.el('table').on('click', 'button.remove', function () {
 			var button = $(this);
 
 			if (!button.next().is('.confirm')) {
@@ -80,7 +80,7 @@ var ListController = o.Class({
 			}, 100);
 		});
 
-		this.el().on('click', 'span.option.yes', function () {
+		this.el('table').on('click', 'span.option.yes', function () {
 			var tbody = $(this).closest('tbody'),
 				user = tbody.attr('user');
 			
@@ -92,7 +92,7 @@ var ListController = o.Class({
 			that.render();
 		});
 
-		this.el().on('click', 'span.option.no', function () {
+		this.el('table').on('click', 'span.option.no', function () {
 			$(this).parent().removeClass('visible');
 		});
 	},
@@ -145,15 +145,15 @@ var ListController = o.Class({
 	},
 
 	_lock: function () {
-		this.el().parent().find('div#overlay').show();
+		this.el().find('div#overlay').show();
 	},
 
 	_remove: function () {
-		this.el().find('tbody').remove();
+		this.el('table').find('tbody').remove();
 	},
 
 	_showMessage: function () {
-		this.el().append([
+		this.el('table').append([
 			'<tr>',
 			'<td class="message" colspan="6">',
 			'<div id="no-projects">No project has been added until now.</div>',
@@ -163,7 +163,7 @@ var ListController = o.Class({
 	},
 
 	_unlock: function () {
-		this.el().parent().find('div#overlay').hide();
+		this.el().find('div#overlay').hide();
 	}
 });
 
