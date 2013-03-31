@@ -1,5 +1,7 @@
 # TODO
 
+* Lint project
+* Isolate List from Badge
 * Add support to set multiple values on Model.
 	Eg: Model.set({key1:'value1', key2: 'value2'})
 * Update jQuery to version 2.0
