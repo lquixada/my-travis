@@ -1,13 +1,15 @@
+/*globals Controller */
+
 var BadgeController = o.Class({
 	extend: Controller,
 
-	clear: function () {
-		chrome.browserAction.setBadgeText({text: ''});
-	},
-
-	init: function () {
+	boot: function () {
 		this.client = new LiteMQ.Client();
 		this._addListener();
+	},
+	
+	clear: function () {
+		chrome.browserAction.setBadgeText({text: ''});
 	},
 
 	set: function (failed) {
