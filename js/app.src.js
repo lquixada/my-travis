@@ -29,9 +29,13 @@ var Controller = o.Class( {
 var DOMController = o.Class( {
 	extend: Controller,
 
-	el: function () {
+	el: function (q) {
 		if (!this.element) {
 			this.element = $(this.dom);
+		}
+
+		if (q) {
+			return this.element.find(q);
 		}
 
 		return this.element;
