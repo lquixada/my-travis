@@ -135,12 +135,6 @@ var FormPrefsController = o.Class({
 		this._restoreData();
 	},
 
-	close: function () {
-		$('header button#open-prefs').focus();
-
-		this._super();
-	},
-
 	// private
 	
 	_addListeners: function () {
