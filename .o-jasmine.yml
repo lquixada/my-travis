@@ -2,10 +2,10 @@ title: "MyTravis Spec Runner"
 css:
   - spec/spec.src.css
 js:
-  - js/lib/o.min.js
-  - js/lib/litemq.min.js
-  - js/lib/jquery-1.9.1.min.js
-  - js/lib/utils.src.js
+  - js/vendor/o.min.js
+  - js/vendor/litemq.min.js
+  - js/vendor/jquery-1.9.1.min.js
+  - js/vendor/utils.src.js
   - spec/spec.src.js
 
   - js/app.src.js
@@ -20,7 +20,7 @@ js:
   - js/model/travis.src.js
   - js/service/updater.src.js
 
-  - spec/lib/utils.spec.js
+  - spec/vendor/utils.spec.js
   - spec/controller/controller.spec.js
   - spec/controller/analytics.spec.js
   - spec/controller/header.spec.js
