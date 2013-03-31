@@ -1,4 +1,4 @@
-/*globals DOMController, formPrefsController, formUsersController */
+/*globals DOMController */
 
 var HeaderController = o.Class({
 	extend: DOMController,

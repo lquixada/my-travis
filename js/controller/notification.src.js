@@ -1,7 +1,7 @@
-/*globals DOMController, Prefs, webkitNotifications */
+/*globals Controller, Prefs, webkitNotifications */
 
 var NotificationController = o.Class({
-	extend: DOMController,
+	extend: Controller,
 
 	getResult: function () {
 		return this.result || {passed: [], failed: []};
