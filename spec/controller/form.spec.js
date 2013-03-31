@@ -29,7 +29,7 @@ describe("Form Controller", function () {
 
 describe("Form User Controller", function () {
 	beforeEach(function () {
-		spyOn(TravisAPI, 'get');
+		spyOn($, 'getJSON');
 	});
 	
 	afterEach(function () {
@@ -63,7 +63,7 @@ describe("Form User Controller", function () {
 
 describe("Form Prefs Controller", function () {
 	beforeEach(function () {
-		spyOn(TravisAPI, 'get');
+		spyOn($, 'getJSON');
 	});
 	
 	afterEach(function () {
