@@ -3,7 +3,7 @@ css:
   - spec/spec.src.css
 js:
   - js/lib/o.min.js
-  - js/lib/litemq.src.js
+  - js/lib/litemq.min.js
   - js/lib/jquery-1.9.1.min.js
   - js/lib/utils.src.js
   - spec/spec.src.js
