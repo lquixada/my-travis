@@ -41,7 +41,16 @@ var ListController = o.Class({
 	// private
 	
 	_addListeners: function() {
-		var that = this;
+		var that = this,
+			client = new LiteMQ.Client();
+
+		client.sub('form-users-submitted', function () {
+			that._lock();
+		});
+		
+		client.sub('request-travisapi-done', function () {
+			that._unlock();
+		});
 
 		this.el().on('click', 'tr', function () {
 			var url = this.getAttribute('href');
@@ -134,6 +143,10 @@ var ListController = o.Class({
 		return '<img class="icon-status" src="../imgs/icon-'+proj.status+'.png" title="'+proj.status+'">';
 	},
 
+	_lock: function () {
+		this.el().parent().find('div#overlay').show();
+	},
+
 	_remove: function () {
 		this.el().find('tbody').remove();
 	},
@@ -146,6 +159,10 @@ var ListController = o.Class({
 			'</td>',
 			'</tr>'
 		].join(''));
+	},
+
+	_unlock: function () {
+		this.el().parent().find('div#overlay').hide();
 	}
 });
 

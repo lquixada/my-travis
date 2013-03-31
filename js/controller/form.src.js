@@ -101,23 +101,13 @@ var FormUsersController = o.Class({
 		this.el().find(':input[name=user]').val('');
 	},
 
-	_hideOverlay: function () {
-		$('section#list div#overlay').hide();
-	},
-
 	_lock: function () {
-		this._showOverlay();
 		this._blockSubmit(true);
 		this._setStatus('<img src="../imgs/loading.gif">');
 	},
 
-	_showOverlay: function () {
-		$('section#list div#overlay').show();
-	},
-
 	_unlock: function () {
 		this._clear();
-		this._hideOverlay();
 		this._blockSubmit(false);
 		this._setStatus('saved');
 	}
