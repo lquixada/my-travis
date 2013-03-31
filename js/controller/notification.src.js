@@ -6,6 +6,11 @@ var NotificationController = o.Class({
 	getResult: function () {
 		return this.result || {passed: [], failed: []};
 	},
+
+	init: function () {
+		this.client = new LiteMQ.Client();
+		this._addListener();
+	},
 	
 	update: function (projs) {
 		var prefs = Prefs.get();
@@ -16,6 +21,16 @@ var NotificationController = o.Class({
 	},
   
 	// private
+	
+	_addListener: function () {
+		var that = this;
+
+		this.client.sub('request-travisapi-done', function (msg) {
+			var projs = msg.body;
+			
+			that.update(projs);
+		});
+	},
 	
 	_compare: function (stored, fetched) {
 		var storedStatus, fetchedStatus;

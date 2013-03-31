@@ -1,4 +1,4 @@
-/*globals Service, Badge, Notification, Prefs, Projs, TravisAPI */
+/*globals Service, Prefs, Projs, TravisAPI */
 
 var UpdaterService = o.Class({
 	extend: Service,
@@ -10,10 +10,7 @@ var UpdaterService = o.Class({
 		TravisAPI.get(users, function (projs) {
 			projs = Projs.store(projs);
 
-			Badge.update(projs);
-			Notification.update(projs);
-
-			that.client.pub('request-travisapi-done');
+			that.client.pub('request-travisapi-done', projs);
 
 			if (callback) {
 				callback(projs);

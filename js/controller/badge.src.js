@@ -5,6 +5,11 @@ var BadgeController = o.Class({
 		chrome.browserAction.setBadgeText({text: ''});
 	},
 
+	init: function () {
+		this.client = new LiteMQ.Client();
+		this._addListener();
+	},
+
 	set: function (failed) {
 		chrome.browserAction.setBadgeText({text: (failed?''+failed:' ')});
 		chrome.browserAction.setBadgeBackgroundColor({color: (failed?'#f00':'#0c0')});
@@ -38,6 +43,18 @@ var BadgeController = o.Class({
 		}
 
 		this.set(failed);
+	},
+	
+	// private
+	
+	_addListener: function () {
+		var that = this;
+
+		this.client.sub('request-travisapi-done', function (msg) {
+			var projs = msg.body;
+
+			that.update(projs);
+		});
 	}
 });
 
