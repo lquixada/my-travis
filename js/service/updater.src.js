@@ -20,6 +20,10 @@ var UpdaterService = o.Class({
 		});	
 	},
 
+	init: function () {
+		this._addListeners();
+	},
+
 	restart: function () {
 		this.stop();
 		this.start();
@@ -43,6 +47,25 @@ var UpdaterService = o.Class({
 		console.log('Updater stopped.');
 
 		clearInterval(this.timer);
+	},
+
+	// private
+	
+	_addListeners: function () {
+		var that = this,
+			client = new LiteMQ.Client();
+
+		client.sub('form-prefs-submitted', function () {
+			that.restart();
+		});
+
+		client.sub('form-users-submitted', function () {
+			that.stop();
+			that.exec(function () {
+				client.pub('request-travisapi-done');
+				that.restart();
+			});
+		});
 	}
 });
 

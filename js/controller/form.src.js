@@ -1,7 +1,12 @@
-/*globals DOMController, Updater, Prefs */
+/*globals DOMController, Prefs */
 
 var FormController = o.Class({
 	extend: DOMController,
+
+	boot: function () {
+		this._addListeners();
+		this._disableFieldsTabIndex();	
+	},
 
 	close: function () {
 		this.el().removeClass('opened');
@@ -32,7 +37,7 @@ var FormController = o.Class({
 	},
 	
 	_disableFieldsTabIndex: function () {
-		this.el().find(':input').attr('tabindex', '-1' );	
+		this.el().find(':input').attr('tabindex', '-1');	
 	},
 
 	_enableFieldsTabIndex: function () {
@@ -41,10 +46,6 @@ var FormController = o.Class({
 
 	_focus: function () {
 		this.el().find(':input:first').get(0).focus(); 
-	},
-
-	_getUpdater: function () {
-		return chrome.extension.getBackgroundPage().Updater;
 	},
 
 	_setStatus: function (msg) {
@@ -56,11 +57,6 @@ var FormController = o.Class({
 var FormUsersController = o.Class({
 	extend: FormController,
 	dom: 'section#form-user form',
-
-	boot: function () {
-		this._addListeners();
-		this._disableFieldsTabIndex();	
-	},
 
 	close: function () {
 		$('header button#open-users').focus();
@@ -82,26 +78,22 @@ var FormUsersController = o.Class({
 			that.close();
 		});
 
-		this.el().on('submit', function ( evt ) {
-			var Updater = that._getUpdater();
-			
-			evt.preventDefault();
+		client.sub('request-travisapi-done', function () {
+			that._unlock();
 
-			Updater.stop();
+			setTimeout(function () {
+				that.close();
+			}, 1000);	
+		});
+
+		this.el().on('submit', function (evt) {
+			evt.preventDefault();
 
 			Prefs.addUser(this.user.value);
 
+			client.pub('form-users-submitted');
+
 			that._lock();
-
-			Updater.exec(function () {
-				that._unlock();
-
-				Updater.restart();
-
-				setTimeout(function () {
-					that.close();
-				}, 1000);
-			});
 		});
 	},
 
@@ -139,17 +131,15 @@ var FormPrefsController = o.Class({
 	dom: 'section#form-prefs form',
 
 	boot: function() {
-		this._addListeners();
+		this._super();
 		this._restoreData();
-		this._disableFieldsTabIndex();
 	},
 
-	_close: function () {
+	close: function () {
 		$('header button#open-prefs').focus();
 
 		this._super();
 	},
-	
 
 	// private
 	
@@ -166,8 +156,6 @@ var FormPrefsController = o.Class({
 		});
 
 		this.el().on('submit', function (evt) {
-			var Updater = that._getUpdater();
-
 			evt.preventDefault();
 
 			Prefs.set('interval', this.interval.value || 60);
@@ -175,7 +163,7 @@ var FormPrefsController = o.Class({
 
 			that._setStatus('saved');
 
-			Updater.restart();
+			client.pub('form-prefs-submitted');
 
 			setTimeout(function () {
 				that.close();
