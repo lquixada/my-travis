@@ -33,6 +33,14 @@ module.exports = function ( grunt ) {
 			}
     },
 
+		copy: {
+			imgs: {
+				files: [
+					{src: ['imgs/**'], dest: 'build/'} // includes files in path and its subdirs
+				]
+			}
+		},
+
     zip: {
       dist: {
         exclude: ['./.*', './node_modules*', './screenshots*'],
@@ -106,6 +114,7 @@ module.exports = function ( grunt ) {
 	grunt.loadNpmTasks('grunt-contrib-jasmine');
 	grunt.loadNpmTasks('grunt-contrib-connect');
 	grunt.loadNpmTasks('grunt-contrib-livereload');
+	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-regarde');
 
   // Aliased tasks (for readability purposes on "build" task)
@@ -113,7 +122,7 @@ module.exports = function ( grunt ) {
   grunt.registerTask('o:jsmin', 'uglify:build');
   grunt.registerTask('o:jslint', 'jshint');
   grunt.registerTask('o:zip', 'zip:dist');
-  grunt.registerTask('o:imgs', 'imgs');
+  grunt.registerTask('o:imgs', 'copy:imgs');
 
 	grunt.registerTask('o:ci', ['connect:pivotal', 'jasmine']);
 	grunt.registerTask('o:regarde:pivotal', ['connect:pivotal', 'regarde:pivotal']);
@@ -121,20 +130,6 @@ module.exports = function ( grunt ) {
 
 	// Batch taks
 	grunt.registerTask('o:build', ['o:ci', 'o:jslint', 'o:jsmin', 'o:cssmin', 'o:imgs']);
-  
-  grunt.registerMultiTask('imgs', 'Copy images to the build folder', function () {
-    var done = this.async();
-
-    if (fs.existsSync(this.data.src)) {
-      grunt.util.spawn({ cmd: 'cp', args: ['-R', this.data.src, this.data.dest]}, function (err, result, code) {
-				writeOutput(result.err, 'Image files copied successfully.', code);
-        
-        done(code>0? false: true);
-      } );
-    } else {
-      grunt.log.writeln('Nothing to do.');
-    }
-  } );
 
 
   grunt.registerMultiTask('zip', 'Creates package for deploy.', function () {

@@ -1,3 +1,4 @@
 *.zip
 runner.html
-.grunt
+.grunt/
+build/

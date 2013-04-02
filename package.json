@@ -14,7 +14,7 @@
     "test": "grunt o:ci"
   },
   "devDependencies": {
-		"phantomjs": "1.8.2-0",
+    "phantomjs": "1.8.2-0",
     "grunt-cli": "*",
     "grunt": "*",
     "grunt-contrib-jshint": "*",
@@ -23,6 +23,7 @@
     "grunt-contrib-connect": "*",
     "grunt-contrib-jasmine": "*",
     "grunt-contrib-livereload": "*",
-    "grunt-regarde": "*"
+    "grunt-regarde": "*",
+    "grunt-contrib-copy": "~0.4.1"
   }
 }
