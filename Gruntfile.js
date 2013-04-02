@@ -131,17 +131,11 @@ module.exports = function ( grunt ) {
     options = options.concat(['-r', this.data.dest, this.data.src]);
     
     grunt.util.spawn({cmd: 'zip', args: options}, function (err, result, code) {
-		  writeOutput(result.err, result.stdout, code);
+      var output = result.err || result.stdout;
+
+			grunt.log.writeln( '\n'+output+'\n' );
 
 			done(code>0? false: true);
     });
   });
-
-
-	// Helpers
-	function writeOutput(errorMsg, successMsg, code) {
-    var output = errorMsg || successMsg;
-
-    grunt.log.writeln( '\n'+output+'\n' );
-	}
 };
