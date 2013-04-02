@@ -24,7 +24,7 @@ describe("List Controller", function() {
 			listController._clear();
 
 			expect(chrome.browserAction.setBadgeText).toHaveBeenCalled();
-			expect(chrome.browserAction.setBadgeText.calls[0].args[0]).toBeJson({text: ''});
+			expect(chrome.browserAction.setBadgeText.calls[0].args[0]).toBeSameJsonAs({text: ''});
 		});
 	});
 });

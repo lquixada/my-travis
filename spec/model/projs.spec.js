@@ -17,7 +17,7 @@ describe("Project Model", function() {
   it("should get the right projects", function() {
 		Projs.set([{prop: 'value'}]);
 
-		expect(Projs.get()).toBeJson([{prop: 'value'}]);
+		expect(Projs.get()).toBeSameJsonAs([{prop: 'value'}]);
   });
 
 	describe("convert", function() {
@@ -90,7 +90,7 @@ describe("Project Model", function() {
 
 			projs = Projs.get();
 			
-			expect(projs).toBeJson({
+			expect(projs).toBeSameJsonAs({
 				"lquixada": [
 					{user: 'lquixada', name: 'proj1', status: 'passed'},
 					{user: 'lquixada', name: 'proj2', status: 'passed'}

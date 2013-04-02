@@ -19,7 +19,7 @@ beforeEach(function() {
       return $.isArray(this.actual);
     },
     
-    toBeJson: function (object) {
+    toBeSameJsonAs: function (object) {
         return JSON.stringify(this.actual) === JSON.stringify(object);
     },
     

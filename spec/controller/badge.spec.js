@@ -18,7 +18,7 @@ describe("Badge", function() {
             Badge.update([]);
 
             expect(setBadgeText).toHaveBeenCalled();
-            expect(setBadgeText.calls[0].args[0]).toBeJson({text: ''});
+            expect(setBadgeText.calls[0].args[0]).toBeSameJsonAs({text: ''});
         });
     });
 
@@ -33,14 +33,14 @@ describe("Badge", function() {
             Badge.update(projs);
 
             expect(setBadgeText).toHaveBeenCalled();
-            expect(setBadgeText.calls[0].args[0]).toBeJson({text: ' '});
+            expect(setBadgeText.calls[0].args[0]).toBeSameJsonAs({text: ' '});
         });
 
         it("should be green", function() {
             Badge.update(projs);
 
             expect(setBadgeBackgroundColor).toHaveBeenCalled();
-            expect(setBadgeBackgroundColor.calls[0].args[0]).toBeJson({color: '#0c0'});
+            expect(setBadgeBackgroundColor.calls[0].args[0]).toBeSameJsonAs({color: '#0c0'});
         });
     });
 
@@ -55,14 +55,14 @@ describe("Badge", function() {
             Badge.update(projs);
 
             expect(setBadgeText).toHaveBeenCalled();
-            expect(setBadgeText.calls[0].args[0]).toBeJson({text: '1'});
+            expect(setBadgeText.calls[0].args[0]).toBeSameJsonAs({text: '1'});
         });
 
         it("should be red", function() {
             Badge.update(projs);
 
             expect(setBadgeBackgroundColor).toHaveBeenCalled();
-            expect(setBadgeBackgroundColor.calls[0].args[0]).toBeJson({color: '#f00'});
+            expect(setBadgeBackgroundColor.calls[0].args[0]).toBeSameJsonAs({color: '#f00'});
         });
     });
 

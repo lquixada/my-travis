@@ -22,7 +22,7 @@ describe("Preferences Model", function() {
 			Prefs.set('user', 'test');
 			Prefs.set('password', 'wow');
 
-			expect(Prefs.get()).toBeJson({user: 'test', password: 'wow'});
+			expect(Prefs.get()).toBeSameJsonAs({user: 'test', password: 'wow'});
 		});
 	});
 	
