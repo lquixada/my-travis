@@ -1,6 +1,10 @@
 describe("Preferences Model", function() {
+	beforeEach(function() {
+		Prefs.clear();
+	});
+	
 	afterEach(function() {
-		delete localStorage.prefs;
+		Prefs.clear();
 	});
 
 	describe("set", function() {

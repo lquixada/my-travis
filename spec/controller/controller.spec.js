@@ -9,9 +9,9 @@ describe("DOMController", function() {
 
 	it("should get a descendant element", function() {
 		var controller = new DOMController();
-		controller.dom = 'body';	
+		controller.element = $('<div><p></p></div>');
 		
-		expect(controller.el('div#main').get(0)).toBe(document.body.children[0]);
+		expect(controller.el('p').size()).toBe(1);
 	});
 	
 	

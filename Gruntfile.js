@@ -1,4 +1,5 @@
-var fs = require('fs');
+var path = require('path');
+var snippet = require('grunt-contrib-livereload/lib/utils').livereloadSnippet;
 
 module.exports = function ( grunt ) {
 	var projectName = 'mytravis';
@@ -38,22 +39,88 @@ module.exports = function ( grunt ) {
         src: '.',
         dest: ''+projectName+'.zip'
       }
-    }
+    },
+
+		connect: {
+			pivotal: {
+				options: {
+					port: 9001,
+					base: '.'
+				}
+			},
+
+			livereload: {
+        options: {
+          port: 9001,
+          middleware: function(connect, options) {
+            return [snippet, connect.static(path.resolve(options.base))];
+          }
+        }
+      }
+		},
+
+		livereload: {
+      port: 35729
+    },
+
+	  jasmine: {
+			pivotal: {
+				src: [
+				  'js/app.src.js',
+					'js/controller/*.src.js',
+					'js/model/*.src.js',
+					'js/service/*.src.js'
+				],
+				options: {
+					host: 'http://localhost:9001/',
+					vendor: [
+						'js/vendor/o.min.js',
+						'js/vendor/litemq.min.js',
+						'js/vendor/jquery-1.9.1.min.js',
+						'js/vendor/utils.src.js',
+						'spec/spec.src.js'
+					],
+					specs: ['**/*.spec.js'],
+					outfile: 'runner.html'
+				}
+			}
+		},
+		
+		regarde: {
+			pivotal: {
+				files: ['**/*.src.js', '**/*.spec.js'],
+				tasks: ['jasmine:pivotal'],
+				spawn: true
+			},
+
+      livereload: {
+        files: ['Gruntfile.js', '**/*.src.js', '**/*.spec.js'],
+        tasks: ['livereload']
+      }
+		}
   });
 
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
+	grunt.loadNpmTasks('grunt-contrib-jasmine');
+	grunt.loadNpmTasks('grunt-contrib-connect');
+	grunt.loadNpmTasks('grunt-contrib-livereload');
+	grunt.loadNpmTasks('grunt-regarde');
 
   // Aliased tasks (for readability purposes on "build" task)
   grunt.registerTask('o:cssmin', 'cssmin:build');
   grunt.registerTask('o:jsmin', 'uglify:build');
   grunt.registerTask('o:jslint', 'jshint');
   grunt.registerTask('o:zip', 'zip:dist');
-  grunt.registerTask('o:test', 'test');
   grunt.registerTask('o:imgs', 'imgs');
-  grunt.registerTask('o:build', ['o:test', 'o:jslint', 'o:jsmin', 'o:cssmin', 'o:imgs']);
 
+	grunt.registerTask('o:ci', ['connect:pivotal', 'jasmine']);
+	grunt.registerTask('o:regarde:pivotal', ['connect:pivotal', 'regarde:pivotal']);
+	grunt.registerTask('o:regarde:livereload', ['livereload-start', 'connect:livereload', 'jasmine:pivotal:build', 'regarde:livereload']);
+
+	// Batch taks
+	grunt.registerTask('o:build', ['o:ci', 'o:jslint', 'o:jsmin', 'o:cssmin', 'o:imgs']);
   
   grunt.registerMultiTask('imgs', 'Copy images to the build folder', function () {
     var done = this.async();
@@ -80,17 +147,6 @@ module.exports = function ( grunt ) {
 		  writeOutput(result.err, result.stdout, code);
 
 			done(code>0? false: true);
-    });
-  });
-
-
-  grunt.registerTask('test', 'Run specs using npm test', function () {
-    var done = this.async();
-
-    grunt.util.spawn({ cmd: 'npm', args: ['test'] }, function (err, result, code) {
-		  writeOutput(result.err, result.stdout, code);
-      
-      done(code>0? false: true);
     });
   });
 
