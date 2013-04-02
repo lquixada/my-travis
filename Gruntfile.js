@@ -81,7 +81,7 @@ module.exports = function ( grunt ) {
 						'js/vendor/utils.src.js',
 						'spec/spec.src.js'
 					],
-					specs: ['**/*.spec.js'],
+					specs: ['spec/**/*.spec.js'],
 					outfile: 'runner.html'
 				}
 			}
@@ -89,13 +89,13 @@ module.exports = function ( grunt ) {
 		
 		regarde: {
 			pivotal: {
-				files: ['**/*.src.js', '**/*.spec.js'],
+				files: ['js/**/*.src.js', 'spec/**/*.spec.js'],
 				tasks: ['jasmine:pivotal'],
 				spawn: true
 			},
 
       livereload: {
-        files: ['Gruntfile.js', '**/*.src.js', '**/*.spec.js'],
+        files: ['js/**/*.src.js', 'spec/**/*.spec.js'],
         tasks: ['livereload']
       }
 		}
@@ -117,11 +117,10 @@ module.exports = function ( grunt ) {
   grunt.registerTask('o:zip', 'zip:dist');
   grunt.registerTask('o:imgs', 'copy:imgs');
 
+	// Batch taks
 	grunt.registerTask('o:ci', ['connect:pivotal', 'jasmine']);
 	grunt.registerTask('o:pivotal', ['connect:pivotal', 'regarde:pivotal']);
 	grunt.registerTask('o:livereload', ['livereload-start', 'connect:livereload', 'jasmine:pivotal:build', 'regarde:livereload']);
-
-	// Batch taks
 	grunt.registerTask('o:build', ['o:ci', 'o:jslint', 'o:jsmin', 'o:cssmin', 'o:imgs']);
 
 
