@@ -125,8 +125,8 @@ module.exports = function ( grunt ) {
   grunt.registerTask('o:imgs', 'copy:imgs');
 
 	grunt.registerTask('o:ci', ['connect:pivotal', 'jasmine']);
-	grunt.registerTask('o:regarde:pivotal', ['connect:pivotal', 'regarde:pivotal']);
-	grunt.registerTask('o:regarde:livereload', ['livereload-start', 'connect:livereload', 'jasmine:pivotal:build', 'regarde:livereload']);
+	grunt.registerTask('o:pivotal', ['connect:pivotal', 'regarde:pivotal']);
+	grunt.registerTask('o:livereload', ['livereload-start', 'connect:livereload', 'jasmine:pivotal:build', 'regarde:livereload']);
 
 	// Batch taks
 	grunt.registerTask('o:build', ['o:ci', 'o:jslint', 'o:jsmin', 'o:cssmin', 'o:imgs']);
