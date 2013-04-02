@@ -25,13 +25,6 @@ module.exports = function ( grunt ) {
         dest: 'build/'+projectName+'.min.css'
       }
     },
-    
-    imgs: {
-			build: {
-				src: 'imgs',
-				dest: 'build'
-			}
-    },
 
 		copy: {
 			imgs: {
