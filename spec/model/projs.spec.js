@@ -1,26 +1,23 @@
 describe("Project Model", function() {
-  afterEach(function() {
-		delete localStorage.projs;
-		delete localStorage.prefs;
-  });
+	beforeEach(function() {
+		Prefs.clear();
+		Projs.clear();
+	});
+	
+	afterEach(function() {
+		Prefs.clear();
+		Projs.clear();
+	});
 
-  it("should not have stored projects", function() {
+  it("should not have any stored projects", function() {
 		expect(Projs.get()).toBeArray();
 		expect(Projs.get().length).toBe(0);
   });
-
-  it("should store projects on 'projs' key", function() {
-		Projs.set([{prop: 'value'}]);
-
-		expect(localStorage.projs).toBe('[{"prop":"value"}]');
-  });
   
   it("should get the right projects", function() {
-		var json = [{prop: 'value'}];
+		Projs.set([{prop: 'value'}]);
 
-		Projs.set(json);
-
-		expect(Projs.get()).toBeJson(json);
+		expect(Projs.get()).toBeJson([{prop: 'value'}]);
   });
 
 	describe("convert", function() {
@@ -42,34 +39,14 @@ describe("Project Model", function() {
 			};
 		});
 		
-		it("should convert slug", function() {
+		it("should convert properties", function() {
 			converted = Projs.convert(proj);
 
 			expect(converted.user).toBe('lquixada');
 			expect(converted.name).toBe('my-travis');
-		});
-
-		it("should convert build number", function() {
-			converted = Projs.convert(proj);
-
 			expect(converted.build).toBe('13');
-		});
-
-		it("should convert finished_at", function() {
-			converted = Projs.convert(proj);
-
 			expect(converted.finishedAt).toMatch('2013-02-13T16:02:40Z');
-		});
-
-		it("should convert description", function() {
-			converted = Projs.convert(proj);
-
 			expect(converted.description).toBe('Monitor your projects builds from TravisCI within Chrome.');
-		});	
-		
-		it("should convert duration", function() {
-			converted = Projs.convert(proj);
-
 			expect(converted.duration).toBe(28);
 		});
 
@@ -77,34 +54,26 @@ describe("Project Model", function() {
 			it("should convert status passed", function() {
 				proj.last_build_status = 0;
 
-				converted = Projs.convert(proj);
-
-				expect(converted.status).toBe('passed');
+				expect(Projs.convert(proj).status).toBe('passed');
 			});
 
 			it("should convert status failed", function() {
 				proj.last_build_status = 1;
 
-				converted = Projs.convert(proj);
-
-				expect(converted.status).toBe('failed');
+				expect(Projs.convert(proj).status).toBe('failed');
 			});
 
 			it("should convert status started", function() {
 				proj.last_build_status = null;
 				proj.last_build_finished_at = null;
 
-				converted = Projs.convert(proj);
-
-				expect(converted.status).toBe('started');
+				expect(Projs.convert(proj).status).toBe('started');
 			});
 
 			it("should convert status errored", function() {
 				proj.last_build_status = null;
 
-				converted = Projs.convert(proj);
-
-				expect(converted.status).toBe('errored');
+				expect(Projs.convert(proj).status).toBe('errored');
 			});
 		});
 	});
