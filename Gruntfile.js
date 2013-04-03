@@ -81,7 +81,7 @@ module.exports = function ( grunt ) {
 					'js/service/*.src.js'
 				],
 				options: {
-					host: 'http://localhost:<%=connect.port%>/',
+					host: 'http://localhost:<%=connect.pivotal.options.port%>/',
 					vendor: [
 						'js/vendor/o.min.js',
 						'js/vendor/litemq.min.js',
