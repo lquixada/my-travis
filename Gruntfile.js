@@ -45,14 +45,14 @@ module.exports = function ( grunt ) {
 		connect: {
 			pivotal: {
 				options: {
-					port: '9001',
+					port: 9001,
 					base: '.'
 				}
 			},
 
 			livereload: {
         options: {
-          port: '9001',
+          port: 9001,
           middleware: function(connect, options) {
             return [snippet, connect.static(path.resolve(options.base))];
           }
@@ -126,7 +126,7 @@ module.exports = function ( grunt ) {
   grunt.registerTask('o:imgs', 'copy:imgs');
 
 	// Batch taks
-	grunt.registerTask('o:ci', ['connect:pivotal', 'jasmine']);
+	grunt.registerTask('o:ci', ['connect:pivotal', 'jasmine:pivotal']);
 	grunt.registerTask('o:pivotal', ['connect:pivotal', 'regarde:pivotal']);
 	grunt.registerTask('o:livereload', ['livereload-start', 'connect:livereload', 'jasmine:pivotal:build', 'url:pivotal', 'regarde:livereload']);
 	grunt.registerTask('o:build', ['o:ci', 'o:jslint', 'o:jsmin', 'o:cssmin', 'o:imgs']);
@@ -137,7 +137,7 @@ module.exports = function ( grunt ) {
 		var port = this.data.port;
 		var runner = this.data.runner; 
 
-		grunt.log.writeln( 'Specs can now be accessed on http://'+host+':'+port+'/'+runner );
+		grunt.log.writeln('Specs can now be accessed on http://'+host+':'+port+'/'+runner);
 	});
 
   grunt.registerMultiTask('zip', 'Creates package for deploy.', function () {
