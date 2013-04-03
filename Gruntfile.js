@@ -2,26 +2,30 @@ var path = require('path');
 var snippet = require('grunt-contrib-livereload/lib/utils').livereloadSnippet;
 
 module.exports = function ( grunt ) {
-	var projectName = 'mytravis';
-
+	var projectName = 'mytravis',
+		files = [],
+		js = ['*.src.js', 'js/**/*.src.js'],
+		css = ['*.src.css', 'css/**/*.src.css'],
+		spec = ['*.spec.js', 'spec/**/*.spec.js'];
+	
   grunt.initConfig({
     jshint: {
 			options: {
 				jshintrc: '.jshintrc'
 			},
-      files: ['js/**/*.src.js', 'specs/**/*.spec.js']
+      files: files.concat(js, spec)
     },
 
     uglify: {
       build: {
-        src: ['js/**/*.src.js'],
+        src: files.concat(js),
         dest: 'build/'+projectName+'.min.js'
       }
     },
 
     cssmin: {
       build: {
-        src: ['css/**/*.src.css'],
+        src: files.concat(css),
         dest: 'build/'+projectName+'.min.css'
       }
     },
@@ -89,7 +93,7 @@ module.exports = function ( grunt ) {
 						'js/vendor/utils.src.js',
 						'spec/spec.src.js'
 					],
-					specs: ['spec/**/*.spec.js'],
+					specs: files.concat(spec),
 					outfile: 'runner.html'
 				}
 			}
@@ -97,13 +101,13 @@ module.exports = function ( grunt ) {
 		
 		regarde: {
 			pivotal: {
-				files: ['js/**/*.src.js', 'spec/**/*.spec.js'],
+				files: files.concat(js, spec),
 				tasks: ['jasmine:pivotal'],
 				spawn: true
 			},
 
       livereload: {
-        files: ['js/**/*.src.js', 'spec/**/*.spec.js'],
+        files: files.concat(js, spec),
         tasks: ['livereload']
       }
 		}
