@@ -45,19 +45,27 @@ module.exports = function ( grunt ) {
 		connect: {
 			pivotal: {
 				options: {
-					port: 9001,
+					port: '9001',
 					base: '.'
 				}
 			},
 
 			livereload: {
         options: {
-          port: 9001,
+          port: '9001',
           middleware: function(connect, options) {
             return [snippet, connect.static(path.resolve(options.base))];
           }
         }
       }
+		},
+
+		url: {
+			pivotal: {
+				host: 'localhost',
+				port: '<%=connect.pivotal.options.port%>',
+				runner: '<%=jasmine.pivotal.options.outfile%>'
+			}
 		},
 
 		livereload: {
@@ -73,7 +81,7 @@ module.exports = function ( grunt ) {
 					'js/service/*.src.js'
 				],
 				options: {
-					host: 'http://localhost:9001/',
+					host: 'http://localhost:<%=connect.port%>/',
 					vendor: [
 						'js/vendor/o.min.js',
 						'js/vendor/litemq.min.js',
@@ -120,9 +128,17 @@ module.exports = function ( grunt ) {
 	// Batch taks
 	grunt.registerTask('o:ci', ['connect:pivotal', 'jasmine']);
 	grunt.registerTask('o:pivotal', ['connect:pivotal', 'regarde:pivotal']);
-	grunt.registerTask('o:livereload', ['livereload-start', 'connect:livereload', 'jasmine:pivotal:build', 'regarde:livereload']);
+	grunt.registerTask('o:livereload', ['livereload-start', 'connect:livereload', 'jasmine:pivotal:build', 'url:pivotal', 'regarde:livereload']);
 	grunt.registerTask('o:build', ['o:ci', 'o:jslint', 'o:jsmin', 'o:cssmin', 'o:imgs']);
 
+
+	grunt.registerMultiTask('url', 'Mounts url on screen', function () {
+		var host = this.data.host;
+		var port = this.data.port;
+		var runner = this.data.runner; 
+
+		grunt.log.writeln( 'Specs can now be accessed on http://'+host+':'+port+'/'+runner );
+	});
 
   grunt.registerMultiTask('zip', 'Creates package for deploy.', function () {
     var options, done = this.async();
