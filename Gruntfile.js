@@ -4,7 +4,7 @@ var snippet = require('grunt-contrib-livereload/lib/utils').livereloadSnippet;
 module.exports = function (grunt) {
 	var projectName = 'mytravis',
 		files = [],
-		js = ['*.src.js', 'js/**/*.src.js'],
+		js = ['*.src.js', 'app/**/*.src.js'],
 		css = ['*.src.css', 'css/**/*.src.css'],
 		spec = ['*.spec.js', 'spec/**/*.spec.js'];
 	
@@ -79,11 +79,11 @@ module.exports = function (grunt) {
 	  jasmine: {
 			pivotal: {
 				src: [
-				  'js/app.src.js',
-					'js/controller/*.src.js',
-					'js/helper/*.src.js',
-					'js/model/*.src.js',
-					'js/service/*.src.js'
+				  'app/app.src.js',
+					'app/controller/*.src.js',
+					'app/helper/*.src.js',
+					'app/model/*.src.js',
+					'app/service/*.src.js'
 				],
 				options: {
 					host: 'http://localhost:<%=connect.pivotal.options.port%>/',

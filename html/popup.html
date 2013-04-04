@@ -3,120 +3,120 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
+	<meta charset="utf-8">
 
-  <title>MyTravis</title>
+	<title>MyTravis</title>
 
-  <base target="_blank">
+	<base target="_blank">
 
-  <link rel="stylesheet" href="/css/popup.src.css">
-  <link rel="stylesheet" href="/css/list.src.css">
-  <link rel="stylesheet" href="/css/form.src.css">
-  <link rel="stylesheet" href="/css/footer.src.css">
-  <link rel="stylesheet" href="/css/header.src.css">
-  <link rel="stylesheet" href="/css/author.src.css">
+	<link rel="stylesheet" href="/css/popup.src.css">
+	<link rel="stylesheet" href="/css/list.src.css">
+	<link rel="stylesheet" href="/css/form.src.css">
+	<link rel="stylesheet" href="/css/footer.src.css">
+	<link rel="stylesheet" href="/css/header.src.css">
+	<link rel="stylesheet" href="/css/author.src.css">
 
-  <script src="/vendor/o.min.js"></script>
-  <script src="/vendor/jquery-1.9.1.min.js"></script>
-  <script src="/vendor/moment.min.js"></script>
-  <script src="/js/app.src.js"></script>
+	<script src="/vendor/o.min.js"></script>
+	<script src="/vendor/jquery-1.9.1.min.js"></script>
+	<script src="/vendor/moment.min.js"></script>
+	<script src="/app/app.src.js"></script>
 	
-  <script src="/js/helper/utils.src.js"></script>
+	<script src="/app/helper/utils.src.js"></script>
 
-	<script src="/js/model/prefs.src.js"></script>
-  <script src="/js/model/projs.src.js"></script>
-  <script src="/js/model/travis.src.js"></script>
+	<script src="/app/model/prefs.src.js"></script>
+	<script src="/app/model/projs.src.js"></script>
+	<script src="/app/model/travis.src.js"></script>
 	
-	<script src="/js/controller/analytics.src.js"></script>
-  <script src="/js/controller/list.src.js"></script>
-  <script src="/js/controller/form.src.js"></script>
-  <script src="/js/controller/header.src.js"></script>
-  <script src="/js/controller/author.src.js"></script>
-  <script src="/js/controller/badge.src.js"></script>
+	<script src="/app/controller/analytics.src.js"></script>
+	<script src="/app/controller/list.src.js"></script>
+	<script src="/app/controller/form.src.js"></script>
+	<script src="/app/controller/header.src.js"></script>
+	<script src="/app/controller/author.src.js"></script>
+	<script src="/app/controller/badge.src.js"></script>
 
-  <script src="/js/init/popup.src.js"></script>
+	<script src="/app/init/popup.src.js"></script>
 </head>
 
 <body>
-    <span id="auto-focus" tabindex="0">prevent auto focus</span>
+		<span id="auto-focus" tabindex="0">prevent auto focus</span>
 
 		<iframe id="templates" src="templates.html"></iframe>
 
-    <header id="main-header">
-        <a id="logo" href="http://travisci.org/"><img src="/imgs/logo.png"></a>
+		<header id="main-header">
+				<a id="logo" href="http://travisci.org/"><img src="/imgs/logo.png"></a>
 
-        <div id="bar">
-          <button id="open-users" title="add user"><img src="/imgs/icon-user.png"></button>
-          <button id="open-prefs" title="settings"><img src="/imgs/icon-cog.png"></button>
-        </div>
-    </header>
+				<div id="bar">
+					<button id="open-users" title="add user"><img src="/imgs/icon-user.png"></button>
+					<button id="open-prefs" title="settings"><img src="/imgs/icon-cog.png"></button>
+				</div>
+		</header>
 
-    <section id="form-prefs" class="form">
-      <form>
-        <label>check interval (in secs) <input name="interval" type="text" maxlength="3" required></label>
+		<section id="form-prefs" class="form">
+			<form>
+				<label>check interval (in secs) <input name="interval" type="text" maxlength="3" required></label>
 				<label>enable notifications <input name="notifications" type="checkbox"></label>
-        <button type="submit">save</button>
-        <span class="status"></span>
-      </form>
-    </section>
+				<button type="submit">save</button>
+				<span class="status"></span>
+			</form>
+		</section>
 
-    <section id="form-user" class="form">
-      <form>
+		<section id="form-user" class="form">
+			<form>
 				<label>user <input name="user" type="text" required></label>
 				<button type="submit">add</button>
-        <span class="status"></span>
-      </form>
-    </section>
+				<span class="status"></span>
+			</form>
+		</section>
 		
 		<section id="list">
-      <table border="0" cellspacing="0">
-        <thead>
-          <tr>
-            <th></th>
-            <th>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</th>
-            <th>Build</th>
-            <th>Duration</th>
-            <th>Finished At</th>
-          </tr>
-        </thead>
-      </table>
+			<table border="0" cellspacing="0">
+				<thead>
+					<tr>
+						<th></th>
+						<th>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</th>
+						<th>Build</th>
+						<th>Duration</th>
+						<th>Finished At</th>
+					</tr>
+				</thead>
+			</table>
 
-      <div id="overlay"></div>
-    </section>
+			<div id="overlay"></div>
+		</section>
 
-    <section id="author">
-        <div id="card">
-            <header>
-              <h4>Leonardo Quixadá</h4>
+		<section id="author">
+				<div id="card">
+						<header>
+							<h4>Leonardo Quixadá</h4>
 
-              <button id="close">close</button>
-            </header>
+							<button id="close">close</button>
+						</header>
 
-            <section>
-              <img id="photo" src="/imgs/photo.jpeg">
+						<section>
+							<img id="photo" src="/imgs/photo.jpeg">
 
-              <p>I'm a passionate javascript developer who likes dancing forró and good breakfasts :)</p>
+							<p>I'm a passionate javascript developer who likes dancing forró and good breakfasts :)</p>
 
-              <span class="github"><strong>Github</strong>: <a href="http://github.com/lquixada">github.com/lquixada</a></span>
-              <span class="twitter"><strong>Twitter</strong>: <a href="http://twitter.com/lquixada">@lquixada</a></span>
-            </section>
+							<span class="github"><strong>Github</strong>: <a href="http://github.com/lquixada">github.com/lquixada</a></span>
+							<span class="twitter"><strong>Twitter</strong>: <a href="http://twitter.com/lquixada">@lquixada</a></span>
+						</section>
 
-            <footer>
-              <p>Make a donation to support this app!</p>
+						<footer>
+							<p>Make a donation to support this app!</p>
 
-              <form id="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
-                  <input type="hidden" name="cmd" value="_s-xclick">
-                  <input type="hidden" name="hosted_button_id" value="EN5RLK73KUCYW">
-                  <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-                  <img alt="" border="0" src="https://www.paypalobjects.com/pt_BR/i/scr/pixel.gif" width="1" height="1">
-              </form>
-            </footer>
-        </div>
-    </section>
+							<form id="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+									<input type="hidden" name="cmd" value="_s-xclick">
+									<input type="hidden" name="hosted_button_id" value="EN5RLK73KUCYW">
+									<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+									<img alt="" border="0" src="https://www.paypalobjects.com/pt_BR/i/scr/pixel.gif" width="1" height="1">
+							</form>
+						</footer>
+				</div>
+		</section>
 
-    <footer id="main-footer">
-      <a id="author" href="#">author</a> | <a href="http://travisci.org/">visit travisci.org &raquo;</a>
-    </footer>
+		<footer id="main-footer">
+			<a id="author" href="#">author</a> | <a href="http://travisci.org/">visit travisci.org &raquo;</a>
+		</footer>
 </body>
 
 </html>
