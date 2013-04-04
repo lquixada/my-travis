@@ -5,7 +5,7 @@ module.exports = function (grunt) {
 	var projectName = 'mytravis',
 		files = [],
 		js = ['*.src.js', 'app/**/*.src.js'],
-		css = ['*.src.css', 'css/**/*.src.css'],
+		css = ['*.src.css', 'style/**/*.src.css'],
 		spec = ['*.spec.js', 'spec/**/*.spec.js'];
 	
   grunt.initConfig({
