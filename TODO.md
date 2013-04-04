@@ -23,14 +23,14 @@
 
 ## Version 0.4
 
-* chrome.storage.sync
+* Multiple user add support
+* Users drag'n'drop
+* Switch to multiple tables
 
 
 ## Version 0.5
 
-* Multiple user add support
-* Users drag'n'drop
-* Switch to multiple tables
+* chrome.storage.sync
 
 
 ## Version 0.6
