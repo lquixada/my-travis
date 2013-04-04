@@ -80,9 +80,9 @@ module.exports = function (grunt) {
 			pivotal: {
 				src: [
 				  'app/app.src.js',
-					'app/controller/*.src.js',
 					'app/helper/*.src.js',
 					'app/model/*.src.js',
+					'app/controller/*.src.js',
 					'app/service/*.src.js'
 				],
 				options: {
