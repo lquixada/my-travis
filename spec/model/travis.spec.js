@@ -1,3 +1,5 @@
+/*globals TravisAPI */
+
 describe("TravisAPI", function() {
 	it("should make a request to TravisCI with callback", function() {
 		var callback = jasmine.createSpy('onComplete');

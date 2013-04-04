@@ -1,3 +1,5 @@
+/*globals Prefs, Updater, TravisAPI */
+
 describe("Updater Service", function() {
 	describe("polling", function() {
 		beforeEach(function() {
@@ -40,12 +42,12 @@ describe("Updater Service", function() {
 	});
 	
 	it("should stop polling", function() {
-		  spyOn(window, 'clearInterval');
+		spyOn(window, 'clearInterval');
 
-			Updater.start();
-			Updater.stop();
-			
-			expect(window.clearInterval).toHaveBeenCalled();
+		Updater.start();
+		Updater.stop();
+		
+		expect(window.clearInterval).toHaveBeenCalled();
 	});
 });
 

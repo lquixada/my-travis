@@ -1,3 +1,5 @@
+/*globals Prefs */
+
 describe("Preferences Model", function() {
 	beforeEach(function() {
 		Prefs.clear();

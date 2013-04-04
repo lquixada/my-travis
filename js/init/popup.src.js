@@ -1,4 +1,4 @@
-/*globals formUsersController, formPrefsController, listController, authorController, headerController */
+/*globals formUsersController, formPrefsController, listController, authorController, headerController, Badge */
 
 // Must be window.load due to the async iframe load
 $(window).load(function () {

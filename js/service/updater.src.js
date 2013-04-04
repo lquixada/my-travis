@@ -5,7 +5,7 @@ var UpdaterService = o.Class({
 
 	exec: function (callback) {
 		var that = this,
-		  users = Prefs.getUsers();
+			users = Prefs.getUsers();
 
 		TravisAPI.get(users, function (projs) {
 			projs = Projs.store(projs);

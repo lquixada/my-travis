@@ -1,3 +1,5 @@
+/*globals FormController, Prefs, formUsersController, formPrefsController */
+
 describe("Form Controller", function () {
 	it("should open/close", function () {
 		var form = new FormController();

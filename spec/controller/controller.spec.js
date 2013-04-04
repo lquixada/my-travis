@@ -1,3 +1,4 @@
+/*globals DOMController */
 
 describe("DOMController", function() {
 	it("should get main element", function() {
@@ -16,7 +17,7 @@ describe("DOMController", function() {
 	
 	
 	it("should cache element", function() {
-		controller = new DOMController();
+		var controller = new DOMController();
 		
 		spyOn(window, '$').andReturn({});
 
@@ -27,6 +28,8 @@ describe("DOMController", function() {
 	});
 
 	it("should have a signature addListeners()", function() {
+		var controller = new DOMController();
+
 		expect(function () { controller._addListeners(); }).toThrow('not implemented error');
 	});
 });

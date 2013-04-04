@@ -1,3 +1,5 @@
+/*globals listController */
+
 describe("List Controller", function() {
 	describe("clear", function() {
 		beforeEach(function() {

@@ -4,8 +4,8 @@ describe("formatSecs", function() {
 			expect(formatSecs(2)).toBe('2s');
 		});
 
-			expect(formatSecs(62)).toBe('1min 2s');
 		it("should display 1min 2s", function() {
+			expect(formatSecs(62)).toBe('1min 2s');
 		});
 
 		it("should display 1h 1min 2s", function() {

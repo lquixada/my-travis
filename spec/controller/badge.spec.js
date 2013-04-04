@@ -1,3 +1,5 @@
+/*globals Badge */
+
 describe("Badge", function() {
     var setBadgeText, setBadgeBackgroundColor;
 

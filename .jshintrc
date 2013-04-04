@@ -22,9 +22,15 @@
         "expect",
         "it",
         "beforeEach",
+        "afterEach",
+				"spyOn",
         "jasmine",
 				"o",
-				"chrome"
+				"chrome",
+				"LiteMQ",
+				"Handlebars",
+				"moment",
+				"formatSecs"
     ],
 
 

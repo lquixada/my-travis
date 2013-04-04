@@ -1,3 +1,5 @@
+/*globals headerController */
+
 describe("Header", function() {
 	it("should notify when user button is clicked", function() {
 		var client = new LiteMQ.Client();

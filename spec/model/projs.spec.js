@@ -1,3 +1,5 @@
+/*globals Projs, Prefs */
+
 describe("Project Model", function() {
 	beforeEach(function() {
 		Prefs.clear();
@@ -9,16 +11,16 @@ describe("Project Model", function() {
 		Projs.clear();
 	});
 
-  it("should not have any stored projects", function() {
+	it("should not have any stored projects", function() {
 		expect(Projs.get()).toBeArray();
 		expect(Projs.get().length).toBe(0);
-  });
-  
-  it("should get the right projects", function() {
+	});
+	
+	it("should get the right projects", function() {
 		Projs.set([{prop: 'value'}]);
 
 		expect(Projs.get()).toBeSameJsonAs([{prop: 'value'}]);
-  });
+	});
 
 	describe("convert", function() {
 		var proj;
@@ -40,7 +42,7 @@ describe("Project Model", function() {
 		});
 		
 		it("should convert properties", function() {
-			converted = Projs.convert(proj);
+			var converted = Projs.convert(proj);
 
 			expect(converted.user).toBe('lquixada');
 			expect(converted.name).toBe('my-travis');
@@ -79,25 +81,25 @@ describe("Project Model", function() {
 	});
 	
 	it("should store projects", function() {
-			var projs, json = [
-				{slug: 'lquixada/proj1', last_build_status: 0},
-				{slug: 'aaron/proj1', last_build_status: 0},
-				{slug: 'lquixada/proj2', last_build_status: 0},
-				{slug: 'flickr/proj1', last_build_status: 0}
-			];
+		var projs, json = [
+			{slug: 'lquixada/proj1', last_build_status: 0},
+			{slug: 'aaron/proj1', last_build_status: 0},
+			{slug: 'lquixada/proj2', last_build_status: 0},
+			{slug: 'flickr/proj1', last_build_status: 0}
+		];
 
-			Projs.store(json);
+		Projs.store(json);
 
-			projs = Projs.get();
-			
-			expect(projs).toBeSameJsonAs({
-				"lquixada": [
-					{user: 'lquixada', name: 'proj1', status: 'passed'},
-					{user: 'lquixada', name: 'proj2', status: 'passed'}
-				],
-				"aaron": [{user: 'aaron', name:'proj1', status: 'passed'}],
-				"flickr": [{user: 'flickr', name:'proj1', status: 'passed'}]
-			});
+		projs = Projs.get();
+		
+		expect(projs).toBeSameJsonAs({
+			"lquixada": [
+				{user: 'lquixada', name: 'proj1', status: 'passed'},
+				{user: 'lquixada', name: 'proj2', status: 'passed'}
+			],
+			"aaron": [{user: 'aaron', name:'proj1', status: 'passed'}],
+			"flickr": [{user: 'flickr', name:'proj1', status: 'passed'}]
+		});
 	});
 });
 

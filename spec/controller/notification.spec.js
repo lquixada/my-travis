@@ -1,3 +1,5 @@
+/*globals Notification, Prefs */
+
 describe("Notification", function() {
 	describe("setting", function() {
 		beforeEach(function() {
