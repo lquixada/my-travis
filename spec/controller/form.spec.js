@@ -2,9 +2,10 @@
 
 describe("Form Controller", function () {
 	it("should open/close", function () {
-		var form = new FormController();
+		var
+			element = $('<form><input type="hidden" name="user" value="John"></form>'),
+			form = new FormController({element:element});
 
-		form.element = $('<form><input type="hidden" name="user" value="John"></form>');
 		form.open();
 
 		expect(form.el().is('.opened')).toBe(true);
@@ -15,9 +16,10 @@ describe("Form Controller", function () {
 	});
 	
 	it("should toggle", function () {
-		var form = new FormController();
+		var
+			element = $('<form><input type="hidden" name="user" value="John"></form>'),
+			form = new FormController({element:element});
 
-		form.element = $('<form><input type="hidden" name="user" value="John"></form>');
 		form.toggle();
 
 		expect(form.el().is('.opened')).toBe(true);
@@ -40,24 +42,28 @@ describe("Form User Controller", function () {
 
 	describe("on submit", function () {
 		it("should store user", function () {
-			formUsersController.element = $('<form><input type="hidden" name="user" value="John"></form>');
-			formUsersController.boot();
-			formUsersController.el().submit();
+			var
+				element = $('<form><input type="hidden" name="user" value="John"></form>'),
+				form = new FormUsersController({element:element});
+
+		  form._addListeners();
+			form.el().submit();
 
 			expect(Prefs.getUsers()[0]).toBe('John');
 		});
 
 		it("should publish", function () {
 			var
+				element = $('<form><input type="hidden" name="user" value="John"></form>'),
+				form = new FormUsersController({element:element}),
 				client = new LiteMQ.Client();
 			
 			client.sub('form-users-submitted', function () {
 				expect(true).toBe(true);
 			});
 
-			formUsersController.element = $('<form><input type="hidden" name="user" value="John"></form>');
-			formUsersController.boot();
-			formUsersController.el().submit();
+		  form._addListeners();
+			form.el().submit();
 		});
 	});
 });
@@ -74,9 +80,12 @@ describe("Form Prefs Controller", function () {
 
 	describe("on submit", function () {
 		it("should store prefs", function () {
-			formPrefsController.element = $('<form><input type="hidden" name="interval"><input type="checkbox" name="notifications"></form>');
-			formPrefsController.boot();
-			formPrefsController.el()
+			var
+				element = $('<form><input type="hidden" name="interval"><input type="checkbox" name="notifications"></form>'),
+				form = new FormPrefsController({element:element});
+
+		  form._addListeners();
+			form.el()
 				.find(':input[name=interval]').val(50).end()
 				.find(':input[name=notifications]').attr('checked', true).end()
 				.submit();
@@ -87,15 +96,16 @@ describe("Form Prefs Controller", function () {
 
 		it("should publish", function () {
 			var
+				element = $('<form><input type="hidden" name="interval"><input type="checkbox" name="notifications"></form>'),
+				form = new FormPrefsController({element:element}),
 				client = new LiteMQ.Client();
 			
 			client.sub('form-prefs-submitted', function () {
 				expect(true).toBe(true);
 			});
 
-			formPrefsController.element = $('<form><input type="hidden" name="interval"><input type="checkbox" name="notifications"></form>');
-			formPrefsController.boot();
-			formPrefsController.el().submit();
+		  form._addListeners();
+			form.el().submit();
 		});
 	});
 });

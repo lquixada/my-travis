@@ -4,19 +4,25 @@ var HeaderController = o.Class({
 	extend: DOMController,
 	dom: 'header',
 	
-	boot: function() {
-		this._addListeners();
+	init: function (opt) {
+		var that = this;
+
+		this._super(opt);
+		this.client = new LiteMQ.Client();
+		this.client.sub('window-load', function () {
+			that._addListeners();
+		});
 	},
 	
 	_addListeners: function () {
-		var client = new LiteMQ.Client();
+		var that = this;
 
 		this.el().on('click', 'button#open-users', function () {
-			client.pub('button-open-users-pressed');
+			that.client.pub('button-open-users-pressed');
 		});
 
 		this.el().on('click', 'button#open-prefs', function () {
-			client.pub('button-open-prefs-pressed');
+			that.client.pub('button-open-prefs-pressed');
 		});
 	}
 });

@@ -3,11 +3,6 @@
 var FormController = o.Class({
 	extend: DOMController,
 
-	boot: function () {
-		this._addListeners();
-		this._disableFieldsTabIndex();	
-	},
-
 	close: function () {
 		this.el().removeClass('opened');
 		this._setStatus('');
@@ -63,22 +58,32 @@ var FormUsersController = o.Class({
 
 		this._super();
 	},
+
+	init: function (opt) {
+		var that = this;
+
+		this._super(opt);
+		this.client = new LiteMQ.Client();
+		this.client.sub('window-load', function () {
+			that._addListeners();
+			that._disableFieldsTabIndex();	
+		})
+	},
 	
 	// private
 	
 	_addListeners: function () {
-		var that = this,
-			client = new LiteMQ.Client();
+		var that = this;
 
-		client.sub('button-open-users-pressed', function () {
+		this.client.sub('button-open-users-pressed', function () {
 			that.toggle();
 		});
 		
-		client.sub('button-open-prefs-pressed', function () {
+		this.client.sub('button-open-prefs-pressed', function () {
 			that.close();
 		});
 
-		client.sub('request-travisapi-done', function () {
+		this.client.sub('request-travisapi-done', function () {
 			that._unlock();
 
 			setTimeout(function () {
@@ -91,7 +96,7 @@ var FormUsersController = o.Class({
 
 			Prefs.addUser(this.user.value);
 
-			client.pub('form-users-submitted');
+			that.client.pub('form-users-submitted');
 
 			that._lock();
 		});
@@ -120,22 +125,28 @@ var FormPrefsController = o.Class({
 	extend: FormController,
 	dom: 'section#form-prefs form',
 
-	boot: function() {
-		this._super();
-		this._restoreData();
+	init: function (opt) {
+		var that = this;
+
+		this._super(opt);
+		this.client = new LiteMQ.Client();
+		this.client.sub('window-load', function () {
+			that._addListeners();
+			that._disableFieldsTabIndex();		
+			that._restoreData();
+		});
 	},
 
 	// private
 	
 	_addListeners: function () {
-		var that = this,
-			client = new LiteMQ.Client();
+		var that = this;
 		
-		client.sub('button-open-users-pressed', function () {
+		this.client.sub('button-open-users-pressed', function () {
 			that.close();
 		});
 		
-		client.sub('button-open-prefs-pressed', function () {
+		this.client.sub('button-open-prefs-pressed', function () {
 			that.toggle();
 		});
 
@@ -147,7 +158,7 @@ var FormPrefsController = o.Class({
 
 			that._setStatus('saved');
 
-			client.pub('form-prefs-submitted');
+			that.client.pub('form-prefs-submitted');
 
 			setTimeout(function () {
 				that.close();

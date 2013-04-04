@@ -4,9 +4,10 @@ var ListController = o.Class({
 	extend: DOMController,
 	dom: 'section#list',
 	
-	boot: function () {
-		this.render();
-		this._addListeners();	
+	init: function (opt) {
+		this._super(opt);
+		this.client = new LiteMQ.Client();
+		this._addBusListeners();
 	},
 
 	render: function () {
@@ -26,22 +27,31 @@ var ListController = o.Class({
 
 	// private
 	
-	_addListeners: function() {
-		var that = this,
-			client = new LiteMQ.Client();
+	_addBusListeners: function () {
+		var that = this;
+		
+		this.client.sub('window-load', function () {
+			that.render();
+			that._addListeners();	
+		});
 
-		client.sub('form-users-submitted', function () {
+		this.client.sub('form-users-submitted', function () {
 			that._lock();
 		});
 		
-		client.sub('request-travisapi-done', function () {
+		this.client.sub('request-travisapi-done', function () {
 			that.render();
 			that._unlock();
 		});
 
-		window.addEventListener('message', function (evt) {
-			that._renderTemplate(evt.data.html);
-		});
+		$(window).on('message', function (evt) {
+			var html = evt.originalEvent.data.html;
+			that._renderTemplate(html);
+		});	
+	},
+	
+	_addListeners: function() {
+		var that = this;
 
 		this.el('table').on('click', 'tr', function () {
 			var url = this.getAttribute('href');

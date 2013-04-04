@@ -8,6 +8,16 @@ var AuthorController = o.Class({
 		this._addListeners();
 	},
 
+	init: function (opt) {
+		var that = this;
+
+		this._super(opt);
+		this.client = new LiteMQ.Client();
+		this.client.sub('window-load', function () {
+			that._addListeners();
+		});
+	},
+
 	// private
 
 	_addListeners: function () {
