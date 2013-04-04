@@ -9,7 +9,7 @@ section#list button.remove {
 	padding:0;
 	width:14px;
 	height:15px;
-	background:transparent url(../imgs/icon-remove.png) no-repeat 0 0;
+	background:transparent url(/imgs/icon-remove.png) no-repeat 0 0;
 	border:none;
 	float:right;
 	cursor:pointer;

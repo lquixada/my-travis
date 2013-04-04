@@ -58,7 +58,7 @@ section#author header button#close {
 	width:16px;
 	height:16px;
 	text-indent:-5000px;
-	background:#fff url(../imgs/icon-close.png) 0 0 no-repeat;
+	background:#fff url(/imgs/icon-close.png) 0 0 no-repeat;
 	border:none;
 	cursor:pointer;
 }
@@ -78,7 +78,7 @@ section#author img#photo {
 	margin-right:10px;
 	width:73px;
 	height:73px;
-	background:#eee url(../imgs/loading.gif) 50% 50% no-repeat;
+	background:#eee url(/imgs/loading.gif) 50% 50% no-repeat;
 	border-radius:6px;
 	float:left;
 }

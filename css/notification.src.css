@@ -23,7 +23,7 @@ span.status {
 	left:5px;
 	width:40px;
 	height:40px;
-	background:transparent url(../imgs/icons-notification.png) no-repeat 0 0;
+	background:transparent url(/imgs/icons-notification.png) no-repeat 0 0;
 	float:left;
 }
 

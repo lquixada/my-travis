@@ -17,7 +17,7 @@ Handlebars.registerHelper('urlTo', function(user, name) {
 });
 
 Handlebars.registerHelper('statusImg', function(status) {
-	return '<img class="icon-status" src="../imgs/icon-'+status+'.png" title="'+status+'">';
+	return '<img class="icon-status" src="/imgs/icon-'+status+'.png" title="'+status+'">';
 });
 
 Handlebars.registerHelper('formatSecs', function(duration) {
