@@ -12,6 +12,7 @@
 * Create javascript more specs
 * Update screenshots
 * Code Style Guidelines
+* Option "show only broken projects" mode
 
 
 ## Issues
