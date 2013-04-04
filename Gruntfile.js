@@ -1,7 +1,7 @@
 var path = require('path');
 var snippet = require('grunt-contrib-livereload/lib/utils').livereloadSnippet;
 
-module.exports = function ( grunt ) {
+module.exports = function (grunt) {
 	var projectName = 'mytravis',
 		files = [],
 		js = ['*.src.js', 'js/**/*.src.js'],
@@ -31,7 +31,7 @@ module.exports = function ( grunt ) {
     },
 
 		copy: {
-			imgs: {
+			build: {
 				files: [
 					{src: ['imgs/**'], dest: 'build/'} // includes files in path and its subdirs
 				]
@@ -127,8 +127,8 @@ module.exports = function ( grunt ) {
   grunt.registerTask('o:cssmin', 'cssmin:build');
   grunt.registerTask('o:jsmin', 'uglify:build');
   grunt.registerTask('o:jslint', 'jshint');
+  grunt.registerTask('o:imgs', 'copy:build');
   grunt.registerTask('o:zip', 'zip:dist');
-  grunt.registerTask('o:imgs', 'copy:imgs');
 
 	// Batch taks
 	grunt.registerTask('o:ci', ['connect:pivotal', 'jasmine:pivotal']);
