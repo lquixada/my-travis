@@ -14,6 +14,9 @@
 * Code Style Guidelines
 * Option "show only broken projects" mode
 * client.pub('document-ready')?
+* Create FooterController
+* Refactor app/init/notification.src.js
+* Remove cache from DOMController.el()?
 
 
 ## Issues
