@@ -30,7 +30,7 @@ var ListController = o.Class({
 	_addBusListeners: function () {
 		var that = this;
 		
-		this.client.sub('window-load', function () {
+		this.client.sub('popup-window-load', function () {
 			that.render();
 			that._addListeners();	
 		});

@@ -13,7 +13,7 @@ var AuthorController = o.Class({
 
 		this._super(opt);
 		this.client = new LiteMQ.Client();
-		this.client.sub('window-load', function () {
+		this.client.sub('popup-window-load', function () {
 			that._addListeners();
 		});
 	},
