@@ -9,7 +9,7 @@ var NotificationController = o.Class({
 
 	init: function () {
 		this.client = new LiteMQ.Client();
-		this._addListener();
+		this._addListeners();
 	},
 	
 	update: function (projs) {
@@ -22,7 +22,7 @@ var NotificationController = o.Class({
   
 	// private
 	
-	_addListener: function () {
+	_addListeners: function () {
 		var that = this;
 
 		this.client.sub('request-travisapi-done', function (msg) {

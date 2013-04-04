@@ -19,6 +19,8 @@ var UpdaterService = o.Class({
 	},
 
 	init: function () {
+		var that = this;
+
 		this.client = new LiteMQ.Client();
 		this._addListeners();
 	},
@@ -52,6 +54,10 @@ var UpdaterService = o.Class({
 	
 	_addListeners: function () {
 		var that = this;
+		
+		this.client.sub('background-document-ready', function () {
+			that.start();
+		});
 
 		this.client.sub('form-prefs-submitted', function () {
 			that.restart();

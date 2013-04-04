@@ -1,8 +1,6 @@
-/*globals Badge, Projs, Updater */
+
+window.client = new LiteMQ.Client();
 
 $(document).ready(function () {
-	Badge.boot();
-	Badge.update(Projs.get());
-
-	Updater.start();
+	client.pub('background-document-ready');
 });
