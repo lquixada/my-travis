@@ -88,10 +88,10 @@ module.exports = function ( grunt ) {
 				options: {
 					host: 'http://localhost:<%=connect.pivotal.options.port%>/',
 					vendor: [
-						'js/vendor/o.min.js',
-						'js/vendor/litemq.min.js',
-						'js/vendor/jquery-1.9.1.min.js',
-						'js/vendor/handlebars.js',
+						'vendor/o.min.js',
+						'vendor/litemq.min.js',
+						'vendor/jquery-1.9.1.min.js',
+						'vendor/handlebars.js',
 						'spec/spec.src.js'
 					],
 					specs: files.concat(spec),
