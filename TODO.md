@@ -9,10 +9,11 @@
 	* Convert Controller to singletons
 	* Use namespace. Eg: Header.Ctrl or Ctrl.Header?
 * Improve screenshots zoom
-* Create javascript more specs
+* Create notification and list specs
 * Update screenshots
 * Code Style Guidelines
 * Option "show only broken projects" mode
+* client.pub('document-ready')?
 
 
 ## Issues
