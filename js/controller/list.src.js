@@ -9,33 +9,19 @@ var ListController = o.Class({
 		this._addListeners();	
 	},
 
-	render: function() {
+	render: function () {
 		var users = Prefs.getUsers();
-		var projs = Projs.get();
-		var that = this;
-		var html = '';
 
-		if (users.length=== 0) {
+		if (users.length===0) {
 			this._clear();
 			return;
 		}
 
-		this._remove();
-
-		users.forEach(function (user) {
-			html += '<tbody user="'+user+'">';
-			html += '<tr><th colspan="6">'+user+' <button class="remove" title="remove user"></button></th></tr>';
-
-			if (projs[user]) {
-				html += projs[user].map(this._compileProjTemplate, this).join('');
-			} else {
-				html += '<tr><td class="message" colspan="6"><em>no projects found.</em></td></tr>';
-			}
-			
-			html += '</tbody>';
-		}, this);
-
-		this.el('table').append(html);
+		// In order to overcome the chrome's security policies
+		// about the eval() usage, we're using a sandboxed page
+		// as specified on:
+		//   http://developer.chrome.com/apps/sandboxingEval.html
+		this._requestTemplate();
 	},
 
 	// private
@@ -51,6 +37,10 @@ var ListController = o.Class({
 		client.sub('request-travisapi-done', function () {
 			that.render();
 			that._unlock();
+		});
+
+		window.addEventListener('message', function (evt) {
+			that._renderTemplate(evt.data.html);
 		});
 
 		this.el('table').on('click', 'tr', function () {
@@ -104,52 +94,26 @@ var ListController = o.Class({
 		Badge.clear();
 	},
 
-	_compileProjTemplate: function (proj) {
-		return [
-			'<tr '+this._getHref(proj)+' '+this._getClassName(proj)+'>',
-			'<td>'+this._getIcon(proj)+'</td>',
-			'<td>'+proj.name+'</td>',
-			'<td>'+'#'+proj.build+'</td>',
-			'<td>'+this._getDuration(proj)+'</td>',
-			'<td>'+this._getFinishedAt(proj)+'</td>',
-			'</tr>'
-		].join('');
-	},
-
-	_getClassName: function (proj) {
-		return (proj.status==='failed'?'class="failed"':'');
-	},
-
-	_getDuration: function (proj) {
-		if (proj.duration) {
-			return formatSecs(proj.duration);
-		}
-
-		return '-';
-	},
-
-	_getFinishedAt: function (proj) {
-		if (proj.finishedAt) {
-			return moment(proj.finishedAt).fromNow();
-		}
-
-		return 'running';	
-	},
-
-	_getHref: function (proj) {
-		return 'href="https://travis-ci.org/'+proj.user+'/'+proj.name+'"';
-	},
-
-	_getIcon: function (proj) {
-		return '<img class="icon-status" src="../imgs/icon-'+proj.status+'.png" title="'+proj.status+'">';
-	},
-
 	_lock: function () {
 		this.el().find('div#overlay').show();
 	},
 
 	_remove: function () {
 		this.el('table').find('tbody').remove();
+	},
+
+	_renderTemplate: function (html) {
+		this._remove();
+
+		this.el('table').append(html);
+	},
+
+	_requestTemplate: function () {
+		var iwindow = $('iframe#templates').get(0).contentWindow;
+
+		iwindow.postMessage({
+			context: {users: Projs.get()}
+		}, '*');
 	},
 
 	_showMessage: function () {

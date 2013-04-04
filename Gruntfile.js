@@ -81,6 +81,7 @@ module.exports = function ( grunt ) {
 				src: [
 				  'js/app.src.js',
 					'js/controller/*.src.js',
+					'js/helper/*.src.js',
 					'js/model/*.src.js',
 					'js/service/*.src.js'
 				],
@@ -90,7 +91,7 @@ module.exports = function ( grunt ) {
 						'js/vendor/o.min.js',
 						'js/vendor/litemq.min.js',
 						'js/vendor/jquery-1.9.1.min.js',
-						'js/vendor/utils.src.js',
+						'js/vendor/handlebars.js',
 						'spec/spec.src.js'
 					],
 					specs: files.concat(spec),

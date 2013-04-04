@@ -15,6 +15,10 @@ a {
   text-decoration:none;
 }
 
+iframe#templates {
+	display:none;
+}
+
 span#auto-focus {
 	position:absolute;
 	left:-9999px;

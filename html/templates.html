@@ -1,0 +1,43 @@
+<script src="../js/vendor/jquery-1.9.1.min.js"></script>
+<script src="../js/vendor/handlebars.js"></script>
+<script src="../js/vendor/moment.min.js"></script>
+
+<script src="../js/helper/utils.src.js"></script>
+<script src="../js/helper/handlebars.src.js"></script>
+
+<script id="projects" type="text/x-handlebars-template">
+	{{#eachProperty users}}
+	<tbody user="{{property}}">
+			<tr>
+				<th colspan="6">{{property}} <button class="remove" title="remove user"></button></th>
+			</tr>
+
+			{{#if value}}
+				{{#each value}}
+				<tr href="{{{urlTo user name}}}" {{{classOf status}}}>
+					<td>{{{statusImg status}}}</td>
+					<td>{{name}}</td>
+					<td>#{{build}}</td>
+					<td>{{{formatSecs duration}}}</td>
+					<td>{{{moment finishedAt}}}</td>
+				</tr>
+				{{/each}}
+			{{else}}
+				<tr>
+					<td class="message" colspan="6"><em>no projects found.</em></td>
+				</tr>	
+			{{/if}}
+		</tbody>
+	{{/eachProperty}}
+</script>
+
+<script>
+var source   = $("#projects").html();
+var template = Handlebars.compile(source);
+
+window.addEventListener('message', function (evt) {
+	evt.source.postMessage({
+		html: template(evt.data.context)
+	}, evt.origin);
+});
+</script>

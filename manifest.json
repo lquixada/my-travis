@@ -21,6 +21,10 @@
     "page": "html/background.html"
   },
 
+	"sandbox": {
+		"pages": ["html/templates.html"]	
+	},
+
   "icons": {
     "16":  "imgs/icon-app-16.png",
     "48":  "imgs/icon-app-48.png",
