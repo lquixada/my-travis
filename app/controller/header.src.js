@@ -24,12 +24,11 @@ var HeaderController = o.Class({
 		var that = this;
 
 		this.el().on('click', 'button#open-users', function () {
-			that.client.pub('button-open-users-pressed');
-		});
-
-		this.el().on('click', 'button#open-prefs', function () {
-			that.client.pub('button-open-prefs-pressed');
-		});
+				that.client.pub('button-open-users-pressed');
+			})
+			.on('click', 'button#open-prefs', function () {
+				that.client.pub('button-open-prefs-pressed');
+			});
 	}
 });
 

@@ -52,47 +52,44 @@ var ListController = o.Class({
 		var that = this;
 
 		this.el('table').on('click', 'tr', function () {
-			var url = this.getAttribute('href');
+				var url = this.getAttribute('href');
 
-			if (url) {
-				window.open(url);
-			}
-		});
+				if (url) {
+					window.open(url);
+				}
+			})
+			.on('click', 'button.remove', function () {
+				var button = $(this);
 
-		this.el('table').on('click', 'button.remove', function () {
-			var button = $(this);
+				if (!button.next().is('.confirm')) {
+					button.after([
+						'<span class="confirm">',
+						'are you sure?',
+						'<span class="option yes">yes</span>',
+						'<span class="option no">no</span>',
+						'</span>'
+					].join(''));
+				}
 
-			if (!button.next().is('.confirm')) {
-				button.after([
-					'<span class="confirm">',
-					'are you sure?',
-					'<span class="option yes">yes</span>',
-					'<span class="option no">no</span>',
-					'</span>'
-				].join(''));
-			}
+				// Without setTimeout, transition does not work
+				setTimeout(function () {
+					button.next().toggleClass('visible');
+				}, 100);
+			})
+			.on('click', 'span.option.yes', function () {
+				var tbody = $(this).closest('tbody'),
+					user = tbody.attr('user');
+				
+				Prefs.removeUser(user);
+				Projs.removeUser(user);
 
-			// Without setTimeout, transition does not work
-			setTimeout(function () {
-				button.next().toggleClass('visible');
-			}, 100);
-		});
+				that.client.pub('button-yes-clicked');
 
-		this.el('table').on('click', 'span.option.yes', function () {
-			var tbody = $(this).closest('tbody'),
-				user = tbody.attr('user');
-			
-			Prefs.removeUser(user);
-			Projs.removeUser(user);
-
-			that.client.pub('button-yes-clicked');
-
-			that.render();
-		});
-
-		this.el('table').on('click', 'span.option.no', function () {
-			$(this).parent().removeClass('visible');
-		});
+				that.render();
+			})
+			.on('click', 'span.option.no', function () {
+				$(this).parent().removeClass('visible');
+			});
 	},
 
 	_clear: function () {

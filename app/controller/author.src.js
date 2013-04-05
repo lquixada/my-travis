@@ -33,16 +33,14 @@ var AuthorController = o.Class({
 		});
 
 		this.el().on('click', function () {
-			that._hide();
-		});
-
-		this.el().on('click', 'div#card', function (evt) {
-			evt.stopPropagation();
-		});
-
-		this.el().on('click', 'button#close', function () {
-			that._hide();
-		});
+				that._hide();
+			})
+			.on('click', 'div#card', function (evt) {
+				evt.stopPropagation();
+			})
+			.on('click', 'button#close', function () {
+				that._hide();
+			});
 	},
 
 	_hide: function () {
