@@ -55,7 +55,8 @@ var BadgeController = o.Class({
 	_addListeners: function () {
 		var that = this;
 		
-		this.client.sub('background-document-ready', function () {
+		this.client.sub(['button-yes-clicked', 'background-document-ready'], function () {
+			console.log('bateu aqui');
 			that.update(Projs.get());	
 		});
 
@@ -63,6 +64,11 @@ var BadgeController = o.Class({
 			var projs = msg.body;
 
 			that.update(projs);
+		});
+
+		this.client.sub('project-list-cleared', function () {
+			console.log('project-list-cleared');
+			that.clear();
 		});
 	}
 });

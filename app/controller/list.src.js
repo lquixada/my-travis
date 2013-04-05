@@ -1,4 +1,4 @@
-/*globals DOMController, Prefs, Projs, Badge, moment, formatSecs */
+/*globals DOMController, Prefs, Projs */
 
 var ListController = o.Class({
 	extend: DOMController,
@@ -87,7 +87,7 @@ var ListController = o.Class({
 			Prefs.removeUser(user);
 			Projs.removeUser(user);
 
-			Badge.update(Projs.get());
+			that.client.pub('button-yes-clicked');
 
 			that.render();
 		});
@@ -101,7 +101,7 @@ var ListController = o.Class({
 		this._remove();
 		this._showMessage();
 
-		Badge.clear();
+		this.client.pub('project-list-cleared');
 	},
 
 	_lock: function () {
