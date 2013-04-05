@@ -1,4 +1,4 @@
-/*globals DOMController, Prefs */
+/*globals DOMController */
 
 var FormController = o.Class({
 	extend: DOMController,

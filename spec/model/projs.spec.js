@@ -1,4 +1,3 @@
-/*globals Projs, Prefs */
 
 describe("Project Model", function() {
 	beforeEach(function() {

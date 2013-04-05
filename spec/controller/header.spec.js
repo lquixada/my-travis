@@ -1,10 +1,10 @@
-/*globals headerController */
+/*globals HeaderController */
 
 describe("Header", function() {
 	it("should notify when user button is clicked", function() {
 		var
-			element = $('<div><button id="open-users"></button></div>');
-			header = new HeaderController({element: element});
+			element = $('<div><button id="open-users"></button></div>'),
+			header = new HeaderController({element: element}),
 			client = new LiteMQ.Client();
 
 		client.count = 0;
@@ -20,8 +20,8 @@ describe("Header", function() {
 
 	it("should notify when prefs button is clicked", function() {
 		var
-			element = $('<div><button id="open-prefs"></button></div>');
-			header = new HeaderController({element: element});
+			element = $('<div><button id="open-prefs"></button></div>'),
+			header = new HeaderController({element: element}),
 			client = new LiteMQ.Client();
 		
 		client.count = 0;

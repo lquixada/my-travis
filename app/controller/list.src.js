@@ -1,4 +1,4 @@
-/*globals DOMController, Prefs, Projs */
+/*globals DOMController, */
 
 var ListController = o.Class({
 	extend: DOMController,

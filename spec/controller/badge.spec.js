@@ -1,4 +1,4 @@
-/*globals Badge */
+/*globals badgeController */
 
 describe("Badge", function() {
     var setBadgeText, setBadgeBackgroundColor;

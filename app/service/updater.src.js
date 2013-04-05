@@ -1,4 +1,4 @@
-/*globals Service, Prefs, Projs, TravisAPI */
+/*globals Service, TravisAPI */
 
 var UpdaterService = o.Class({
 	extend: Service,

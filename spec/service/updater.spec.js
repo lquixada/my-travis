@@ -1,4 +1,4 @@
-/*globals Prefs, Updater, TravisAPI */
+/*globals Updater, TravisAPI */
 
 describe("Updater Service", function() {
 	describe("polling", function() {

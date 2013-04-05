@@ -1,4 +1,4 @@
-/*globals Controller, Prefs, webkitNotifications */
+/*globals Controller, webkitNotifications */
 
 var NotificationController = o.Class({
 	extend: Controller,

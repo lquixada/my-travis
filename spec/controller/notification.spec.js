@@ -1,4 +1,4 @@
-/*globals Notification, Prefs */
+/*globals Notification */
 
 describe("Notification", function() {
 	describe("setting", function() {

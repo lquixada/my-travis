@@ -1,4 +1,4 @@
-/*globals FormController, Prefs, formUsersController, formPrefsController */
+/*globals FormController, FormUsersController, FormPrefsController */
 
 describe("Form Controller", function () {
 	it("should open/close", function () {
@@ -46,7 +46,7 @@ describe("Form User Controller", function () {
 				element = $('<form><input type="hidden" name="user" value="John"></form>'),
 				form = new FormUsersController({element:element});
 
-		  form._addListeners();
+			form._addListeners();
 			form.el().submit();
 
 			expect(Prefs.getUsers()[0]).toBe('John');
@@ -62,7 +62,7 @@ describe("Form User Controller", function () {
 				expect(true).toBe(true);
 			});
 
-		  form._addListeners();
+			form._addListeners();
 			form.el().submit();
 		});
 	});
@@ -84,7 +84,7 @@ describe("Form Prefs Controller", function () {
 				element = $('<form><input type="hidden" name="interval"><input type="checkbox" name="notifications"></form>'),
 				form = new FormPrefsController({element:element});
 
-		  form._addListeners();
+			form._addListeners();
 			form.el()
 				.find(':input[name=interval]').val(50).end()
 				.find(':input[name=notifications]').attr('checked', true).end()
@@ -104,7 +104,7 @@ describe("Form Prefs Controller", function () {
 				expect(true).toBe(true);
 			});
 
-		  form._addListeners();
+			form._addListeners();
 			form.el().submit();
 		});
 	});

@@ -2,5 +2,5 @@
 window.client = new LiteMQ.Client();
 
 $(document).ready(function () {
-	client.pub('background-document-ready');
+	window.client.pub('background-document-ready');
 });
