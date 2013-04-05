@@ -31,18 +31,16 @@ var ListController = o.Class({
 		var that = this;
 		
 		this.client.sub('popup-window-load', function () {
-			that.render();
-			that._addListeners();	
-		});
-
-		this.client.sub('form-users-submitted', function () {
-			that._lock();
-		});
-		
-		this.client.sub('request-travisapi-done', function () {
-			that.render();
-			that._unlock();
-		});
+				that.render();
+				that._addListeners();	
+			})
+			.sub('form-users-submitted', function () {
+				that._lock();
+			})
+			.sub('request-travisapi-done', function () {
+				that.render();
+				that._unlock();
+			});
 
 		$(window).on('message', function (evt) {
 			var html = evt.originalEvent.data.html;

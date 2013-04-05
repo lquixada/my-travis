@@ -5,10 +5,16 @@ var HeaderController = o.Class({
 	dom: 'header',
 	
 	init: function (opt) {
-		var that = this;
-
 		this._super(opt);
 		this.client = new LiteMQ.Client();
+		this._addBusListeners();
+	},
+
+	// private
+	
+	_addBusListeners: function () {
+		var that = this;
+		
 		this.client.sub('popup-window-load', function () {
 			that._addListeners();
 		});

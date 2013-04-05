@@ -12,7 +12,7 @@ var BadgeController = o.Class({
 
 		this._super(opt);
 		this.client = new LiteMQ.Client();
-		this._addListeners();
+		this._addBusListeners();
 	},
 
 	set: function (failed) {
@@ -52,24 +52,23 @@ var BadgeController = o.Class({
 	
 	// private
 	
-	_addListeners: function () {
+	_addBusListeners: function () {
 		var that = this;
 		
-		this.client.sub(['button-yes-clicked', 'background-document-ready'], function () {
-			console.log('bateu aqui');
-			that.update(Projs.get());	
-		});
+		this.client
+			.sub(['button-yes-clicked', 'background-document-ready'], function () {
+				console.log('bateu aqui');
+				that.update(Projs.get());	
+			})
+			.sub('request-travisapi-done', function (msg) {
+				var projs = msg.body;
 
-		this.client.sub('request-travisapi-done', function (msg) {
-			var projs = msg.body;
-
-			that.update(projs);
-		});
-
-		this.client.sub('project-list-cleared', function () {
-			console.log('project-list-cleared');
-			that.clear();
-		});
+				that.update(projs);
+			})
+			.sub('project-list-cleared', function () {
+				console.log('project-list-cleared');
+				that.clear();
+			});
 	}
 });
 

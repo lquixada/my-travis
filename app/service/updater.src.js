@@ -22,7 +22,7 @@ var UpdaterService = o.Class({
 		var that = this;
 
 		this.client = new LiteMQ.Client();
-		this._addListeners();
+		this._addBusListeners();
 	},
 
 	restart: function () {
@@ -52,25 +52,23 @@ var UpdaterService = o.Class({
 
 	// private
 	
-	_addListeners: function () {
+	_addBusListeners: function () {
 		var that = this;
 		
 		this.client.sub('background-document-ready', function () {
-			that.start();
-		});
-
-		this.client.sub('form-prefs-submitted', function () {
-			that.restart();
-		});
-
-		this.client.sub('form-users-submitted', function () {
-			that.stop();
-
-			// Do a request right away!
-			that.exec(function () {
+				that.start();
+			})
+			.sub('form-prefs-submitted', function () {
 				that.restart();
+			})
+			.sub('form-users-submitted', function () {
+				that.stop();
+
+				// Do a request right away!
+				that.exec(function () {
+					that.restart();
+				});
 			});
-		});
 	}
 });
 

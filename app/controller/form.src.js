@@ -60,36 +60,36 @@ var FormUsersController = o.Class({
 	},
 
 	init: function (opt) {
-		var that = this;
-
 		this._super(opt);
 		this.client = new LiteMQ.Client();
-		this.client.sub('popup-window-load', function () {
-			that._addListeners();
-			that._disableFieldsTabIndex();	
-		})
+		this._addBusListeners();
 	},
 	
 	// private
+	_addBusListeners: function () {
+		var that = this;
+
+		this.client.sub('popup-window-load', function () {
+				that._addListeners();
+				that._disableFieldsTabIndex();	
+			})
+			.sub('button-open-users-pressed', function () {
+				that.toggle();
+			})
+			.sub('button-open-prefs-pressed', function () {
+				that.close();
+			})
+			.sub('request-travisapi-done', function () {
+				that._unlock();
+
+				setTimeout(function () {
+					that.close();
+				}, 1000);	
+			});	
+	},
 	
 	_addListeners: function () {
 		var that = this;
-
-		this.client.sub('button-open-users-pressed', function () {
-			that.toggle();
-		});
-		
-		this.client.sub('button-open-prefs-pressed', function () {
-			that.close();
-		});
-
-		this.client.sub('request-travisapi-done', function () {
-			that._unlock();
-
-			setTimeout(function () {
-				that.close();
-			}, 1000);	
-		});
 
 		this.el().on('submit', function (evt) {
 			evt.preventDefault();
@@ -126,29 +126,31 @@ var FormPrefsController = o.Class({
 	dom: 'section#form-prefs form',
 
 	init: function (opt) {
-		var that = this;
-
 		this._super(opt);
 		this.client = new LiteMQ.Client();
-		this.client.sub('popup-window-load', function () {
-			that._addListeners();
-			that._disableFieldsTabIndex();		
-			that._restoreData();
-		});
+		this._addBusListeners();
 	},
 
 	// private
 	
-	_addListeners: function () {
+	_addBusListeners: function () {
 		var that = this;
 		
-		this.client.sub('button-open-users-pressed', function () {
-			that.close();
-		});
-		
-		this.client.sub('button-open-prefs-pressed', function () {
-			that.toggle();
-		});
+		this.client.sub('popup-window-load', function () {
+				that._addListeners();
+				that._disableFieldsTabIndex();		
+				that._restoreData();
+			})
+			.sub('button-open-users-pressed', function () {
+				that.close();
+			})
+			.sub('button-open-prefs-pressed', function () {
+				that.toggle();
+			});
+	},
+	
+	_addListeners: function () {
+		var that = this;
 
 		this.el().on('submit', function (evt) {
 			evt.preventDefault();
