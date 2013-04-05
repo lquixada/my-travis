@@ -8,8 +8,6 @@ var BadgeController = o.Class({
 	},
 
 	init: function (opt) {
-		var that = this;
-
 		this._super(opt);
 		this.client = new LiteMQ.Client();
 		this._addBusListeners();
@@ -65,7 +63,6 @@ var BadgeController = o.Class({
 				that.update(projs);
 			})
 			.sub('project-list-cleared', function () {
-				console.log('project-list-cleared');
 				that.clear();
 			});
 	}
