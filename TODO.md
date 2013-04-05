@@ -1,6 +1,5 @@
 # TODO
 
-* Isolate List from Badge
 * Add support to set multiple values on Model.
 	Eg: Model.set({key1:'value1', key2: 'value2'})
 * Update jQuery to version 2.0
@@ -16,6 +15,8 @@
 * Create FooterController
 * Refactor app/init/notification.src.js
 * Remove cache from DOMController.el()?
+* Switch to multiple tables
+* Track what happens when unknown user is added
 
 
 ## Issues
@@ -28,7 +29,6 @@
 
 * Multiple user add support
 * Users drag'n'drop
-* Switch to multiple tables
 
 
 ## Version 0.5
