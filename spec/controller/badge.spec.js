@@ -17,7 +17,7 @@ describe("Badge", function() {
     
     describe("no projects", function() {
         it("should remove badge", function() {
-            Badge.update([]);
+            badgeController.update([]);
 
             expect(setBadgeText).toHaveBeenCalled();
             expect(setBadgeText.calls[0].args[0]).toBeSameJsonAs({text: ''});
@@ -32,14 +32,14 @@ describe("Badge", function() {
         });
         
         it("should have blank text", function() {
-            Badge.update(projs);
+            badgeController.update(projs);
 
             expect(setBadgeText).toHaveBeenCalled();
             expect(setBadgeText.calls[0].args[0]).toBeSameJsonAs({text: ' '});
         });
 
         it("should be green", function() {
-            Badge.update(projs);
+            badgeController.update(projs);
 
             expect(setBadgeBackgroundColor).toHaveBeenCalled();
             expect(setBadgeBackgroundColor.calls[0].args[0]).toBeSameJsonAs({color: '#0c0'});
@@ -54,14 +54,14 @@ describe("Badge", function() {
         });
         
         it("should have blank text", function() {
-            Badge.update(projs);
+            badgeController.update(projs);
 
             expect(setBadgeText).toHaveBeenCalled();
             expect(setBadgeText.calls[0].args[0]).toBeSameJsonAs({text: '1'});
         });
 
         it("should be red", function() {
-            Badge.update(projs);
+            badgeController.update(projs);
 
             expect(setBadgeBackgroundColor).toHaveBeenCalled();
             expect(setBadgeBackgroundColor.calls[0].args[0]).toBeSameJsonAs({color: '#f00'});
@@ -76,13 +76,13 @@ describe("Badge", function() {
         });
         
         it("should not modify text", function() {
-            Badge.update(projs);
+            badgeController.update(projs);
 
             expect(setBadgeText).not.toHaveBeenCalled();
         });
 
         it("should not modify color", function() {
-            Badge.update(projs);
+            badgeController.update(projs);
 
             expect(setBadgeBackgroundColor).not.toHaveBeenCalled();
         });

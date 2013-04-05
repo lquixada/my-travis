@@ -57,7 +57,6 @@ var BadgeController = o.Class({
 		
 		this.client
 			.sub(['button-yes-clicked', 'background-document-ready'], function () {
-				console.log('bateu aqui');
 				that.update(Projs.get());	
 			})
 			.sub('request-travisapi-done', function (msg) {
@@ -72,4 +71,4 @@ var BadgeController = o.Class({
 	}
 });
 
-var Badge = new BadgeController();
+var badgeController = new BadgeController();
