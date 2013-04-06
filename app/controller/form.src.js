@@ -61,7 +61,7 @@ var FormUsersController = o.Class({
 
 	init: function (opt) {
 		this._super(opt);
-		this.client = new LiteMQ.Client();
+		this.client = new LiteMQ.Client({name:'FormUsersController'});
 		this._addBusListeners();
 	},
 	
@@ -127,7 +127,7 @@ var FormPrefsController = o.Class({
 
 	init: function (opt) {
 		this._super(opt);
-		this.client = new LiteMQ.Client();
+		this.client = new LiteMQ.Client({name: 'FormPrefsController'});
 		this._addBusListeners();
 	},
 

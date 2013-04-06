@@ -8,7 +8,7 @@ var NotificationController = o.Class({
 	},
 
 	init: function () {
-		this.client = new LiteMQ.Client();
+		this.client = new LiteMQ.Client({name: 'NotificationController'});
 		this._addBusListeners();
 	},
 	

@@ -9,7 +9,7 @@ var BadgeController = o.Class({
 
 	init: function (opt) {
 		this._super(opt);
-		this.client = new LiteMQ.Client();
+		this.client = new LiteMQ.Client({name: 'BadgeController'});
 		this._addBusListeners();
 	},
 
