@@ -66,6 +66,7 @@ var UpdaterService = o.Class({
 
 				// Do a request right away!
 				that.exec(function () {
+					that.client.pub('request-user-done');
 					that.restart();
 				});
 			});
