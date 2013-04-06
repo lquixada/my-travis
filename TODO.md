@@ -17,6 +17,7 @@
 * Remove cache from DOMController.el()?
 * Switch to multiple tables
 * Track what happens when unknown user is added
+* Fix title bar
 
 
 ## Issues
