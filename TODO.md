@@ -12,7 +12,6 @@
 * Update screenshots
 * Code Style Guidelines
 * Option "show only broken projects" mode
-* Create FooterController
 * Refactor app/init/notification.src.js
 * Remove cache from DOMController.el()?
 

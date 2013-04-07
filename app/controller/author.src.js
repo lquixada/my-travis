@@ -20,17 +20,15 @@ var AuthorController = o.Class({
 		var that = this;
 		
 		this.client.sub('popup-window-load', function () {
-			that._addListeners();
-		});
+				that._addListeners();
+			})
+			.sub('link-author-clicked', function () {
+				that._show();	
+			});
 	},
 
 	_addListeners: function () {
 		var that = this;
-
-		$('a#author').on('click', function (evt) {
-			evt.preventDefault();
-			that._show();
-		});
 
 		this.el().on('click', function () {
 				that._hide();
