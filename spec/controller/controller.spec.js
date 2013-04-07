@@ -1,8 +1,9 @@
 /*globals DOMController */
 
-describe("DOMController", function() {
+describe("DOM Controller", function() {
 	it("should get main element", function() {
 		var controller = new DOMController();
+
 		controller.dom = 'body';
 
 		expect(controller.el().get(0)).toBe(document.body);
@@ -10,11 +11,11 @@ describe("DOMController", function() {
 
 	it("should get a descendant element", function() {
 		var controller = new DOMController();
+
 		controller.element = $('<div><p></p></div>');
 		
 		expect(controller.el('p').size()).toBe(1);
 	});
-	
 	
 	it("should cache element", function() {
 		var controller = new DOMController();
@@ -33,4 +34,3 @@ describe("DOMController", function() {
 		expect(function () { controller._addListeners(); }).toThrow('not implemented error');
 	});
 });
-

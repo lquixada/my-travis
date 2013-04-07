@@ -1,6 +1,6 @@
 /*globals HeaderController */
 
-describe("Header", function() {
+describe("Header Controller", function() {
 	it("should notify when user button is clicked", function() {
 		var
 			element = $('<div><button id="open-users"></button></div>'),

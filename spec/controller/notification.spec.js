@@ -6,7 +6,6 @@ describe("Notification", function() {
 			spyOn(Notification, '_notify');
 		});
 		
-		
 		it("should notify when enabled", function() {
 			Prefs.set('notifications', true);
 			
@@ -22,7 +21,6 @@ describe("Notification", function() {
 			
 			expect(Notification._notify).not.toHaveBeenCalled();
 		});
-		
 	});
 
 	describe("notify", function() {
@@ -149,7 +147,6 @@ describe("Notification", function() {
 			});
 		});
 		
-
 		describe("shows passed", function() {
 			it("if a project goes from failed to passed", function() {
 				Notification.update({
@@ -206,6 +203,5 @@ describe("Notification", function() {
 			});
 		});
 	});
-
 });
 
