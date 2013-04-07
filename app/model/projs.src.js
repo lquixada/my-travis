@@ -4,7 +4,25 @@ var Project = o.Class({
 	extend: ModelLocalStorage,
 	key: 'projs',
 
-	convert: function (proj) {
+	convertAll: function (projs) {
+		var that = this,
+			tmp = {};
+
+		projs.forEach(function (projOld) {
+			var projNew = that.convertOnly(projOld),
+				user = projNew.user;
+
+			if (!tmp[user]) {
+				tmp[user] = [];
+			}
+
+			tmp[user].push(projNew);
+		});
+
+		return tmp;
+	},
+
+	convertOnly: function (proj) {
 		return {
 			user: proj.slug.split('/')[0],
 			name: proj.slug.split('/')[1],
@@ -44,23 +62,11 @@ var Project = o.Class({
 	},
 	
 	store: function (projs) {
-		var that = this,
-			tmp = {};
+		projs = this.convertAll(projs);
 
-		projs.forEach(function (projOld) {
-			var projNew = that.convert(projOld),
-				user = projNew.user;
+		this.set(projs);
 
-			if (!tmp[user]) {
-				tmp[user] = [];
-			}
-
-			tmp[user].push(projNew);
-		});
-
-		this.set(tmp);
-
-		return tmp;
+		return projs;
 	}
 });
 

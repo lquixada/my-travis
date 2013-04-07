@@ -5,6 +5,34 @@
 <script src="/app/helper/utils.src.js"></script>
 <script src="/app/helper/handlebars.src.js"></script>
 
+<script id="projects-table" type="text/x-handlebars-template">
+{{#eachProperty users}}
+<li user="{{property}}">
+	<table>
+		<tr>
+			<th colspan="6">{{property}} <button class="remove" title="remove user"></button></th>
+		</tr>
+
+		{{#if value}}
+			{{#each value}}
+			<tr href="{{{urlTo user name}}}" {{{classOf status}}}>
+				<td class="col-status">{{{statusImg status}}}</td>
+				<td class="col-name">{{name}}</td>
+				<td class="col-build">#{{build}}</td>
+				<td class="col-duration">{{{formatSecs duration}}}</td>
+				<td class="col-finishedAt">{{{moment finishedAt}}}</td>
+			</tr>
+			{{/each}}
+		{{else}}
+			<tr>
+				<td class="message" colspan="6"><em>no projects found.</em></td>
+			</tr>	
+		{{/if}}
+	</table>
+</li>
+{{/eachProperty}}
+</script>
+
 <script id="projects" type="text/x-handlebars-template">
 {{#eachProperty users}}
 	<tbody user="{{property}}">
@@ -32,7 +60,7 @@
 </script>
 
 <script>
-var source = $("#projects").html();
+var source = $("#projects-table").html();
 var template = Handlebars.compile(source);
 
 window.addEventListener('message', function (evt) {

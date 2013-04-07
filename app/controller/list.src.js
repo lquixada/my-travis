@@ -1,4 +1,4 @@
-/*globals DOMController, */
+/*globals DOMController */
 
 var ListController = o.Class({
 	extend: DOMController,
@@ -51,7 +51,7 @@ var ListController = o.Class({
 	_addListeners: function() {
 		var that = this;
 
-		this.el('table').on('click', 'tr', function () {
+		this.el().on('click', 'tr', function () {
 				var url = this.getAttribute('href');
 
 				if (url) {
@@ -77,8 +77,8 @@ var ListController = o.Class({
 				}, 100);
 			})
 			.on('click', 'span.option.yes', function () {
-				var tbody = $(this).closest('tbody'),
-					user = tbody.attr('user');
+				var li = $(this).closest('li'),
+					user = li.attr('user');
 				
 				Prefs.removeUser(user);
 				Projs.removeUser(user);
@@ -104,13 +104,13 @@ var ListController = o.Class({
 	},
 
 	_remove: function () {
-		this.el('table').find('tbody').remove();
+		this.el('ul').html('');
 	},
 
 	_renderTemplate: function (html) {
 		this._remove();
 
-		this.el('table').append(html);
+		this.el('ul').append(html);
 	},
 
 	_requestTemplate: function () {
@@ -122,12 +122,16 @@ var ListController = o.Class({
 	},
 
 	_showMessage: function () {
-		this.el('table').append([
+		this.el('ul').append([
+			'<li>',
+			'<table>',
 			'<tr>',
 			'<td class="message" colspan="6">',
 			'<div id="no-projects">No project has been added until now.</div>',
 			'</td>',
-			'</tr>'
+			'</tr>',
+			'</table>',
+			'</li>'
 		].join(''));
 	},
 

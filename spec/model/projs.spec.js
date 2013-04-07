@@ -21,7 +21,7 @@ describe("Project Model", function() {
 		expect(Projs.get()).toBeSameJsonAs([{prop: 'value'}]);
 	});
 
-	describe("convert", function() {
+	describe("convertOnly", function() {
 		var proj;
 
 		beforeEach(function() {
@@ -41,7 +41,7 @@ describe("Project Model", function() {
 		});
 		
 		it("should convert properties", function() {
-			var converted = Projs.convert(proj);
+			var converted = Projs.convertOnly(proj);
 
 			expect(converted.user).toBe('lquixada');
 			expect(converted.name).toBe('my-travis');
@@ -55,26 +55,26 @@ describe("Project Model", function() {
 			it("should convert status passed", function() {
 				proj.last_build_status = 0;
 
-				expect(Projs.convert(proj).status).toBe('passed');
+				expect(Projs.convertOnly(proj).status).toBe('passed');
 			});
 
 			it("should convert status failed", function() {
 				proj.last_build_status = 1;
 
-				expect(Projs.convert(proj).status).toBe('failed');
+				expect(Projs.convertOnly(proj).status).toBe('failed');
 			});
 
 			it("should convert status started", function() {
 				proj.last_build_status = null;
 				proj.last_build_finished_at = null;
 
-				expect(Projs.convert(proj).status).toBe('started');
+				expect(Projs.convertOnly(proj).status).toBe('started');
 			});
 
 			it("should convert status errored", function() {
 				proj.last_build_status = null;
 
-				expect(Projs.convert(proj).status).toBe('errored');
+				expect(Projs.convertOnly(proj).status).toBe('errored');
 			});
 		});
 	});

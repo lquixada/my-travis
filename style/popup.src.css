@@ -28,3 +28,17 @@ section {
 	position:relative;
 }
 
+ol, ul, li {
+	margin:0;
+	padding:0;
+}
+
+ol, ul {
+	list-style: none;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+

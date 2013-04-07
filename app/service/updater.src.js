@@ -8,7 +8,17 @@ var UpdaterService = o.Class({
 			users = Prefs.getUsers();
 
 		TravisAPI.get(users, function (projs) {
-			projs = Projs.store(projs);
+			projs = Projs.convertAll(projs);
+
+			users.forEach(function (user) {
+				if (!projs[user]) {
+					projs[user] = [];
+				}
+			});
+
+			console.log(projs);
+			
+			Projs.set(projs);
 
 			that.client.pub('request-travisapi-done', projs);
 
