@@ -79,7 +79,7 @@ describe("Project Model", function() {
 		});
 	});
 	
-	it("should store projects", function() {
+	xit("should store projects", function() {
 		var projs, json = [
 			{slug: 'lquixada/proj1', last_build_status: 0},
 			{slug: 'aaron/proj1', last_build_status: 0},

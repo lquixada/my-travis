@@ -20,12 +20,10 @@ describe("Badge Controller", function() {
 		it("should have blank text", function() {
 			var badgeController = new BadgeController();
 
-			badgeController.update({
-				user: [
+			badgeController.update([
 					{status: 'passed'},
 					{status: 'passed'}
-				]
-			});
+				]);
 
 			expect(chrome.browserAction.setBadgeText).toHaveBeenCalled();
 			expect(chrome.browserAction.setBadgeText.calls[0].args[0]).toBeSameJsonAs({text: ' '});
@@ -34,12 +32,10 @@ describe("Badge Controller", function() {
 		it("should be green", function() {
 			var badgeController = new BadgeController();
 
-			badgeController.update({
-				user: [
+			badgeController.update([
 					{status: 'passed'},
 					{status: 'passed'}
-				]
-			});
+			]);
 
 			expect(chrome.browserAction.setBadgeBackgroundColor).toHaveBeenCalled();
 			expect(chrome.browserAction.setBadgeBackgroundColor.calls[0].args[0]).toBeSameJsonAs({color: '#0c0'});
@@ -51,12 +47,10 @@ describe("Badge Controller", function() {
 		it("should have blank text", function() {
 			var badgeController = new BadgeController();
 
-			badgeController.update({
-				user: [
-					{status: 'failed'},
-					{status: 'passed'}
-				]
-			});
+			badgeController.update([
+				{status: 'failed'},
+				{status: 'passed'}
+			]);
 
 			expect(chrome.browserAction.setBadgeText).toHaveBeenCalled();
 			expect(chrome.browserAction.setBadgeText.calls[0].args[0]).toBeSameJsonAs({text: '1'});
@@ -65,12 +59,10 @@ describe("Badge Controller", function() {
 		it("should be red", function() {
 			var badgeController = new BadgeController();
 
-			badgeController.update({
-				user: [
-					{status: 'failed'},
-					{status: 'passed'}
-				]
-			});
+			badgeController.update([
+				{status: 'failed'},
+				{status: 'passed'}
+			]);
 
 			expect(chrome.browserAction.setBadgeBackgroundColor).toHaveBeenCalled();
 			expect(chrome.browserAction.setBadgeBackgroundColor.calls[0].args[0]).toBeSameJsonAs({color: '#f00'});
@@ -82,12 +74,10 @@ describe("Badge Controller", function() {
 		it("should not modify text", function() {
 			var badgeController = new BadgeController();
 
-			badgeController.update({
-				user: [
-					{status: 'started'},
-					{status: 'passed'}
-				]
-			});
+			badgeController.update([
+				{status: 'started'},
+				{status: 'passed'}
+			]);
 
 			expect(chrome.browserAction.setBadgeText).not.toHaveBeenCalled();
 		});
@@ -95,12 +85,10 @@ describe("Badge Controller", function() {
 		it("should not modify color", function() {
 			var badgeController = new BadgeController();
 
-			badgeController.update({
-				user: [
-					{status: 'started'},
-					{status: 'passed'}
-				]
-			});
+			badgeController.update([
+				{status: 'started'},
+				{status: 'passed'}
+			]);
 
 			expect(chrome.browserAction.setBadgeBackgroundColor).not.toHaveBeenCalled();
 		});

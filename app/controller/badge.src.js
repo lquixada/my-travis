@@ -21,24 +21,22 @@ var BadgeController = o.Class({
 	update: function (projs) {
 		var failed = 0, running = 0;
 
-		if ($.isEmptyObject(projs)) {
+		if (projs.length===0) {
 			this.clear();
 			return;
 		}
-		
-		for (var key in projs) {
-			projs[key].forEach(function (proj) {
-				if (proj.status === 'failed') {
-					failed++;
-					return;
-				}
 
-				if (proj.status === 'started') {
-					running++;
-					return;
-				}
-			});
-		}
+		projs.forEach(function (proj) {
+			if (proj.status === 'failed') {
+				failed++;
+				return;
+			}
+
+			if (proj.status === 'started') {
+				running++;
+				return;
+			}
+		});
 
 		if (running>0 && failed === 0) {
 			// Do nothing, maintain state

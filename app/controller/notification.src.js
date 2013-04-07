@@ -61,13 +61,11 @@ var NotificationController = o.Class({
 	_format: function (projs) {
 		var formatted = {};
 
-		for (var user in projs) {
-			projs[user].forEach(function (proj) {
-				var slug = proj.user+'/'+proj.name;
+		projs.forEach(function (proj) {
+			var slug = proj.user+'/'+proj.name;
 
-				formatted[slug] = this._getStatus(proj);
-			}, this);
-		}
+			formatted[slug] = this._getStatus(proj);
+		}, this);
 
 		return formatted;
 	},

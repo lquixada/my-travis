@@ -88,11 +88,19 @@ var ListController = o.Class({
 	},
 
 	_requestTemplate: function () {
-		var iwindow = $('iframe#templates').get(0).contentWindow;
+		var
+			ordered = [],
+			users = Prefs.getUsers(),
+			projs = Projs.get(),
+			iwindow = $('iframe#templates').get(0).contentWindow;
 
-		iwindow.postMessage({
-			context: {users: Projs.get()}
-		}, '*');
+		users.forEach(function (user) {
+			var projs = Projs.getFromUser(user);
+
+			ordered.push({user:user, projs:projs});
+		});
+
+		iwindow.postMessage({context: ordered}, '*');
 	},
 
 	_showDialog: function (button) {

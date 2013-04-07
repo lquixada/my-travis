@@ -5,21 +5,9 @@ var Project = o.Class({
 	key: 'projs',
 
 	convertAll: function (projs) {
-		var that = this,
-			tmp = {};
-
-		projs.forEach(function (projOld) {
-			var projNew = that.convertOnly(projOld),
-				user = projNew.user;
-
-			if (!tmp[user]) {
-				tmp[user] = [];
-			}
-
-			tmp[user].push(projNew);
-		});
-
-		return tmp;
+		return projs.map(function (proj) {
+			return this.convertOnly(proj);
+		}, this);
 	},
 
 	convertOnly: function (proj) {
@@ -53,10 +41,20 @@ var Project = o.Class({
 		return this._super() || [];
 	},
 
+	getFromUser: function (user) {
+		var projs = this.get();
+
+		return projs.filter(function (proj) {
+			return (proj.user===user);
+		});
+	},
+
 	removeUser: function (user) {
 		var projs = this.get();
 
-		delete projs[user];
+		projs = projs.filter(function (proj) {
+			return (proj.user!==user);
+		});
 
 		this.set(projs);
 	},

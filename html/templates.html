@@ -6,18 +6,18 @@
 <script src="/app/helper/handlebars.src.js"></script>
 
 <script id="users" type="text/x-handlebars-template">
-	{{#eachProperty users}}
+	{{#each users}}
 	<li>
 		<table>
 			<tr>
 				<th colspan="6">
-					{{property}}
+					{{user}}
 					<button class="remove" title="remove user"></button>
 					{{{include "#confirm-dialog" this}}}
 				</th>
 			</tr>
 
-			{{#each value}}
+			{{#each projs}}
 				{{{include "#projects" this}}}
 			{{else}}
 				{{{include "#no-projects"}}}
@@ -26,7 +26,7 @@
 	</li>
 	{{else}}
 		{{{include "#no-users"}}}
-	{{/eachProperty}}
+	{{/each}}
 </script>
 
 <script id="no-users" type="text/x-handlebars-template">
@@ -42,7 +42,7 @@
 </script>
 
 <script id="confirm-dialog" type="text/x-handlebars-template">
-	<span class="confirm" user={{property}}>
+	<span class="confirm" user={{user}}>
 		are you sure?
 		<span class="option yes">yes</span>
 		<span class="option no">no</span>
@@ -72,7 +72,7 @@ var template = Handlebars.compile(source);
 
 window.addEventListener('message', function (evt) {
 	evt.source.postMessage({
-		html: template(evt.data.context)
+		html: template({users:evt.data.context})
 	}, evt.origin);
 });
 </script>

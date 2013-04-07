@@ -33,59 +33,45 @@ describe("Notification", function() {
 		
 		describe("does nothing", function() {
 			it("on first fetch", function() {
-				Notification.update({
-					'user1': [
-						{user:'user1', name: 'proj1', status: 'failed'}
-					]
-				});
+				Notification.update([
+					{user:'user1', name: 'proj1', status: 'failed'}
+				]);
 
 				expect(Notification._open).not.toHaveBeenCalled();
 			});
 
 			it("if projects status do not alter", function() {
-				Notification.update({
-					'user1': [
-						{user:'user1', name: 'proj1', status: 'failed'}
-					]
-				});
+				Notification.update([
+					{user:'user1', name: 'proj1', status: 'failed'}
+				]);
 
-				Notification.update({
-					'user1': [
-						{user:'user1', name: 'proj1', status: 'failed'}
-					]
-				});
+				Notification.update([
+					{user:'user1', name: 'proj1', status: 'failed'}
+				]);
 
 				expect(Notification._open).not.toHaveBeenCalled();
 			});
 
 			it("even if project status goes from failed to errored", function() {
-				Notification.update({
-					'user1': [
-						{user:'user1', name: 'proj1', status: 'failed'}
-					]
-				});
+				Notification.update([
+					{user:'user1', name: 'proj1', status: 'failed'}
+				]);
 
-				Notification.update({
-					'user1': [
-						{user:'user1', name: 'proj1', status: 'errored'}
-					]
-				});
+				Notification.update([
+					{user:'user1', name: 'proj1', status: 'errored'}
+				]);
 
 				expect(Notification._open).not.toHaveBeenCalled();
 			});
 
 			it("or vice-versa", function() {
-				Notification.update({
-					'user1': [
-						{user:'user1', name: 'proj1', status: 'errored'}
-					]
-				});
+				Notification.update([
+					{user:'user1', name: 'proj1', status: 'errored'}
+				]);
 
-				Notification.update({
-					'user1': [
-						{user:'user1', name: 'proj1', status: 'failed'}
-					]
-				});
+				Notification.update([
+					{user:'user1', name: 'proj1', status: 'failed'}
+				]);
 
 				expect(Notification._open).not.toHaveBeenCalled();
 			});
@@ -93,55 +79,41 @@ describe("Notification", function() {
 
 		describe("shows fail", function() {
 			it("if a project goes from passed to failed", function() {
-				Notification.update({
-					'user1': [
-						{user:'user1', name: 'proj1', status: 'passed'}
-					]
-				});
+				Notification.update([
+					{user:'user1', name: 'proj1', status: 'passed'}
+				]);
 
-				Notification.update({
-					'user1': [
-						{user:'user1', name: 'proj1', status: 'failed'}
-					]
-				});
+				Notification.update([
+					{user:'user1', name: 'proj1', status: 'failed'}
+				]);
 
 				expect(Notification._open).toHaveBeenCalledWith('failed');
 			});
 
 			it("if a project goes from passed to errored", function() {
-				Notification.update({
-					'user1': [
-						{user:'user1', name: 'proj1', status: 'passed'}
-					]
-				});
+				Notification.update([
+					{user:'user1', name: 'proj1', status: 'passed'}
+				]);
 
-				Notification.update({
-					'user1': [
-						{user:'user1', name: 'proj1', status: 'errored'}
-					]
-				});
+				Notification.update([
+					{user:'user1', name: 'proj1', status: 'errored'}
+				]);
 
 				expect(Notification._open).toHaveBeenCalledWith('failed');
 			});
 
 			it("if project was passing, runned and has failed", function() {
-				Notification.update({
-					'user1': [
-						{user:'user1', name: 'proj1', status: 'passed'}
-					]
-				});
+				Notification.update([
+					{user:'user1', name: 'proj1', status: 'passed'}
+				]);
 
-				Notification.update({
-					'user1': [
-						{user:'user1', name: 'proj1', status: 'started'}
-					]
-				});
+				Notification.update([
+					{user:'user1', name: 'proj1', status: 'started'}
+				]);
 
-				Notification.update({
-					'user1': [
-						{user:'user1', name: 'proj1', status: 'failed'}
-					]
-				});
+				Notification.update([
+					{user:'user1', name: 'proj1', status: 'failed'}
+				]);
 
 				expect(Notification._open).toHaveBeenCalledWith('failed');
 			});
@@ -149,55 +121,41 @@ describe("Notification", function() {
 		
 		describe("shows passed", function() {
 			it("if a project goes from failed to passed", function() {
-				Notification.update({
-					'user1': [
-						{user:'user1', name: 'proj1', status: 'failed'}
-					]
-				});
+				Notification.update([
+					{user:'user1', name: 'proj1', status: 'failed'}
+				]);
 
-				Notification.update({
-					'user1': [
-						{user:'user1', name: 'proj1', status: 'passed'}
-					]
-				});
+				Notification.update([
+					{user:'user1', name: 'proj1', status: 'passed'}
+				]);
 
 				expect(Notification._open).toHaveBeenCalledWith('passed');
 			});
 			
 			it("if a project goes from errored to passed", function() {
-				Notification.update({
-					'user1': [
-						{user:'user1', name: 'proj1', status: 'errored'}
-					]
-				});
+				Notification.update([
+					{user:'user1', name: 'proj1', status: 'errored'}
+				]);
 
-				Notification.update({
-					'user1': [
+				Notification.update([
 						{user:'user1', name: 'proj1', status: 'passed'}
-					]
-				});
+				]);
 
 				expect(Notification._open).toHaveBeenCalledWith('passed');
 			});
 
 			it("if project was failing, runned and has passed", function() {
-				Notification.update({
-					'user1': [
-						{user:'user1', name: 'proj1', status: 'failed'}
-					]
-				});
+				Notification.update([
+					{user:'user1', name: 'proj1', status: 'failed'}
+				]);
 
-				Notification.update({
-					'user1': [
-						{user:'user1', name: 'proj1', status: 'started'}
-					]
-				});
+				Notification.update([
+					{user:'user1', name: 'proj1', status: 'started'}
+				]);
 
-				Notification.update({
-					'user1': [
-						{user:'user1', name: 'proj1', status: 'passed'}
-					]
-				});
+				Notification.update([
+					{user:'user1', name: 'proj1', status: 'passed'}
+				]);
 
 				expect(Notification._open).toHaveBeenCalledWith('passed');
 			});
