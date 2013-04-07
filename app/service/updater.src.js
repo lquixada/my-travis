@@ -27,8 +27,6 @@ var UpdaterService = o.Class({
 	},
 
 	init: function () {
-		var that = this;
-
 		this.client = new LiteMQ.Client();
 		this._addBusListeners();
 	},
