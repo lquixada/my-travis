@@ -3,7 +3,7 @@
 describe("Badge Controller", function() {
 	beforeEach(function() {
 		chrome = {
-			browserAction: jasmine.createSpyObj('browserAction', ['setBadgeText', 'setBadgeBackgroundColor']);
+			browserAction: jasmine.createSpyObj('browserAction', ['setBadgeText', 'setBadgeBackgroundColor'])
 		};
 	});
 	
