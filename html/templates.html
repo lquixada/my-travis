@@ -7,7 +7,7 @@
 
 <script id="users" type="text/x-handlebars-template">
 	{{#each users}}
-	<li>
+	<li user="{{user}}">
 		<table>
 			<tr>
 				<th colspan="6">
@@ -42,7 +42,7 @@
 </script>
 
 <script id="confirm-dialog" type="text/x-handlebars-template">
-	<span class="confirm" user={{user}}>
+	<span class="confirm">
 		are you sure?
 		<span class="option yes">yes</span>
 		<span class="option no">no</span>

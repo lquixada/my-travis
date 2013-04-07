@@ -61,14 +61,17 @@ var ListController = o.Class({
 				that._showDialog(this);
 			})
 			.on('click', 'span.option.yes', function () {
-				var user = $(this).parent().attr('user');
+				var li = $(this).closest('li'),
+					user = li.attr('user');
 				
 				Prefs.removeUser(user);
 				Projs.removeUser(user);
 
 				that.client.pub('button-yes-clicked');
 
-				that.render();
+				li.animate({ height: 'toggle', opacity: 'toggle' }, 'normal', function () {
+					that.render();
+				});
 			})
 			.on('click', 'span.option.no', function () {
 				that._hideDialog(this);
