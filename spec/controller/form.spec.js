@@ -43,13 +43,15 @@ describe("Form User Controller", function () {
 	describe("on submit", function () {
 		it("should store user", function () {
 			var
-				element = $('<form><input type="hidden" name="user" value="John"></form>'),
+				element = $('<form><input type="hidden" name="user" value="john, bill, jack"></form>'),
 				form = new FormUsersController({element:element});
+
+			Prefs.addUser('john');
 
 			form._addListeners();
 			form.el().submit();
 
-			expect(Prefs.getUsers()[0]).toBe('John');
+			expect(Prefs.get('users')).toBe('bill,jack,john');
 		});
 
 		it("should publish", function () {

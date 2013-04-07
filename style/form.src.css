@@ -81,6 +81,11 @@ section.form span.status {
 	color:#0b0;
 }
 
+section.form span.tip {
+	color:#999;
+	font-size:11px;
+}
+
 section.form form.opened {
 	top:51px;
 }

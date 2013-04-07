@@ -92,9 +92,15 @@ var FormUsersController = o.Class({
 		var that = this;
 
 		this.el().on('submit', function (evt) {
+			var users;
+
 			evt.preventDefault();
 
-			Prefs.addUser(this.user.value);
+			users = this.user.value.split(',');
+
+			users.reverse().forEach(function (user) {
+				Prefs.addUser(user);
+			});
 
 			that.client.pub('form-users-submitted');
 
