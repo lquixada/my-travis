@@ -131,7 +131,6 @@ section#list thead tr {
 
 section#list ul {
 	max-height:485px;
-	min-height:150px;
 	overflow-x:hidden;
 }
 
