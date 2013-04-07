@@ -16,8 +16,6 @@ var UpdaterService = o.Class({
 				}
 			});
 
-			console.log(projs);
-			
 			Projs.set(projs);
 
 			that.client.pub('request-travisapi-done', projs);

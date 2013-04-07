@@ -5,62 +5,69 @@
 <script src="/app/helper/utils.src.js"></script>
 <script src="/app/helper/handlebars.src.js"></script>
 
-<script id="projects-table" type="text/x-handlebars-template">
-{{#eachProperty users}}
-<li user="{{property}}">
-	<table>
-		<tr>
-			<th colspan="6">{{property}} <button class="remove" title="remove user"></button></th>
-		</tr>
-
-		{{#if value}}
-			{{#each value}}
-			<tr href="{{{urlTo user name}}}" {{{classOf status}}}>
-				<td class="col-status">{{{statusImg status}}}</td>
-				<td class="col-name">{{name}}</td>
-				<td class="col-build">#{{build}}</td>
-				<td class="col-duration">{{{formatSecs duration}}}</td>
-				<td class="col-finishedAt">{{{moment finishedAt}}}</td>
-			</tr>
-			{{/each}}
-		{{else}}
+<script id="users" type="text/x-handlebars-template">
+	{{#eachProperty users}}
+	<li>
+		<table>
 			<tr>
-				<td class="message" colspan="6"><em>no projects found.</em></td>
-			</tr>	
-		{{/if}}
-	</table>
-</li>
-{{/eachProperty}}
+				<th colspan="6">
+					{{property}}
+					<button class="remove" title="remove user"></button>
+					{{{include "#confirm-dialog" this}}}
+				</th>
+			</tr>
+
+			{{#each value}}
+				{{{include "#projects" this}}}
+			{{else}}
+				{{{include "#no-projects"}}}
+			{{/each}}
+		</table>
+	</li>
+	{{else}}
+		{{{include "#no-users"}}}
+	{{/eachProperty}}
+</script>
+
+<script id="no-users" type="text/x-handlebars-template">
+	<li>
+		<table>
+			<tr>
+				<td class="message" colspan="6">
+					<div id="no-projects">No users has been added until now.</div>
+				</td>
+			</tr>
+		</table>
+	</li>
+</script>
+
+<script id="confirm-dialog" type="text/x-handlebars-template">
+	<span class="confirm" user={{property}}>
+		are you sure?
+		<span class="option yes">yes</span>
+		<span class="option no">no</span>
+	</span>
 </script>
 
 <script id="projects" type="text/x-handlebars-template">
-{{#eachProperty users}}
-	<tbody user="{{property}}">
-		<tr>
-			<th colspan="6">{{property}} <button class="remove" title="remove user"></button></th>
-		</tr>
-
-		{{#if value}}
-			{{#each value}}
-			<tr href="{{{urlTo user name}}}" {{{classOf status}}}>
-				<td class="col-status">{{{statusImg status}}}</td>
-				<td class="col-name">{{name}}</td>
-				<td class="col-build">#{{build}}</td>
-				<td class="col-duration">{{{formatSecs duration}}}</td>
-				<td class="col-finishedAt">{{{moment finishedAt}}}</td>
-			</tr>
-			{{/each}}
-		{{else}}
-			<tr>
-				<td class="message" colspan="6"><em>no projects found.</em></td>
-			</tr>	
-		{{/if}}
-	</tbody>
-{{/eachProperty}}
+	<tr href="{{{urlTo user name}}}" {{{classOf status}}}>
+		<td class="col-status">{{{statusImg status}}}</td>
+		<td class="col-name">{{name}}</td>
+		<td class="col-build">#{{build}}</td>
+		<td class="col-duration">{{{formatSecs duration}}}</td>
+		<td class="col-finishedAt">{{{moment finishedAt}}}</td>
+	</tr>
 </script>
 
+<script id="no-projects" type="text/x-handlebars-template">
+	<tr>
+		<td class="message" colspan="6"><em>no projects found.</em></td>
+	</tr>
+</script>
+
+
 <script>
-var source = $("#projects-table").html();
+var source = $("#users").html();
 var template = Handlebars.compile(source);
 
 window.addEventListener('message', function (evt) {

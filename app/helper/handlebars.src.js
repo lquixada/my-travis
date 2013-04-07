@@ -1,11 +1,22 @@
 Handlebars.registerHelper('eachProperty', function(context, options) {
-	var ret = "";
-	
-	for (var prop in context) {
-		ret = ret + options.fn({property:prop,value:context[prop]});
-	}
+	if (!$.isEmptyObject(context)) {
+		var ret = "";
 
-	return ret;
+		for (var prop in context) {
+			ret = ret + options.fn({property:prop,value:context[prop]});
+		}
+
+		return ret;
+	} else {
+		return options.inverse(this);
+	}
+});
+
+Handlebars.registerHelper('include', function(id, context) {
+	var source = $(id).html();
+	var template = Handlebars.compile(source);
+	
+	return template(context);
 });
 
 Handlebars.registerHelper('classOf', function(status) {

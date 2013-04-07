@@ -14,8 +14,7 @@ var ListController = o.Class({
 		var users = Prefs.getUsers();
 
 		if (users.length===0) {
-			this._clear();
-			return;
+			this.client.pub('project-list-cleared');
 		}
 
 		// In order to overcome the chrome's security policies
@@ -59,26 +58,10 @@ var ListController = o.Class({
 				}
 			})
 			.on('click', 'button.remove', function () {
-				var button = $(this);
-
-				if (!button.next().is('.confirm')) {
-					button.after([
-						'<span class="confirm">',
-						'are you sure?',
-						'<span class="option yes">yes</span>',
-						'<span class="option no">no</span>',
-						'</span>'
-					].join(''));
-				}
-
-				// Without setTimeout, transition does not work
-				setTimeout(function () {
-					button.next().toggleClass('visible');
-				}, 100);
+				that._showDialog(this);
 			})
 			.on('click', 'span.option.yes', function () {
-				var li = $(this).closest('li'),
-					user = li.attr('user');
+				var user = $(this).parent().attr('user');
 				
 				Prefs.removeUser(user);
 				Projs.removeUser(user);
@@ -88,29 +71,20 @@ var ListController = o.Class({
 				that.render();
 			})
 			.on('click', 'span.option.no', function () {
-				$(this).parent().removeClass('visible');
+				that._hideDialog(this);
 			});
 	},
 
-	_clear: function () {
-		this._remove();
-		this._showMessage();
-
-		this.client.pub('project-list-cleared');
+	_hideDialog: function (spanNo) {
+		$(spanNo).parent().removeClass('visible');
 	},
 
 	_lock: function () {
 		this.el().find('div#overlay').show();
 	},
 
-	_remove: function () {
-		this.el('ul').html('');
-	},
-
 	_renderTemplate: function (html) {
-		this._remove();
-
-		this.el('ul').append(html);
+		this.el('ul').html(html);
 	},
 
 	_requestTemplate: function () {
@@ -121,18 +95,8 @@ var ListController = o.Class({
 		}, '*');
 	},
 
-	_showMessage: function () {
-		this.el('ul').append([
-			'<li>',
-			'<table>',
-			'<tr>',
-			'<td class="message" colspan="6">',
-			'<div id="no-projects">No project has been added until now.</div>',
-			'</td>',
-			'</tr>',
-			'</table>',
-			'</li>'
-		].join(''));
+	_showDialog: function (button) {
+		$(button).next().toggleClass('visible');
 	},
 
 	_unlock: function () {

@@ -1,6 +1,7 @@
 /*globals listController */
 
-describe("List Controller", function() {
+// TODO: Redo specs
+xdescribe("List Controller", function() {
 	describe("clear", function() {
 		beforeEach(function() {
 			chrome = { browserAction: {} };
