@@ -1,8 +1,5 @@
 section#list {
-	margin:15px 0 0;
-	max-height:500px;
-	min-height:150px;
-	overflow-x:hidden;
+	margin:10px 0 0;
 }
 
 section#list button.remove {
@@ -59,6 +56,7 @@ section#list table {
 
 section#list th {
   padding-right:15px;
+	height:20px;
   text-align:left;
 }
 
@@ -127,8 +125,14 @@ section#list tbody tr.failed:hover {
   background-color:#fbb;
 }
 
+section#list thead tr {
+	border-bottom:1px solid #999;
+}
+
 section#list ul {
-	margin:5px 0 0;
+	max-height:485px;
+	min-height:150px;
+	overflow-x:hidden;
 }
 
 section#list .col-status {

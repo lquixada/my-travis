@@ -15,7 +15,6 @@
 * Create FooterController
 * Refactor app/init/notification.src.js
 * Remove cache from DOMController.el()?
-* Fix title bar
 
 
 ## Issues
