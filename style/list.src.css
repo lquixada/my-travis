@@ -126,3 +126,23 @@ section#list tbody tr.failed {
 section#list tbody tr.failed:hover {
   background-color:#fbb;
 }
+
+section#list .col-status {
+	width:30px;
+}
+
+section#list .col-name {
+	width:auto;
+}
+
+section#list .col-build {
+	width:60px;
+}
+
+section#list .col-duration {
+	width:80px;
+}
+
+section#list .col-finishedAt {
+	width:100px;
+}
