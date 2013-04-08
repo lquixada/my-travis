@@ -6,7 +6,7 @@ describe("List Controller", function() {
 		$.fx.off = true;
 	});
 	
-	it("should be on reorder mode", function() {
+	xit("should be on reorder mode", function() {
 		var
 			element = $('<section><ul><li></li></ul></section>'),
 			listController = new ListController({element: element});
