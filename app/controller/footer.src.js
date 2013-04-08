@@ -26,9 +26,17 @@ var FooterController = o.Class({
 		this.el('a#author').on('click', function (evt) {
 				evt.preventDefault();
 				that.client.pub('link-author-clicked');
+			})
+			.end()
+			.find(':checkbox').on('click', function () {
+				if ($(this).is(':checked')) {
+					that.client.pub('checkbox-manage-checked');	
+				} else {
+					that.client.pub('checkbox-manage-unchecked');	
+				}
 			});
 	}
 });
 
-var authorController = new FooterController();
+var footerController = new FooterController();
 

@@ -24,6 +24,11 @@ var ListController = o.Class({
 		this._requestTemplate();
 	},
 
+	rerender: function () {
+		this.render();
+		this._unlock();	
+	},
+
 	// private
 	
 	_addBusListeners: function () {
@@ -36,9 +41,12 @@ var ListController = o.Class({
 			.sub('form-users-submitted', function () {
 				that._lock();
 			})
-			.sub('request-travisapi-done', function () {
-				that.render();
-				that._unlock();
+			.sub('request-travisapi-done', this.rerender)
+			.sub('checkbox-manage-checked', function () {
+				that._enableReorder();
+			})
+			.sub('checkbox-manage-unchecked', function () {
+				that._disableReorder();
 			});
 
 		$(window).on('message', function (evt) {
@@ -69,13 +77,83 @@ var ListController = o.Class({
 
 				that.client.pub('button-yes-clicked');
 
-				li.animate({ height: 'toggle', opacity: 'toggle' }, 'normal', function () {
-					that.render();
-				});
+				li.animate({height: 'toggle', opacity: 'toggle'}, 'normal');
 			})
 			.on('click', 'span.option.no', function () {
 				that._hideDialog(this);
 			});
+	},
+
+	_collapseList: function () {
+		this.el('li').each(function () {
+			var li = $(this);
+
+			li.data('old-height', li.height())
+				.animate({height:26})
+				.find('span.user-removal')
+				.show()
+				.end()
+				.find('img.user-grip')
+				.show()
+				.animate({opacity:0.5});
+		});
+	},
+
+	_disableReorder: function () {
+		this.client.sub('request-travisapi-done', this.rerender);
+
+		this._expandList();
+		this._disableSorting();
+	},
+
+	_disableSorting: function () {
+		this.el('ul').sortable('destroy');
+	},
+
+	_enableReorder: function () {
+		this.client.unsub('request-travisapi-done', this.rerender);
+
+		this._collapseList();
+		this._enableSorting();
+	},
+
+	_enableSorting: function () {
+		var that = this;
+
+		this.el('ul').sortable({
+			cursor: '-webkit-grabbing',
+			placeholder: 'ui-state-highlight',
+			stop: function () {
+				var users = that._grepUsersOrder();
+
+				Prefs.set('users', users.join(','));
+			}
+		});
+	},
+
+	_expandList: function () {
+		this.el('li').each(function () {
+			var li = $(this);
+
+			li.animate({height:li.data('old-height')})
+				.find('span.user-removal')
+				.hide()
+				.end()
+				.find('img.user-grip')
+				.animate({opacity:0}, function () {
+					$(this).hide();
+				});
+		});	
+	},
+
+	_grepUsersOrder: function () {
+		var users = [];
+
+		this.el('li').each(function () {
+			users.push($(this).attr('user'));
+		});
+
+		return users;
 	},
 
 	_hideDialog: function (spanNo) {

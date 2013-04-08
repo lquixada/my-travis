@@ -11,3 +11,9 @@ footer#main-footer {
 footer#main-footer a {
   color:#666;
 }
+
+footer#main-footer label {
+	position:absolute;
+	top:6px;
+	left:5px;
+}

@@ -1,14 +1,29 @@
 /*globals listController */
 
 // TODO: Redo specs
-xdescribe("List Controller", function() {
+describe("List Controller", function() {
+	beforeEach(function() {
+		$.fx.off = true;
+	});
+	
+	it("should be on reorder mode", function() {
+		var
+			element = $('<section><ul><li></li></ul></section>'),
+			listController = new ListController({element: element});
+
+		listController.reorder();
+
+		expect(listController.el('li').height()).toBe(26);	
+	});
+
 	describe("clear", function() {
 		beforeEach(function() {
-			chrome = { browserAction: {} };
-			chrome.browserAction.setBadgeText = function () {};
-		});
+			chrome = {
+				browserAction: jasmine.createSpyObj('browserAction', ['setBadgeText'])
+			};
+		});	
 			
-		it("should clear the html", function() {
+		xit("should clear the html", function() {
 			var table = $('<table></table>');
 
 			spyOn(listController, 'el').andReturn(table);
@@ -18,7 +33,7 @@ xdescribe("List Controller", function() {
 			expect(table.find('#no-projects').length).toBe(1);
 		});
 
-		it("should remove badge", function() {
+		xit("should remove badge", function() {
 			var table = $('<table></table>');
 
 			spyOn(chrome.browserAction, 'setBadgeText'); 

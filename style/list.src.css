@@ -50,11 +50,27 @@ section#list span.option {
 	cursor:pointer;
 }
 
+section#list span.user-removal {
+	display:none;
+}
+
+section#list img.user-grip {
+	position:absolute;
+	display:none;
+	top:50%;
+	left:50%;
+	margin-top:-6px;
+	margin-left:-58px;
+	cursor: -webkit-grab;
+	opacity:0;
+}
+
 section#list table {
   width:100%;
 }
 
 section#list th {
+	position:relative;
   padding-right:15px;
 	height:20px;
   text-align:left;
@@ -132,6 +148,17 @@ section#list thead tr {
 section#list ul {
 	max-height:485px;
 	overflow-x:hidden;
+}
+
+section#list ul li {
+	overflow:hidden;
+}
+
+section#list ul li.ui-state-highlight {
+	margin:3px;
+	height:20px;
+	border:3px dashed #ccc;
+	border-radius:3px;
 }
 
 section#list .col-status {
