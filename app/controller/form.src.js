@@ -85,7 +85,13 @@ var FormUsersController = o.Class({
 				setTimeout(function () {
 					that.close();
 				}, 1000);	
-			});	
+			})
+			.sub('checkbox-manage-checked', function () {
+				that.el(':input').attr('disabled', 'true');
+			})
+			.sub('checkbox-manage-unchecked', function () {
+				that.el(':input').removeAttr('disabled');
+			});
 	},
 	
 	_addListeners: function () {
