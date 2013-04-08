@@ -40,88 +40,90 @@
 </head>
 
 <body>
-		<span id="auto-focus" tabindex="0">prevent auto focus</span>
 
-		<iframe id="templates" src="templates.html"></iframe>
+	<span id="auto-focus" tabindex="0">prevent auto focus</span>
 
-		<header id="main-header">
-			<a id="logo" href="http://travisci.org/"><img src="/imgs/logo.png"></a>
+	<iframe id="templates" src="templates.html"></iframe>
 
-			<div id="bar">
-				<button id="open-users" title="add user"><img src="/imgs/icon-user.png"></button>
-				<button id="open-prefs" title="settings"><img src="/imgs/icon-cog.png"></button>
-			</div>
-		</header>
+	<header id="main-header">
+		<a id="logo" href="http://travisci.org/"><img src="/imgs/logo.png"></a>
 
-		<section id="form-prefs" class="form">
-			<form>
-				<label>check interval (in secs) <input name="interval" type="text" maxlength="3" required></label>
-				<label>enable notifications <input name="notifications" type="checkbox"></label>
-				<button type="submit">save</button>
-				<span class="status"></span>
-			</form>
-		</section>
+		<div id="bar">
+			<button id="open-users" title="add user"><img src="/imgs/icon-user.png"></button>
+			<button id="open-prefs" title="settings"><img src="/imgs/icon-cog.png"></button>
+		</div>
+	</header>
 
-		<section id="form-user" class="form">
-			<form>
-				<label>user <input name="user" type="text" required></label>
-				<button type="submit">add</button>
-				<span class="tip">(Tip: use commas to add multiple users)</span>
-			</form>
-		</section>
-		
-		<section id="list">
-			<table>
-				<thead>
-					<tr>
-						<th class="col-status"></th>
-						<th class="col-name">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</th>
-						<th class="col-build">Build</th>
-						<th class="col-duration">Duration</th>
-						<th class="col-finishedAt">Finished At</th>
-					</tr>
-				</thead>
-			</table>
+	<section id="form-prefs" class="form">
+		<form>
+			<label>check interval (in secs) <input name="interval" type="text" maxlength="3" required></label>
+			<label>enable notifications <input name="notifications" type="checkbox"></label>
+			<button type="submit">save</button>
+			<span class="status"></span>
+		</form>
+	</section>
 
-			<ul></ul>
+	<section id="form-user" class="form">
+		<form>
+			<label>user <input name="user" type="text" required></label>
+			<button type="submit">add</button>
+			<span class="tip">(Tip: use commas to add multiple users)</span>
+		</form>
+	</section>
+	
+	<section id="list">
+		<table>
+			<thead>
+				<tr>
+					<th class="col-status"></th>
+					<th class="col-name">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</th>
+					<th class="col-build">Build</th>
+					<th class="col-duration">Duration</th>
+					<th class="col-finishedAt">Finished At</th>
+				</tr>
+			</thead>
+		</table>
 
-			<div id="overlay"></div>
-		</section>
+		<ul></ul>
 
-		<section id="author">
-			<div id="card">
-				<header>
-					<h4>Leonardo Quixadá</h4>
+		<div id="overlay"></div>
+	</section>
 
-					<button id="close">close</button>
-				</header>
+	<section id="author">
+		<div id="card">
+			<header>
+				<h4>Leonardo Quixadá</h4>
 
-				<section>
-					<img id="photo" src="/imgs/photo.jpeg">
+				<button id="close">close</button>
+			</header>
 
-					<p>I'm a passionate javascript developer who likes dancing forró and good breakfasts :)</p>
+			<section>
+				<img id="photo" src="/imgs/photo.jpeg">
 
-					<span class="github"><strong>Github</strong>: <a href="http://github.com/lquixada">github.com/lquixada</a></span>
-					<span class="twitter"><strong>Twitter</strong>: <a href="http://twitter.com/lquixada">@lquixada</a></span>
-				</section>
+				<p>I'm a passionate javascript developer who likes dancing forró and good breakfasts :)</p>
 
-				<footer>
-					<p>Make a donation to support this app!</p>
+				<span class="github"><strong>Github</strong>: <a href="http://github.com/lquixada">github.com/lquixada</a></span>
+				<span class="twitter"><strong>Twitter</strong>: <a href="http://twitter.com/lquixada">@lquixada</a></span>
+			</section>
 
-					<form id="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
-							<input type="hidden" name="cmd" value="_s-xclick">
-							<input type="hidden" name="hosted_button_id" value="EN5RLK73KUCYW">
-							<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-							<img alt="" border="0" src="https://www.paypalobjects.com/pt_BR/i/scr/pixel.gif" width="1" height="1">
-					</form>
-				</footer>
-			</div>
-		</section>
+			<footer>
+				<p>Make a donation to support this app!</p>
 
-		<footer id="main-footer">
-			<label><input type="checkbox" name="reorder"> Manage user list</label>
-			<a id="author" href="#">author</a> | <a href="http://travisci.org/">visit travisci.org &raquo;</a>
-		</footer>
+				<form id="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+						<input type="hidden" name="cmd" value="_s-xclick">
+						<input type="hidden" name="hosted_button_id" value="EN5RLK73KUCYW">
+						<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+						<img alt="" border="0" src="https://www.paypalobjects.com/pt_BR/i/scr/pixel.gif" width="1" height="1">
+				</form>
+			</footer>
+		</div>
+	</section>
+
+	<footer id="main-footer">
+		<label><input type="checkbox" name="reorder"> Manage user list</label>
+		<a id="author" href="#">author</a> | <a href="http://travisci.org/">visit travisci.org &raquo;</a>
+	</footer>
+
 </body>
 
 </html>
