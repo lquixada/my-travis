@@ -38,13 +38,17 @@ module.exports = function (grunt) {
 			}
 		},
 
-    zip: {
-      dist: {
-        exclude: ['./.*', './node_modules*', './screenshots*'],
-        src: '.',
-        dest: ''+projectName+'.zip'
-      }
-    },
+		compress: {
+			main: {
+				options: {
+					archive: projectName+'.zip'
+				},
+				files: [{
+					src: ['**', '!*.zip', '!node_modules/**', '!screenshots/**'],
+					dest: '.'
+				}]
+			}
+		},
 
 		connect: {
 			pivotal: {
@@ -112,6 +116,7 @@ module.exports = function (grunt) {
         tasks: ['livereload']
       }
 		}
+
   });
 
 	grunt.loadNpmTasks('grunt-contrib-jshint');
@@ -121,6 +126,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-connect');
 	grunt.loadNpmTasks('grunt-contrib-livereload');
 	grunt.loadNpmTasks('grunt-contrib-copy');
+	grunt.loadNpmTasks('grunt-contrib-compress');
 	grunt.loadNpmTasks('grunt-regarde');
 
   // Aliased tasks (for readability purposes on "build" task)
@@ -128,7 +134,7 @@ module.exports = function (grunt) {
   grunt.registerTask('o:jsmin', 'uglify:build');
   grunt.registerTask('o:jslint', 'jshint');
   grunt.registerTask('o:imgs', 'copy:build');
-  grunt.registerTask('o:zip', 'zip:dist');
+  grunt.registerTask('o:compress', 'compress:main');
 
 	// Batch taks
 	grunt.registerTask('o:ci', ['connect:pivotal', 'jasmine:pivotal']);
@@ -144,19 +150,4 @@ module.exports = function (grunt) {
 
 		grunt.log.writeln('Specs can now be accessed on http://'+host+':'+port+'/'+runner);
 	});
-
-  grunt.registerMultiTask('zip', 'Creates package for deploy.', function () {
-    var options, done = this.async();
-
-    options = ['--exclude'].concat(this.data.exclude);
-    options = options.concat(['-r', this.data.dest, this.data.src]);
-    
-    grunt.util.spawn({cmd: 'zip', args: options}, function (err, result, code) {
-      var output = result.err || result.stdout;
-
-			grunt.log.writeln( '\n'+output+'\n' );
-
-			done(code>0? false: true);
-    });
-  });
 };
