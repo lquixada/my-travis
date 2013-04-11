@@ -16,13 +16,7 @@
   "devDependencies": {
     "grunt-cli": "*",
     "grunt": "*",
-    "grunt-contrib-jshint": "*",
-    "grunt-contrib-uglify": "*",
-    "grunt-contrib-cssmin": "*",
-    "grunt-contrib-connect": "*",
-    "grunt-contrib-jasmine": "*",
-    "grunt-contrib-livereload": "*",
-    "grunt-regarde": "*",
-    "grunt-contrib-copy": "~0.4.1"
+		"grunt-o-bundle": "*",
+    "grunt-contrib-compress": "*"
   }
 }
