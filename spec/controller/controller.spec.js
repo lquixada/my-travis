@@ -2,18 +2,18 @@
 
 describe("DOM Controller", function() {
 	it("should get main element", function() {
-		var controller = new DOMController();
+		var
+			element = $('<div id="main"><p></p></div>'),
+			controller = new DOMController({element:element});
 
-		controller.dom = 'body';
-
-		expect(controller.el().get(0)).toBe(document.body);
+		expect(controller.el().is('div#main')).toBe(true);
 	});
 
 	it("should get a descendant element", function() {
-		var controller = new DOMController();
+		var 
+			element = $('<div id="main"><p></p></div>'),
+			controller = new DOMController({element:element});
 
-		controller.element = $('<div><p></p></div>');
-		
 		expect(controller.el('p').size()).toBe(1);
 	});
 	
@@ -26,11 +26,5 @@ describe("DOM Controller", function() {
 		controller.el();
 
 		expect(window.$.calls.length).toBe(1);
-	});
-
-	it("should have a signature addListeners()", function() {
-		var controller = new DOMController();
-
-		expect(function () { controller._addListeners(); }).toThrow('not implemented error');
 	});
 });
