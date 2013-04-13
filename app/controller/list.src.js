@@ -24,11 +24,6 @@ var ListController = o.Class({
 		this._requestTemplate();
 	},
 
-	rerender: function () {
-		this.render();
-		this._unlock();	
-	},
-
 	// private
 	
 	_addBusListeners: function () {
@@ -41,7 +36,10 @@ var ListController = o.Class({
 			.sub('form-users-submitted', function () {
 				that._lock();
 			})
-			.sub('request-travisapi-done', this.rerender)
+			.sub(['request-travisapi-done','request-user-done'], function () {
+				that.render();
+				that._unlock();	
+			})
 			.sub('checkbox-manage-checked', function () {
 				that._enableReorder();
 			})
@@ -100,7 +98,12 @@ var ListController = o.Class({
 	},
 
 	_disableReorder: function () {
-		this.client.sub('request-travisapi-done', this.rerender);
+		var that = this;
+
+		this.client.sub(['request-travisapi-done','request-user-done'], function () {
+				that.render();
+				that._unlock();	
+			});
 
 		this._expandList();
 		this._disableSorting();
@@ -111,7 +114,7 @@ var ListController = o.Class({
 	},
 
 	_enableReorder: function () {
-		this.client.unsub('request-travisapi-done', this.rerender);
+		this.client.unsub(['request-travisapi-done','request-user-done']);
 
 		this._collapseList();
 		this._enableSorting();
