@@ -1,9 +1,4 @@
 module.exports = function (grunt) {
-	var 
-		files = [],
-		js = ['*.src.js', 'app/**/*.src.js'],
-		css = ['*.src.css', 'style/**/*.src.css'],
-		spec = ['*.spec.js', 'spec/**/*.spec.js'];
 	
   grunt.initConfig({
 		projectName: 'mytravis',
@@ -38,16 +33,13 @@ module.exports = function (grunt) {
 					'app/service/*.src.js'
 				],
 				options: {
-					host: 'http://localhost:<%=connect.pivotal.options.port%>/',
+					helpers: 'spec/spec.src.js',
 					vendor: [
 						'vendor/o.min.js',
 						'vendor/litemq.min.js',
 						'vendor/jquery-1.9.1.min.js',
-						'vendor/handlebars.js',
-						'spec/spec.src.js'
-					],
-					specs: files.concat(spec),
-					outfile: 'runner.html'
+						'vendor/handlebars.js'
+					]
 				}
 			}
 		}
