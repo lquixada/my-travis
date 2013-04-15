@@ -15,14 +15,6 @@ module.exports = function (grunt) {
 			}
 		},
 
-		url: {
-			pivotal: {
-				host: 'localhost',
-				port: '<%=connect.pivotal.options.port%>',
-				runner: '<%=jasmine.pivotal.options.outfile%>'
-			}
-		},
-
 	  jasmine: {
 			pivotal: {
 				src: [
@@ -47,12 +39,4 @@ module.exports = function (grunt) {
 
 	grunt.loadNpmTasks('grunt-o-bundle');
 	grunt.loadNpmTasks('grunt-contrib-compress');
-
-	grunt.registerMultiTask('url', 'Mounts url on screen', function () {
-		var host = this.data.host;
-		var port = this.data.port;
-		var runner = this.data.runner; 
-
-		grunt.log.writeln('Specs can now be accessed on http://'+host+':'+port+'/'+runner);
-	});
 };
