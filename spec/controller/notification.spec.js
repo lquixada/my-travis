@@ -26,7 +26,7 @@ describe("Notification", function() {
 	describe("notify", function() {
 		beforeEach(function() {
 			Prefs.set('notifications', true);
-			Prefs.set('statuses', '');
+			Status.set('stored', '');
 
 			spyOn(Notification, '_open');
 		});

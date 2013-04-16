@@ -5,7 +5,7 @@ var NotificationController = o.Class({
 	dom: 'section#notification',
 
 	getResult: function (type) {
-		var results = Prefs.get('results');
+		var results = Status.get('results');
 
 		if ($.isEmptyObject(results)) {
 			results = {passed: [], failed: []};
@@ -123,7 +123,7 @@ var NotificationController = o.Class({
 	},
 
 	_getStored: function () {
-		return Prefs.get('statuses');
+		return Status.get('stored');
 	},
 
 	_hasFailed: function () {
@@ -182,11 +182,11 @@ var NotificationController = o.Class({
 			}
 		}
 
-		Prefs.set('statuses', tmp);
+		Status.set('stored', tmp);
 	},
 
 	_storeResults: function (results) {
-		Prefs.set('results', results);
+		Status.set('results', results);
 	}
 });
 
