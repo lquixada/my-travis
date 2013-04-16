@@ -1,6 +1,6 @@
 /*globals ModelLocalStorage */
 
-var Project = o.Class({
+var ProjsModel = o.Class({
 	extend: ModelLocalStorage,
 	key: 'projs',
 
@@ -68,4 +68,4 @@ var Project = o.Class({
 	}
 });
 
-var Projs = new Project();
+var Projs = new ProjsModel();

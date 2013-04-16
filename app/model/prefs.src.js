@@ -1,6 +1,6 @@
 /*globals ModelLocalStorage */
 
-var Preferences = o.Class({
+var PrefsModel = o.Class({
 	extend: ModelLocalStorage,
 	key: 'prefs',
 
@@ -54,4 +54,4 @@ var Preferences = o.Class({
 	}
 });
 
-var Prefs = new Preferences();
+var Prefs = new PrefsModel();
