@@ -4,6 +4,7 @@ describe("Badge Controller", function() {
 	beforeEach(function() {
 		Projs.clear();
 
+		// Mocked wrapper method around chrome.browserAction
 		spyOn(BadgeController.prototype, 'clear');
 	});
 	
@@ -25,6 +26,7 @@ describe("Badge Controller", function() {
 
 			Projs.set([{status: 'passed'}, {status: 'passed'}]);
 
+			// Mocked wrapper method around chrome.browserAction
 			spyOn(Badge, 'set');
 			
 			Badge.update();
@@ -39,6 +41,7 @@ describe("Badge Controller", function() {
 
 			Projs.set([{status: 'failed'}, {status: 'passed'}]);
 
+			// Mocked wrapper method around chrome.browserAction
 			spyOn(Badge, 'set');
 
 			Badge.update();
@@ -53,6 +56,7 @@ describe("Badge Controller", function() {
 
 			Projs.set([{status: 'started'}, {status: 'passed'}]);
 
+			// Mocked wrapper method around chrome.browserAction
 			spyOn(Badge, 'set');
 
 			Badge.update();

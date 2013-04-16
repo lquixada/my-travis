@@ -5,13 +5,12 @@ describe("Notification", function() {
 	
 	beforeEach(function() {
 		Notification = new NotificationController();
+
+		// Mocked wrapper method around webkitNotifications
+		spyOn(Notification, '_open');
 	});
 
 	describe("setting", function() {
-		beforeEach(function() {
-			spyOn(Notification, '_open');
-		});
-		
 		it("should notify when enabled", function() {
 			Prefs.set('notifications', true);
 			Projs.set([{status: 'passed'}]);
@@ -43,8 +42,6 @@ describe("Notification", function() {
 		beforeEach(function() {
 			Prefs.set('notifications', true);
 			Status.set('stored', '');
-
-			spyOn(Notification, '_open');
 		});
 		
 		describe("does nothing", function() {
