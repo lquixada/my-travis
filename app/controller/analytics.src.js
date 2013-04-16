@@ -1,9 +1,18 @@
 /*globals DOMController */
 
-var Analytics = o.Class({
+var AnalyticsController = o.Class({
 	extend: DOMController,
 
 	init: function () {
+		var that = this;
+
+		this.client = new LiteMQ.Client({name: 'AnalyticsController'});
+		this.client.sub('popup-window-load', function () {
+			that._addAnalyticsTag();
+		});
+	},
+
+	_addAnalyticsTag: function () {
 		var _gaq = _gaq || [];
 		_gaq.push(['_setAccount', 'UA-38205716-1']);
 		_gaq.push(['_trackPageview']);
@@ -19,5 +28,5 @@ var Analytics = o.Class({
 	}
 });
 
-new Analytics();
+new AnalyticsController();
 
