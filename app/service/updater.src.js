@@ -40,6 +40,7 @@ var UpdaterService = o.Class({
 
 		// Do a request right away!
 		this.exec(function () {
+			// Then begin the polling again
 			that.start();
 		});
 	},
@@ -50,14 +51,12 @@ var UpdaterService = o.Class({
 			interval = parseInt(Prefs.get('interval'), 10) || 1;
 
 		if (users.length) {
-			console.log('Updater started. Polling interval: '+interval+'min');
-			chrome.alarms.create('travisapi', {periodInMinutes:interval});
+			this._createAlarm(interval);
 		}
 	},
 
 	stop: function () {
-		console.log('Updater stopped.');
-		chrome.alarms.clear('travisapi');
+		this._clearAlarm();
 	},
 
 	// private
@@ -65,7 +64,11 @@ var UpdaterService = o.Class({
 	_addBusListeners: function () {
 		var that = this;
 		
-		this.client.sub('update-requested', function () {
+		this.client.sub('extension-installed', function () {
+				that._addAlarmListeners();
+				that.start();
+			})
+			.sub('update-requested', function () {
 				console.log(new Date());
 				console.log('Requesting...');
 
@@ -75,6 +78,29 @@ var UpdaterService = o.Class({
 				that.restart();
 				this.pub('form-submit-done');
 			});
+	},
+
+	_addAlarmListeners: function () {
+		var that = this;
+
+		chrome.alarms.onAlarm.addListener(function (alarm) {
+			if (alarm && alarm.name === 'travisapi') {
+				console.log(new Date());
+				console.log('Requesting...');
+
+				that.exec();
+			}
+		});	
+	},
+
+	_clearAlarm: function () {
+		console.log('Updater stopped.');
+		chrome.alarms.clear('travisapi');
+	},
+
+	_createAlarm: function (interval) {
+		console.log('Updater started. Polling interval: '+interval+'min');
+		chrome.alarms.create('travisapi', {periodInMinutes:interval});
 	}
 });
 

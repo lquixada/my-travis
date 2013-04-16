@@ -9,13 +9,5 @@ client.sub('request-done', function () {
 });
 
 chrome.runtime.onInstalled.addListener(function () {
-	chrome.alarms.create('travisapi', {periodInMinutes:1/2});	
-
-	client.pub('update-requested');
-});
-
-chrome.alarms.onAlarm.addListener(function (alarm) {
-	if (alarm && alarm.name === 'travisapi') {
-		client.pub('update-requested');
-	}
+	client.pub('extension-installed');
 });
