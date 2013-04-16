@@ -48,7 +48,7 @@ var UpdaterService = o.Class({
 	start: function () {
 		var
 			users = Prefs.getUsers(),
-			interval = parseInt(Prefs.get('interval'), 10) || 1;
+			interval = parseFloat(Prefs.get('interval'), 10) || 1;
 
 		if (users.length) {
 			this._createAlarm(interval);
@@ -66,7 +66,7 @@ var UpdaterService = o.Class({
 		
 		this.client.sub('extension-installed', function () {
 				that._addAlarmListeners();
-				that.start();
+				that.restart();
 			})
 			.sub('update-requested', function () {
 				console.log(new Date());
