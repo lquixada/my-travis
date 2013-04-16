@@ -32,4 +32,4 @@ var HeaderController = o.Class({
 	}
 });
 
-var headerController = new HeaderController();
+new HeaderController();

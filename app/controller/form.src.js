@@ -130,7 +130,7 @@ var FormUsersController = o.Class({
 	}
 });
 
-var formUsersController = new FormUsersController();
+new FormUsersController();
 
 
 var FormPrefsController = o.Class({
@@ -188,4 +188,4 @@ var FormPrefsController = o.Class({
 	}
 });
 
-var formPrefsController = new FormPrefsController();
+new FormPrefsController();

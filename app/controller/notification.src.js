@@ -190,4 +190,4 @@ var NotificationController = o.Class({
 	}
 });
 
-var Notification = new NotificationController();
+new NotificationController();

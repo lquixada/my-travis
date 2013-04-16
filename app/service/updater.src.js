@@ -104,4 +104,4 @@ var UpdaterService = o.Class({
 	}
 });
 
-var Updater = new UpdaterService();
+new UpdaterService();

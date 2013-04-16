@@ -38,5 +38,5 @@ var FooterController = o.Class({
 	}
 });
 
-var footerController = new FooterController();
+new FooterController();
 

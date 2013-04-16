@@ -1,6 +1,12 @@
 /*globals Notification */
 
 describe("Notification", function() {
+	var Notification;
+	
+	beforeEach(function() {
+		Notification = new NotificationController();
+	});
+
 	describe("setting", function() {
 		beforeEach(function() {
 			spyOn(Notification, '_notify');

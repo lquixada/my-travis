@@ -193,4 +193,4 @@ var ListController = o.Class({
 	}
 });
 
-var listController = new ListController();
+new ListController();

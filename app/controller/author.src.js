@@ -50,4 +50,4 @@ var AuthorController = o.Class({
 	} 
 });
 
-var authorController = new AuthorController();
+new AuthorController();

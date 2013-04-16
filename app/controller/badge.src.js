@@ -67,4 +67,4 @@ var BadgeController = o.Class({
 	}
 });
 
-var badgeController = new BadgeController();
+new BadgeController();
