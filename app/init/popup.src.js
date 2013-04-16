@@ -1,9 +1,15 @@
 
-window.LiteMQ = chrome.extension.getBackgroundPage().LiteMQ;
-window.LiteMQ.debugMode = true;
-window.client = new LiteMQ.Client();
+client = new LiteMQ.Client({name: 'PopupPage'});
 
 // Must be window load due to the async iframe load
 $(window).on('load', function () {
-	window.client.pub('popup-window-load');
+	client.pub('popup-window-load');
+
+	chrome.runtime.onMessage.addListener(function (msg) {
+		console.log('Runtime message delivered!');
+		client.pub('request-done');
+		console.log('---');
+	});
 });
+
+

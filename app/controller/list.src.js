@@ -36,9 +36,11 @@ var ListController = o.Class({
 			.sub('form-users-submitted', function () {
 				that._lock();
 			})
-			.sub(['request-travisapi-done','request-user-done'], function () {
+			.sub('request-done', function () {
 				that.render();
-				that._unlock();	
+				that._unlock();
+
+				console.log('List rerendered!');
 			})
 			.sub('checkbox-manage-checked', function () {
 				that._enableReorder();
@@ -98,12 +100,7 @@ var ListController = o.Class({
 	},
 
 	_disableReorder: function () {
-		var that = this;
-
-		this.client.sub(['request-travisapi-done','request-user-done'], function () {
-				that.render();
-				that._unlock();	
-			});
+		this.client.enable('request-done');
 
 		this._expandList();
 		this._disableSorting();
@@ -114,7 +111,7 @@ var ListController = o.Class({
 	},
 
 	_enableReorder: function () {
-		this.client.unsub(['request-travisapi-done','request-user-done']);
+		this.client.disable('request-done');
 
 		this._collapseList();
 		this._enableSorting();

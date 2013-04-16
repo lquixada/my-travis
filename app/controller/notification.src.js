@@ -25,10 +25,9 @@ var NotificationController = o.Class({
 	_addBusListeners: function () {
 		var that = this;
 
-		this.client.sub('request-travisapi-done', function (msg) {
-			var projs = msg.body;
-			
-			that.update(projs);
+		this.client.sub('request-done', function () {
+			that.update(Projs.get());
+			console.log('Notification updated!');
 		});
 	},
 	

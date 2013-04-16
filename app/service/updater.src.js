@@ -18,7 +18,9 @@ var UpdaterService = o.Class({
 
 			Projs.set(projs);
 
-			that.client.pub('request-travisapi-done', projs);
+			console.log('Request done!');
+
+			that.client.pub('request-done');
 
 			if (callback) {
 				callback(projs);
@@ -32,28 +34,30 @@ var UpdaterService = o.Class({
 	},
 
 	restart: function () {
+		var that = this;
+
 		this.stop();
-		this.start();
+
+		// Do a request right away!
+		this.exec(function () {
+			that.start();
+		});
 	},
 
 	start: function () {
-		var that = this,
+		var
 			users = Prefs.getUsers(),
 			interval = parseInt(Prefs.get('interval'), 10) || 60;
 
 		if (users.length) {
 			console.log('Updater started. Polling interval: '+interval+'s');
-
-			this.timer = setInterval(function () {
-				that.exec();
-			}, interval*1000); 
+			chrome.alarms.create('travisapi', {periodInMinutes:1/2});
 		}
 	},
 
 	stop: function () {
 		console.log('Updater stopped.');
-
-		clearInterval(this.timer);
+		chrome.alarms.clear('travisapi');
 	},
 
 	// private
@@ -61,20 +65,14 @@ var UpdaterService = o.Class({
 	_addBusListeners: function () {
 		var that = this;
 		
-		this.client.sub('background-document-ready', function () {
-				that.start();
-			})
-			.sub('form-prefs-submitted', function () {
-				that.restart();
-			})
-			.sub('form-users-submitted', function () {
-				that.stop();
+		this.client.sub('update-requested', function () {
+				console.log(new Date());
+				console.log('Requesting...');
 
-				// Do a request right away!
-				that.exec(function () {
-					that.client.pub('request-user-done');
-					that.restart();
-				});
+				that.exec();
+			})
+			.sub(['form-prefs-submitted', 'form-users-submitted'], function () {
+				that.restart();
 			});
 	}
 });

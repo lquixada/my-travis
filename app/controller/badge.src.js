@@ -52,13 +52,14 @@ var BadgeController = o.Class({
 		var that = this;
 		
 		this.client
-			.sub(['button-yes-clicked', 'background-document-ready'], function () {
-				that.update(Projs.get());	
-			})
-			.sub('request-travisapi-done', function (msg) {
-				var projs = msg.body;
+			.sub([
+					'request-travisapi-done',
+					'request-done',
+					'button-yes-clicked'
+				], function () {
+					that.update(Projs.get());	
 
-				that.update(projs);
+					console.log('Badge updated!');
 			})
 			.sub('project-list-cleared', function () {
 				that.clear();

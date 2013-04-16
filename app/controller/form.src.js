@@ -79,7 +79,7 @@ var FormUsersController = o.Class({
 			.sub('button-open-prefs-pressed', function () {
 				that.close();
 			})
-			.sub('request-user-done', function () {
+			.sub('request-done', function () {
 				that._unlock();
 
 				setTimeout(function () {
