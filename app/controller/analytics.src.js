@@ -7,7 +7,7 @@ var AnalyticsController = o.Class({
 		var that = this;
 
 		this.client = new LiteMQ.Client({name: 'AnalyticsController'});
-		this.client.sub('popup-window-load', function () {
+		this.client.sub('extension-installed', function () {
 			that._addAnalyticsTag();
 		});
 	},

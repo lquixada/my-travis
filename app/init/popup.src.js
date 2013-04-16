@@ -1,5 +1,4 @@
-
-client = new LiteMQ.Client({name: 'PopupPage'});
+var client = new LiteMQ.Client({name: 'PopupPage'});
 
 // Must be window load due to the async iframe load
 $(window).on('load', function () {
