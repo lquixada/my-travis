@@ -55,7 +55,7 @@ var BadgeController = o.Class({
 			.sub([
 					'request-travisapi-done',
 					'request-done',
-					'button-yes-clicked'
+					'user-removed'
 				], function () {
 					that.update(Projs.get());	
 

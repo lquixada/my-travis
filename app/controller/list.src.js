@@ -75,7 +75,7 @@ var ListController = o.Class({
 				Prefs.removeUser(user);
 				Projs.removeUser(user);
 
-				that.client.pub('button-yes-clicked');
+				that.client.pub('user-removed');
 
 				li.animate({height: 'toggle', opacity: 'toggle'}, 'normal');
 			})
