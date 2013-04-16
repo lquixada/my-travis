@@ -62,20 +62,20 @@ var NotificationController = o.Class({
 			});
 	},
 
-	_addStatus: function (type) {
-		this.el('span.status').addClass(type);
-	},
-
-	_addTitle: function (msg) {
-		this.el('h1').append(msg);
-	},
-
 	_addList: function (slugs) {
 		var lis = slugs.map(function (slug) {
 				return '<li>'+slug+'</li>';
 			}).join('');
 
 		this.el('ul').html(lis);
+	},
+
+	_addStatus: function (type) {
+		this.el('span.status').addClass(type);
+	},
+
+	_addTitle: function (msg) {
+		this.el('h1').append(msg);
 	},
 	
 	_compare: function (stored, fetched) {

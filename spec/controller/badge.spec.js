@@ -2,97 +2,62 @@
 
 describe("Badge Controller", function() {
 	beforeEach(function() {
-		chrome = {
-			browserAction: jasmine.createSpyObj('browserAction', ['setBadgeText', 'setBadgeBackgroundColor'])
-		};
+		Projs.clear();
+
+		spyOn(BadgeController.prototype, 'clear');
 	});
 	
 	describe("no projects", function() {
 		it("should remove badge", function() {
-			var badgeController = new BadgeController();
+			var Badge = new BadgeController();
 
-			badgeController.update([]);
+			Projs.clear();
 
-			expect(chrome.browserAction.setBadgeText).toHaveBeenCalled();
-			expect(chrome.browserAction.setBadgeText.calls[0].args[0]).toBeSameJsonAs({text: ''});
+			Badge.update();
+
+			expect(BadgeController.prototype.clear).toHaveBeenCalled();
 		});
 	});
 
 	describe("ok projects", function() {
 		it("should have blank text", function() {
-			var badgeController = new BadgeController();
+			var Badge = new BadgeController();
 
-			badgeController.update([
-					{status: 'passed'},
-					{status: 'passed'}
-				]);
+			Projs.set([{status: 'passed'}, {status: 'passed'}]);
 
-			expect(chrome.browserAction.setBadgeText).toHaveBeenCalled();
-			expect(chrome.browserAction.setBadgeText.calls[0].args[0]).toBeSameJsonAs({text: ' '});
-		});
+			spyOn(Badge, 'set');
+			
+			Badge.update();
 
-		it("should be green", function() {
-			var badgeController = new BadgeController();
-
-			badgeController.update([
-					{status: 'passed'},
-					{status: 'passed'}
-			]);
-
-			expect(chrome.browserAction.setBadgeBackgroundColor).toHaveBeenCalled();
-			expect(chrome.browserAction.setBadgeBackgroundColor.calls[0].args[0]).toBeSameJsonAs({color: '#0c0'});
+			expect(Badge.set).toHaveBeenCalledWith(0);
 		});
 	});
 
 	describe("failing projects", function() {
-		
-		it("should have blank text", function() {
-			var badgeController = new BadgeController();
+		it("should show text 1 in red", function() {
+			var Badge = new BadgeController();
 
-			badgeController.update([
-				{status: 'failed'},
-				{status: 'passed'}
-			]);
+			Projs.set([{status: 'failed'}, {status: 'passed'}]);
 
-			expect(chrome.browserAction.setBadgeText).toHaveBeenCalled();
-			expect(chrome.browserAction.setBadgeText.calls[0].args[0]).toBeSameJsonAs({text: '1'});
-		});
+			spyOn(Badge, 'set');
 
-		it("should be red", function() {
-			var badgeController = new BadgeController();
+			Badge.update();
 
-			badgeController.update([
-				{status: 'failed'},
-				{status: 'passed'}
-			]);
-
-			expect(chrome.browserAction.setBadgeBackgroundColor).toHaveBeenCalled();
-			expect(chrome.browserAction.setBadgeBackgroundColor.calls[0].args[0]).toBeSameJsonAs({color: '#f00'});
+			expect(Badge.set).toHaveBeenCalledWith(1);
 		});
 	});
 
 	describe("running projects", function() {
-
 		it("should not modify text", function() {
-			var badgeController = new BadgeController();
+			var Badge = new BadgeController();
 
-			badgeController.update([
-				{status: 'started'},
-				{status: 'passed'}
-			]);
+			Projs.set([{status: 'started'}, {status: 'passed'}]);
 
-			expect(chrome.browserAction.setBadgeText).not.toHaveBeenCalled();
-		});
+			spyOn(Badge, 'set');
 
-		it("should not modify color", function() {
-			var badgeController = new BadgeController();
+			Badge.update();
 
-			badgeController.update([
-				{status: 'started'},
-				{status: 'passed'}
-			]);
-
-			expect(chrome.browserAction.setBadgeBackgroundColor).not.toHaveBeenCalled();
+			expect(Badge.set).not.toHaveBeenCalled();
 		});
 	});
 });
