@@ -4,8 +4,7 @@ describe("Badge Controller", function() {
 	beforeEach(function() {
 		Projs.clear();
 
-		// Mocked wrapper method around chrome.browserAction
-		spyOn(BadgeController.prototype, 'clear');
+		spyOn(BadgeController.prototype, '_clearChromeBadge');
 	});
 	
 	describe("no projects", function() {
@@ -16,7 +15,7 @@ describe("Badge Controller", function() {
 
 			Badge.update();
 
-			expect(BadgeController.prototype.clear).toHaveBeenCalled();
+			expect(BadgeController.prototype._clearChromeBadge).toHaveBeenCalled();
 		});
 	});
 
@@ -26,12 +25,11 @@ describe("Badge Controller", function() {
 
 			Projs.set([{status: 'passed'}, {status: 'passed'}]);
 
-			// Mocked wrapper method around chrome.browserAction
-			spyOn(Badge, 'set');
+			spyOn(Badge, '_setChromeBadge');
 			
 			Badge.update();
 
-			expect(Badge.set).toHaveBeenCalledWith(0);
+			expect(Badge._setChromeBadge).toHaveBeenCalledWith(0);
 		});
 	});
 
@@ -41,12 +39,11 @@ describe("Badge Controller", function() {
 
 			Projs.set([{status: 'failed'}, {status: 'passed'}]);
 
-			// Mocked wrapper method around chrome.browserAction
-			spyOn(Badge, 'set');
+			spyOn(Badge, '_setChromeBadge');
 
 			Badge.update();
 
-			expect(Badge.set).toHaveBeenCalledWith(1);
+			expect(Badge._setChromeBadge).toHaveBeenCalledWith(1);
 		});
 	});
 
@@ -56,12 +53,11 @@ describe("Badge Controller", function() {
 
 			Projs.set([{status: 'started'}, {status: 'passed'}]);
 
-			// Mocked wrapper method around chrome.browserAction
-			spyOn(Badge, 'set');
+			spyOn(Badge, '_setChromeBadge');
 
 			Badge.update();
 
-			expect(Badge.set).not.toHaveBeenCalled();
+			expect(Badge._setChromeBadge).not.toHaveBeenCalled();
 		});
 	});
 });

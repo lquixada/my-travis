@@ -2,10 +2,6 @@
 
 var BadgeController = o.Class({
 	extend: Controller,
-	
-	clear: function () {
-		chrome.browserAction.setBadgeText({text: ''});
-	},
 
 	init: function (opt) {
 		this._super(opt);
@@ -15,10 +11,6 @@ var BadgeController = o.Class({
 		this.update();
 	},
 
-	set: function (failed) {
-		chrome.browserAction.setBadgeText({text: (failed?''+failed:' ')});
-		chrome.browserAction.setBadgeBackgroundColor({color: (failed?'#f00':'#0c0')});
-	},
 
 	update: function () {
 		var
@@ -27,7 +19,7 @@ var BadgeController = o.Class({
 			projs = Projs.get();
 
 		if (projs.length===0) {
-			this.clear();
+			this._clearChromeBadge();
 			return;
 		}
 
@@ -48,7 +40,7 @@ var BadgeController = o.Class({
 			return;
 		}
 
-		this.set(failed);
+		this._setChromeBadge(failed);
 	},
 	
 	// private
@@ -63,8 +55,17 @@ var BadgeController = o.Class({
 				console.log('Badge updated!');
 			})
 			.sub('project-list-cleared', function () {
-				that.clear();
+				that._clearChromeBadge();
 			});
+	},
+
+	_clearChromeBadge: function () {
+		chrome.browserAction.setBadgeText({text: ''});
+	},
+	
+	_setChromeBadge: function (failed) {
+		chrome.browserAction.setBadgeText({text: (failed?''+failed:' ')});
+		chrome.browserAction.setBadgeBackgroundColor({color: (failed?'#f00':'#0c0')});
 	}
 });
 
