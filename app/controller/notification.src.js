@@ -37,8 +37,10 @@ var NotificationController = o.Class({
 		this._addList(slugs);
 	},
 	
-	update: function (projs) {
-		var prefs = Prefs.get();
+	update: function () {
+		var
+			projs = Projs.get(),
+			prefs = Prefs.get();
 
 		if (prefs.notifications) {
 			this._notify(projs);
@@ -51,7 +53,7 @@ var NotificationController = o.Class({
 		var that = this;
 
 		this.client.sub('request-done', function () {
-				that.update(Projs.get());
+				that.update();
 				console.log('Notification updated!');
 			})
 			.sub('notification-document-ready', function (msg) {

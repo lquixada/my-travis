@@ -9,8 +9,10 @@ var BadgeController = o.Class({
 
 	init: function (opt) {
 		this._super(opt);
+
 		this.client = new LiteMQ.Client({name: 'BadgeController'});
 		this._addBusListeners();
+		this.update();
 	},
 
 	set: function (failed) {
@@ -18,8 +20,11 @@ var BadgeController = o.Class({
 		chrome.browserAction.setBadgeBackgroundColor({color: (failed?'#f00':'#0c0')});
 	},
 
-	update: function (projs) {
-		var failed = 0, running = 0;
+	update: function () {
+		var
+			failed = 0,
+			running = 0,
+			projs = Projs.get();
 
 		if (projs.length===0) {
 			this.clear();
@@ -52,14 +57,10 @@ var BadgeController = o.Class({
 		var that = this;
 		
 		this.client
-			.sub([
-					'request-travisapi-done',
-					'request-done',
-					'user-removed'
-				], function () {
-					that.update(Projs.get());	
+			.sub(['request-done',	'user-removed'], function () {
+				that.update();	
 
-					console.log('Badge updated!');
+				console.log('Badge updated!');
 			})
 			.sub('project-list-cleared', function () {
 				that.clear();
