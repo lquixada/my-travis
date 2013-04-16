@@ -1,15 +1,40 @@
 /*globals Controller, webkitNotifications */
 
 var NotificationController = o.Class({
-	extend: Controller,
+	extend: DOMController,
+	dom: 'section#notification',
 
-	getResult: function () {
-		return this.result || {passed: [], failed: []};
+	getResult: function (type) {
+		var results = Prefs.get('results');
+
+		if ($.isEmptyObject(results)) {
+			results = {passed: [], failed: []};
+		}
+
+		if (type) {
+			return results[type];
+		}
+
+		return results;
 	},
 
 	init: function () {
 		this.client = new LiteMQ.Client({name: 'NotificationController'});
 		this._addBusListeners();
+	},
+
+	// Render html on notification.html
+	render: function (type) {
+		var msg = ' has been fixed',
+			slugs = this.getResult(type);
+		
+		if (type === 'failed') {
+			msg = ' has failed';
+		}
+
+		this._addStatus(type);
+		this._addTitle(slugs.length+' build'+(slugs.length>1?'s':'')+msg);
+		this._addList(slugs);
 	},
 	
 	update: function (projs) {
@@ -26,9 +51,29 @@ var NotificationController = o.Class({
 		var that = this;
 
 		this.client.sub('request-done', function () {
-			that.update(Projs.get());
-			console.log('Notification updated!');
-		});
+				that.update(Projs.get());
+				console.log('Notification updated!');
+			})
+			.sub('notification-document-ready', function (msg) {
+				var type = msg.body;
+				that.render(type);
+			});
+	},
+
+	_addStatus: function (type) {
+		this.el('span.status').addClass(type);
+	},
+
+	_addTitle: function (msg) {
+		this.el('h1').append(msg);
+	},
+
+	_addList: function (slugs) {
+		var lis = slugs.map(function (slug) {
+				return '<li>'+slug+'</li>';
+			}).join('');
+
+		this.el('ul').html(lis);
 	},
 	
 	_compare: function (stored, fetched) {
@@ -82,15 +127,15 @@ var NotificationController = o.Class({
 	},
 
 	_hasFailed: function () {
-		return this.getResult().failed.length > 0;
+		return this.getResult('failed').length > 0;
 	},
 
 	_hasPassed: function () {
-		return this.getResult().passed.length > 0;
+		return this.getResult('passed').length > 0;
 	},
 
 	_notify: function (projs) {
-		var result,
+		var results,
 			stored = this._getStored(),
 			fetched = this._format(projs);
 
@@ -98,7 +143,11 @@ var NotificationController = o.Class({
 			this._store(stored = fetched);
 		}
 
-		this.result = this._compare(stored, fetched);
+		results = this._compare(stored, fetched);
+		
+		// Update stored
+		this._storeResults(results);
+		this._store(fetched);
 
 		if (this._hasFailed()) {
 			this._open('failed');
@@ -107,9 +156,6 @@ var NotificationController = o.Class({
 		if (this._hasPassed()) {
 			this._open('passed');
 		}
-		
-		// Update stored
-		this._store(fetched);
 	},
 
 	_open: function (type) {
@@ -137,6 +183,10 @@ var NotificationController = o.Class({
 		}
 
 		Prefs.set('statuses', tmp);
+	},
+
+	_storeResults: function (results) {
+		Prefs.set('results', results);
 	}
 });
 
