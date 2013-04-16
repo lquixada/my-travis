@@ -73,6 +73,7 @@ var UpdaterService = o.Class({
 			})
 			.sub(['form-prefs-submitted', 'form-users-submitted'], function () {
 				that.restart();
+				this.pub('form-submit-done');
 			});
 	}
 });
