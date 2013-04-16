@@ -167,7 +167,7 @@ var FormPrefsController = o.Class({
 		this.el().on('submit', function (evt) {
 			evt.preventDefault();
 
-			Prefs.set('interval', this.interval.value || 60);
+			Prefs.set('interval', this.interval.value || 1);
 			Prefs.set('notifications', this.notifications.checked || false);
 
 			that._setStatus('saved');

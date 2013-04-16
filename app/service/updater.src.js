@@ -47,11 +47,11 @@ var UpdaterService = o.Class({
 	start: function () {
 		var
 			users = Prefs.getUsers(),
-			interval = parseInt(Prefs.get('interval'), 10) || 60;
+			interval = parseInt(Prefs.get('interval'), 10) || 1;
 
 		if (users.length) {
-			console.log('Updater started. Polling interval: '+interval+'s');
-			chrome.alarms.create('travisapi', {periodInMinutes:1/2});
+			console.log('Updater started. Polling interval: '+interval+'min');
+			chrome.alarms.create('travisapi', {periodInMinutes:interval});
 		}
 	},
 
