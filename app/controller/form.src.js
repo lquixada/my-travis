@@ -25,12 +25,6 @@ var FormController = o.Class({
 
 	// private
 
-	_blockSubmit: function ( enable ) {
-		var type = (enable?'button':'submit');
-
-		this.el('button').attr('type', type);
-	},
-	
 	_disableFieldsTabIndex: function () {
 		this.el(':input').attr('tabindex', '-1');	
 	},
@@ -52,6 +46,12 @@ var FormController = o.Class({
 var FormUsersController = o.Class({
 	extend: FormController,
 	dom: 'section#form-user',
+
+	close: function () {
+		this._enableInputs();
+		this._clear();
+		this._super();
+	},
 
 	init: function (opt) {
 		this._super(opt);
@@ -81,10 +81,10 @@ var FormUsersController = o.Class({
 				}, 1000);	
 			})
 			.sub('checkbox-manage-checked', function () {
-				that.el(':input').attr('disabled', 'true');
+				that._disableInputs();
 			})
 			.sub('checkbox-manage-unchecked', function () {
-				that.el(':input').removeAttr('disabled');
+				that._enableInputs();
 			});
 	},
 	
@@ -97,14 +97,12 @@ var FormUsersController = o.Class({
 			evt.preventDefault();
 
 			users = this.user.value.split(',');
-
 			users.reverse().forEach(function (user) {
 				Prefs.addUser(user);
 			});
 
-			that.client.pub('form-users-submitted');
-
 			that._lock();
+			that.client.pub('form-users-submitted');
 		});
 	},
 
@@ -112,14 +110,20 @@ var FormUsersController = o.Class({
 		this.el(':input[name=user]').val('');
 	},
 
+	_disableInputs: function () {
+		this.el(':input').attr('disabled', 'true');	
+	},
+
+	_enableInputs: function () {
+		this.el(':input').removeAttr('disabled');	
+	},
+
 	_lock: function () {
-		this._blockSubmit(true);
+		this._disableInputs();
 		this._setStatus('<img src="../imgs/loading.gif">');
 	},
 
 	_unlock: function () {
-		this._clear();
-		this._blockSubmit(false);
 		this._setStatus('saved');
 	}
 });
