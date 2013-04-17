@@ -97,10 +97,9 @@ section#list td.message {
 
 section#list td:first-child {
   padding-left:15px;
-  padding-right:0;
 }
 
-section#list td a {
+section#list tr a {
   display:inline-block;
 }
 
@@ -127,6 +126,22 @@ section#list tr.started a:before {
 
 section#list thead tr {
 	border-bottom:1px solid #999;
+}
+
+section#list ul {
+	max-height:485px;
+	overflow-x:hidden;
+}
+
+section#list ul li {
+	overflow:hidden;
+}
+
+section#list ul li.ui-state-highlight {
+	margin:3px;
+	height:20px;
+	border:3px dashed #ccc;
+	border-radius:3px;
 }
 
 section#list ul th {
@@ -158,26 +173,6 @@ section#list ul tr.failed {
 
 section#list ul tr.failed:hover {
   background-color:#fbb;
-}
-
-section#list ul {
-	max-height:485px;
-	overflow-x:hidden;
-}
-
-section#list ul li {
-	overflow:hidden;
-}
-
-section#list ul li.ui-state-highlight {
-	margin:3px;
-	height:20px;
-	border:3px dashed #ccc;
-	border-radius:3px;
-}
-
-section#list .col-name {
-	width:auto;
 }
 
 section#list .col-build {
