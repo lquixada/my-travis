@@ -4,19 +4,19 @@ var FormController = o.Class({
 	extend: DOMController,
 
 	close: function () {
-		this.el().removeClass('opened');
+		this.el('form').removeClass('opened');
 		this._setStatus('');
 		this._disableFieldsTabIndex();
 	},
 
 	open: function () {
-		this.el().addClass('opened');
+		this.el('form').addClass('opened');
 		this._focus();
 		this._enableFieldsTabIndex();
 	},
 
 	toggle: function () {
-		if (this.el().is('.opened')) {
+		if (this.el('form').is('.opened')) {
 			this.close();
 		} else {
 			this.open();
@@ -28,30 +28,30 @@ var FormController = o.Class({
 	_blockSubmit: function ( enable ) {
 		var type = (enable?'button':'submit');
 
-		this.el().find('button').attr('type', type);
+		this.el('button').attr('type', type);
 	},
 	
 	_disableFieldsTabIndex: function () {
-		this.el().find(':input').attr('tabindex', '-1');	
+		this.el(':input').attr('tabindex', '-1');	
 	},
 
 	_enableFieldsTabIndex: function () {
-		this.el().find(':input').removeAttr('tabindex');
+		this.el(':input').removeAttr('tabindex');
 	},
 
 	_focus: function () {
-		this.el().find(':input:first').get(0).focus(); 
+		this.el(':input:first').get(0).focus(); 
 	},
 
 	_setStatus: function (msg) {
-		this.el().find('span.status').html(msg);
+		this.el('span.status').html(msg);
 	}
 });
 
 
 var FormUsersController = o.Class({
 	extend: FormController,
-	dom: 'section#form-user form',
+	dom: 'section#form-user',
 
 	init: function (opt) {
 		this._super(opt);
@@ -91,7 +91,7 @@ var FormUsersController = o.Class({
 	_addListeners: function () {
 		var that = this;
 
-		this.el().on('submit', function (evt) {
+		this.el('form').on('submit', function (evt) {
 			var users;
 
 			evt.preventDefault();
@@ -109,7 +109,7 @@ var FormUsersController = o.Class({
 	},
 
 	_clear: function () {
-		this.el().find(':input[name=user]').val('');
+		this.el(':input[name=user]').val('');
 	},
 
 	_lock: function () {
@@ -129,7 +129,7 @@ new FormUsersController();
 
 var FormPrefsController = o.Class({
 	extend: FormController,
-	dom: 'section#form-prefs form',
+	dom: 'section#form-prefs',
 
 	init: function (opt) {
 		this._super(opt);
@@ -158,7 +158,7 @@ var FormPrefsController = o.Class({
 	_addListeners: function () {
 		var that = this;
 
-		this.el().on('submit', function (evt) {
+		this.el('form').on('submit', function (evt) {
 			evt.preventDefault();
 
 			Prefs.set('interval', this.interval.value || 1);
@@ -177,8 +177,8 @@ var FormPrefsController = o.Class({
 	_restoreData: function () {
 		var prefs = Prefs.get();
 		
-		this.el().find(':input[name=interval]').val(prefs.interval || '');
-		this.el().find(':input[name=notifications]').attr('checked', prefs.notifications || false);
+		this.el(':input[name=interval]').val(prefs.interval || '');
+		this.el(':input[name=notifications]').attr('checked', prefs.notifications || false);
 	}
 });
 
