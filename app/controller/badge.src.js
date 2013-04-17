@@ -13,7 +13,7 @@ var BadgeController = o.Class({
 
 
 	update: function () {
-		var
+		var count, color,
 			failed = 0,
 			running = 0,
 			projs = Projs.get();
@@ -40,7 +40,10 @@ var BadgeController = o.Class({
 			return;
 		}
 
-		this._setChromeBadge(failed);
+		count = (failed?''+failed:' ');
+		color = (failed?'red':'green');
+
+		this._setChromeBadge(count, color);
 	},
 	
 	// private
@@ -60,12 +63,16 @@ var BadgeController = o.Class({
 	},
 
 	_clearChromeBadge: function () {
-		chrome.browserAction.setBadgeText({text: ''});
+		this._setChromeBadge('');
 	},
 	
-	_setChromeBadge: function (failed) {
-		chrome.browserAction.setBadgeText({text: (failed?''+failed:' ')});
-		chrome.browserAction.setBadgeBackgroundColor({color: (failed?'#f00':'#0c0')});
+	_setChromeBadge: function (count, color) {
+		try {
+			chrome.browserAction.setBadgeText({text: count});
+			chrome.browserAction.setBadgeBackgroundColor({color: (color==='red'?'#f00':'#0c0')});
+		} catch (err) {
+			// fail silently. propably the code is running in a test environment
+		}
 	}
 });
 

@@ -4,7 +4,7 @@ describe("Badge Controller", function() {
 	beforeEach(function() {
 		Projs.clear();
 
-		spyOn(BadgeController.prototype, '_clearChromeBadge');
+		spyOn(BadgeController.prototype, '_setChromeBadge');
 	});
 	
 	describe("no projects", function() {
@@ -15,21 +15,19 @@ describe("Badge Controller", function() {
 
 			Badge.update();
 
-			expect(BadgeController.prototype._clearChromeBadge).toHaveBeenCalled();
+			expect(Badge._setChromeBadge).toHaveBeenCalledWith('');
 		});
 	});
 
 	describe("ok projects", function() {
-		it("should have blank text", function() {
+		it("should have blank text with green background", function() {
 			var Badge = new BadgeController();
 
 			Projs.set([{status: 'passed'}, {status: 'passed'}]);
 
-			spyOn(Badge, '_setChromeBadge');
-			
 			Badge.update();
 
-			expect(Badge._setChromeBadge).toHaveBeenCalledWith(0);
+			expect(Badge._setChromeBadge).toHaveBeenCalledWith(' ', 'green');
 		});
 	});
 
@@ -39,11 +37,9 @@ describe("Badge Controller", function() {
 
 			Projs.set([{status: 'failed'}, {status: 'passed'}]);
 
-			spyOn(Badge, '_setChromeBadge');
-
 			Badge.update();
 
-			expect(Badge._setChromeBadge).toHaveBeenCalledWith(1);
+			expect(Badge._setChromeBadge).toHaveBeenCalledWith('1', 'red');
 		});
 	});
 
@@ -53,7 +49,7 @@ describe("Badge Controller", function() {
 
 			Projs.set([{status: 'started'}, {status: 'passed'}]);
 
-			spyOn(Badge, '_setChromeBadge');
+			Badge._setChromeBadge.reset();
 
 			Badge.update();
 
