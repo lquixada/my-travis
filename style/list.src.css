@@ -100,49 +100,64 @@ section#list td:first-child {
   padding-right:0;
 }
 
-section#list tbody td a {
+section#list td a {
   display:inline-block;
 }
 
-section#list tbody td img.icon-status {
-  margin-right:5px;
-	width:10px;
-	height:10px;
+section#list tr a:before {
+	margin-right: 5px;
+	vertical-align:center;
 }
 
-section#list tbody th {
+section#list tr.passed a:before {
+  content: url(/imgs/icon-passed.png);
+}
+
+section#list tr.failed a:before {
+  content: url(/imgs/icon-failed.png);
+}
+
+section#list tr.errored a:before {
+  content: url(/imgs/icon-errored.png);
+}
+
+section#list tr.started a:before {
+  content: url(/imgs/icon-started.png);
+}
+
+section#list thead tr {
+	border-bottom:1px solid #999;
+}
+
+section#list ul th {
 	padding:5px 15px;
 	color:#fff;
 	background-color:#666;
 	cursor:default;
 }
 
-section#list tbody tr {
+section#list ul tr {
   cursor:pointer;
 }
 
-section#list tbody tr:nth-child(even) {
+section#list ul tr:nth-child(even) {
   background-color:#fff;
 }
 
-section#list tbody tr:nth-child(odd) {
+section#list ul tr:nth-child(odd) {
   background-color:#f1f1f1;
 }
 
-section#list tbody tr:hover {
+section#list ul tr:hover {
 	background-color:#fdf2d6;
 }
 
-section#list tbody tr.failed {
+section#list ul tr.failed {
   background-color:#fcc;
 }
 
-section#list tbody tr.failed:hover {
+section#list ul tr.failed:hover {
   background-color:#fbb;
-}
-
-section#list thead tr {
-	border-bottom:1px solid #999;
 }
 
 section#list ul {
@@ -159,10 +174,6 @@ section#list ul li.ui-state-highlight {
 	height:20px;
 	border:3px dashed #ccc;
 	border-radius:3px;
-}
-
-section#list .col-status {
-	width:30px;
 }
 
 section#list .col-name {

@@ -10,7 +10,7 @@
 	<li user="{{user}}">
 		<table>
 			<tr>
-				<th colspan="6">
+				<th colspan="5">
 					{{user}}
 					<img class="user-grip" src="/imgs/user-grip.png">
 					<span class="user-removal">
@@ -36,7 +36,7 @@
 	<li>
 		<table>
 			<tr>
-				<td class="message" colspan="6">
+				<td class="message" colspan="5">
 					<div id="no-projects">No users has been added until now.</div>
 				</td>
 			</tr>
@@ -53,9 +53,8 @@
 </script>
 
 <script id="projects" type="text/x-handlebars-template">
-	<tr href="{{{urlTo user name}}}" {{{classOf status}}}>
-		<td class="col-status">{{{statusImg status}}}</td>
-		<td class="col-name">{{name}}</td>
+	<tr href="{{{urlTo user name}}}" class="{{status}}">
+		<td class="col-name"><a href="javascript:;" tabindex>{{name}}</a></td>
 		<td class="col-build">#{{build}}</td>
 		<td class="col-duration">{{{formatSecs duration}}}</td>
 		<td class="col-finishedAt">{{{moment finishedAt}}}</td>
@@ -64,7 +63,7 @@
 
 <script id="no-projects" type="text/x-handlebars-template">
 	<tr>
-		<td class="message" colspan="6"><em>no projects found.</em></td>
+		<td class="message" colspan="5"><em>no projects found.</em></td>
 	</tr>
 </script>
 

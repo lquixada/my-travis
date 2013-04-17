@@ -19,16 +19,8 @@ Handlebars.registerHelper('include', function(id, context) {
 	return template(context);
 });
 
-Handlebars.registerHelper('classOf', function(status) {
-	return (status==='failed'?'class="failed"':'');
-});
-
 Handlebars.registerHelper('urlTo', function(user, name) {
 	return 'https://travis-ci.org/'+user+'/'+name;
-});
-
-Handlebars.registerHelper('statusImg', function(status) {
-	return '<img class="icon-status" src="/imgs/icon-'+status+'.png" title="'+status+'">';
 });
 
 Handlebars.registerHelper('formatSecs', function(duration) {
