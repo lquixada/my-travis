@@ -53,12 +53,6 @@ var FormUsersController = o.Class({
 	extend: FormController,
 	dom: 'section#form-user form',
 
-	close: function () {
-		$('header button#open-users').focus();
-
-		this._super();
-	},
-
 	init: function (opt) {
 		this._super(opt);
 		this.client = new LiteMQ.Client({name:'FormUsersController'});

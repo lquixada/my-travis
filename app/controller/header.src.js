@@ -16,8 +16,14 @@ var HeaderController = o.Class({
 		var that = this;
 		
 		this.client.sub('popup-window-load', function () {
-			that._addListeners();
-		});
+				that._addListeners();
+			})
+			.sub('form-prefs-submitted', function () {
+				that.el('button#open-prefs').focus();
+			})
+			.sub('form-users-submitted', function () {
+				that.el('button#open-users').focus();
+			});
 	},
 	
 	_addListeners: function () {
