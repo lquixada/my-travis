@@ -54,7 +54,7 @@
 
 <script id="projects" type="text/x-handlebars-template">
 	<tr href="{{{urlTo user name}}}" class="{{status}}">
-		<td class="col-name"><a href="javascript:;" tabindex>{{name}}</a></td>
+		<td class="col-name"><span tabindex="0">{{name}}</span></td>
 		<td class="col-build">#{{build}}</td>
 		<td class="col-duration">{{{formatSecs duration}}}</td>
 		<td class="col-finishedAt">{{{moment finishedAt}}}</td>

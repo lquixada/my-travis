@@ -65,6 +65,11 @@ var ListController = o.Class({
 					window.open(url);
 				}
 			})
+			.on('keydown', 'tr', function (evt) {
+				if (evt.which === 13) {
+					$(this).click();
+				}
+			})
 			.on('click', 'button.remove', function () {
 				that._showDialog(this);
 			})

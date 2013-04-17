@@ -99,28 +99,24 @@ section#list td:first-child {
   padding-left:15px;
 }
 
-section#list tr a {
-  display:inline-block;
-}
-
-section#list tr a:before {
+section#list tr span:before {
 	margin-right: 5px;
 	vertical-align:center;
 }
 
-section#list tr.passed a:before {
+section#list tr.passed span:before {
   content: url(/imgs/icon-passed.png);
 }
 
-section#list tr.failed a:before {
+section#list tr.failed span:before {
   content: url(/imgs/icon-failed.png);
 }
 
-section#list tr.errored a:before {
+section#list tr.errored span:before {
   content: url(/imgs/icon-errored.png);
 }
 
-section#list tr.started a:before {
+section#list tr.started span:before {
   content: url(/imgs/icon-started.png);
 }
 
