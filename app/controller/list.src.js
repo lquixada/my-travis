@@ -161,7 +161,7 @@ var ListController = o.Class({
 	},
 
 	_lock: function () {
-		this.el().find('div#overlay').show();
+		this.el('div#overlay').show();
 	},
 
 	_renderTemplate: function (html) {
@@ -189,7 +189,7 @@ var ListController = o.Class({
 	},
 
 	_unlock: function () {
-		this.el().find('div#overlay').hide();
+		this.el('div#overlay').hide();
 	}
 });
 
