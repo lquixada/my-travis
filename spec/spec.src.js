@@ -1,4 +1,6 @@
 beforeEach(function() {
+	LiteMQ.DefaultBus.clear();
+
   this.addMatchers({
     toBeArray: function () {
       return $.isArray(this.actual);
