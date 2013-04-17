@@ -77,6 +77,10 @@ var NotificationController = o.Class({
 	_addTitle: function (msg) {
 		this.el('h1').append(msg);
 	},
+
+	_closeChromeNotification: function (notification) {
+		notification.close();
+	},
 	
 	_compare: function (stored, fetched) {
 		var storedStatus, fetchedStatus;
@@ -101,6 +105,11 @@ var NotificationController = o.Class({
 		}
 
 		return result;
+	},
+
+	_createChromeNotification: function (type) {
+		var file = '../html/notification.html?'+type;
+		return webkitNotifications.createHTMLNotification(file);	
 	},
 
 	// Creates a hash-table for tracking projects status
@@ -152,22 +161,35 @@ var NotificationController = o.Class({
 		this._store(fetched);
 
 		if (this._hasFailed()) {
-			this._open('failed');
+			this._showChromeNotification('failed');
 		}
 
 		if (this._hasPassed()) {
-			this._open('passed');
+			this._showChromeNotification('passed');
 		}
 	},
 
-	_open: function (type) {
-		var file = '../html/notification.html?'+type;
-		var notification = webkitNotifications.createHTMLNotification(file);
+	_openChromeNotification: function (type) {
+		var
+			that = this,
+			notification = this._createChromeNotification(type);
 
 		notification.show();
 
 		setTimeout(function () {
-			notification.close();
+			that._closeChromeNotification(notification);
+		}, 3000);
+	},
+
+	_showChromeNotification: function (type) {
+		var
+			that = this,
+			notification = this._createChromeNotification(type);
+		
+		this._openChromeNotification(notification);
+
+		setTimeout(function () {
+			that._closeChromeNotification(notification);
 		}, 3000);
 	},
 

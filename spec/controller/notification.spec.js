@@ -6,8 +6,7 @@ describe("Notification", function() {
 	beforeEach(function() {
 		Notification = new NotificationController();
 
-		// Mocked wrapper method around webkitNotifications
-		spyOn(Notification, '_open');
+		spyOn(Notification, '_showChromeNotification');
 	});
 
 	describe("setting", function() {
@@ -21,7 +20,7 @@ describe("Notification", function() {
 
 			Notification.update();
 
-			expect(Notification._open).toHaveBeenCalled();
+			expect(Notification._showChromeNotification).toHaveBeenCalled();
 		});
 
 		it("should not notify when disabled", function() {
@@ -34,7 +33,7 @@ describe("Notification", function() {
 
 			Notification.update();
 
-			expect(Notification._open).not.toHaveBeenCalled();
+			expect(Notification._showChromeNotification).not.toHaveBeenCalled();
 		});
 	});
 
@@ -50,7 +49,7 @@ describe("Notification", function() {
 
 				Notification.update();
 
-				expect(Notification._open).not.toHaveBeenCalled();
+				expect(Notification._showChromeNotification).not.toHaveBeenCalled();
 			});
 
 			it("if projects status do not alter", function() {
@@ -62,7 +61,7 @@ describe("Notification", function() {
 
 				Notification.update();
 
-				expect(Notification._open).not.toHaveBeenCalled();
+				expect(Notification._showChromeNotification).not.toHaveBeenCalled();
 			});
 
 			it("even if project status goes from failed to errored", function() {
@@ -74,7 +73,7 @@ describe("Notification", function() {
 
 				Notification.update();
 
-				expect(Notification._open).not.toHaveBeenCalled();
+				expect(Notification._showChromeNotification).not.toHaveBeenCalled();
 			});
 
 			it("or vice-versa", function() {
@@ -86,7 +85,7 @@ describe("Notification", function() {
 
 				Notification.update();
 
-				expect(Notification._open).not.toHaveBeenCalled();
+				expect(Notification._showChromeNotification).not.toHaveBeenCalled();
 			});
 		});
 
@@ -100,7 +99,7 @@ describe("Notification", function() {
 
 				Notification.update();
 
-				expect(Notification._open).toHaveBeenCalledWith('failed');
+				expect(Notification._showChromeNotification).toHaveBeenCalledWith('failed');
 			});
 
 			it("if a project goes from passed to errored", function() {
@@ -112,7 +111,7 @@ describe("Notification", function() {
 
 				Notification.update();
 
-				expect(Notification._open).toHaveBeenCalledWith('failed');
+				expect(Notification._showChromeNotification).toHaveBeenCalledWith('failed');
 			});
 
 			it("if project was passing, runned and has failed", function() {
@@ -128,7 +127,7 @@ describe("Notification", function() {
 
 				Notification.update();
 
-				expect(Notification._open).toHaveBeenCalledWith('failed');
+				expect(Notification._showChromeNotification).toHaveBeenCalledWith('failed');
 			});
 		});
 		
@@ -142,7 +141,7 @@ describe("Notification", function() {
 
 				Notification.update();
 
-				expect(Notification._open).toHaveBeenCalledWith('passed');
+				expect(Notification._showChromeNotification).toHaveBeenCalledWith('passed');
 			});
 			
 			it("if a project goes from errored to passed", function() {
@@ -154,7 +153,7 @@ describe("Notification", function() {
 
 				Notification.update();
 
-				expect(Notification._open).toHaveBeenCalledWith('passed');
+				expect(Notification._showChromeNotification).toHaveBeenCalledWith('passed');
 			});
 
 			it("if project was failing, runned and has passed", function() {
@@ -170,7 +169,7 @@ describe("Notification", function() {
 
 				Notification.update();
 
-				expect(Notification._open).toHaveBeenCalledWith('passed');
+				expect(Notification._showChromeNotification).toHaveBeenCalledWith('passed');
 			});
 		});
 	});
