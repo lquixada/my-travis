@@ -29,7 +29,7 @@ module.exports = function (grunt) {
 					vendor: [
 						'vendor/o.min.js',
 						'vendor/litemq.min.js',
-						'vendor/jquery-1.9.1.min.js',
+						'vendor/jquery-2.0.0.min.js',
 						'vendor/handlebars.js'
 					]
 				}
