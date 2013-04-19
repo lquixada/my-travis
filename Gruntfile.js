@@ -9,7 +9,7 @@ module.exports = function (grunt) {
 					archive: '<%=projectName%>.zip'
 				},
 				files: [{
-					src: ['**', '!*.zip', '!node_modules/**', '!screenshots/**'],
+					src: ['**', '!*.zip', '!node_modules/**', '!screenshots/**', '!spec/**'],
 					dest: '.'
 				}]
 			}
@@ -25,6 +25,7 @@ module.exports = function (grunt) {
 					'app/service/*.src.js'
 				],
 				options: {
+					styles: '',
 					helpers: 'spec/spec.src.js',
 					vendor: [
 						'vendor/o.min.js',
