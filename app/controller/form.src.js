@@ -165,7 +165,7 @@ var FormPrefsController = o.Class({
 		this.el('form').on('submit', function (evt) {
 			evt.preventDefault();
 
-			Prefs.set('interval', this.interval.value || 1);
+			Prefs.set('intervalMin', this.interval.value || 1);
 			Prefs.set('notifications', this.notifications.checked || false);
 
 			that._setStatus('saved');
@@ -181,7 +181,7 @@ var FormPrefsController = o.Class({
 	_restoreData: function () {
 		var prefs = Prefs.get();
 		
-		this.el(':input[name=interval]').val(prefs.interval || '');
+		this.el(':input[name=interval]').val(prefs.intervalMin || 1);
 		this.el(':input[name=notifications]').attr('checked', prefs.notifications || false);
 	}
 });

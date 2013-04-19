@@ -10,4 +10,6 @@ client.sub('request-done', function () {
 
 chrome.runtime.onInstalled.addListener(function () {
 	client.pub('extension-installed');
+
+	convertInterval();
 });

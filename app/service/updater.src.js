@@ -48,7 +48,7 @@ var UpdaterService = o.Class({
 	start: function () {
 		var
 			users = Prefs.getUsers(),
-			interval = parseFloat(Prefs.get('interval'), 10) || 1;
+			interval = parseInt(Prefs.get('intervalMin'), 10) || 1;
 
 		if (users.length) {
 			this._createAlarm(interval);

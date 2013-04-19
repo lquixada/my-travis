@@ -92,7 +92,7 @@ describe("Form Prefs Controller", function () {
 				.find(':input[name=notifications]').attr('checked', true).end()
 				.submit();
 
-			expect(Prefs.get('interval')).toBe('50');
+			expect(Prefs.get('intervalMin')).toBe('50');
 			expect(Prefs.get('notifications')).toBe(true);
 		});
 
