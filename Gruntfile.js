@@ -6,10 +6,10 @@ module.exports = function (grunt) {
 		compress: {
 			main: {
 				options: {
-					archive: '<%=projectName%>.zip'
+					archive: 'build/<%=projectName%>.zip'
 				},
 				files: [{
-					src: ['**', '!*.zip', '!node_modules/**', '!screenshots/**', '!spec/**'],
+					src: ['**', '!build/**', '!node_modules/**', '!screenshots/**', '!spec/**'],
 					dest: '.'
 				}]
 			}
@@ -40,4 +40,6 @@ module.exports = function (grunt) {
 
 	grunt.loadNpmTasks('grunt-o-bundle');
 	grunt.loadNpmTasks('grunt-contrib-compress');
+
+	grunt.registerTask('o:build', ['compress']);
 };
