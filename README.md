@@ -1,14 +1,13 @@
-# MyTravis
-[![Build Status](https://travis-ci.org/lquixada/my-travis.png?branch=master)](https://travis-ci.org/lquixada/my-travis)
+# MyTravis [![Build Status](https://travis-ci.org/lquixada/my-travis.png?branch=master)](https://travis-ci.org/lquixada/my-travis)
 
 Monitor your projects builds from TravisCI within Chrome. 
 
 
 ## Installation
 
-Go to the [Chrome Web Store](https://chrome.google.com/webstore/detail/my-travis/ddlafmkcenhiahiikbgjemcbdengmjbg)
-using the Google Chrome web browser. Click on the "add to the chrome" button.
-If you see a red icon with a T in the middle, you've made it.
+1. Go to the [Chrome Web Store](https://chrome.google.com/webstore/detail/my-travis/ddlafmkcenhiahiikbgjemcbdengmjbg) using the Google Chrome web browser.
+2. Click on the "add to the chrome" button.
+3. If you see a red icon with a T in the middle, you've made it.
 
 
 ## Usage
@@ -42,7 +41,6 @@ $ npm test
 ```
 
 
-## Credits
+## Credits & License
 
-This project is developed and maintained by Leonardo Quixada.
-Licensed under the MIT License.
+Copyright (c) 2013 Leonardo Quixada ([@lquixada](http://twitter.com/lquixada)). This software is licensed under the MIT License.
