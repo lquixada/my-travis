@@ -5,7 +5,7 @@ $(window).on('load', function () {
 	client.pub('popup-window-load');
 
 	chrome.runtime.onMessage.addListener(function (msg) {
-		console.log('Runtime message delivered!');
+		console.log(new Date());
 		client.pub('request-done');
 		console.log('---');
 	});
