@@ -31,7 +31,7 @@ module.exports = function (grunt) {
 						'vendor/o.min.js',
 						'vendor/litemq.min.js',
 						'vendor/jquery-2.0.0.min.js',
-						'vendor/handlebars.js'
+						'vendor/handlebars.min.js'
 					]
 				}
 			}
