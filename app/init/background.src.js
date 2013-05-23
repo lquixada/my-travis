@@ -11,3 +11,9 @@ client.sub('request-done', function () {
 chrome.runtime.onInstalled.addListener(function () {
 	client.pub('extension-installed');
 });
+
+$(document).on('ready', function () {
+	client.pub('background-document-ready');
+});
+
+
