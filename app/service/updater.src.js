@@ -31,6 +31,8 @@ var UpdaterService = o.Class({
 	init: function () {
 		this.client = new LiteMQ.Client();
 		this._addBusListeners();
+		this._addAlarmListeners();
+		this.restart();
 	},
 
 	restart: function () {
@@ -64,11 +66,7 @@ var UpdaterService = o.Class({
 	_addBusListeners: function () {
 		var that = this;
 		
-		this.client.sub('extension-installed', function () {
-				that._addAlarmListeners();
-				that.restart();
-			})
-			.sub('update-requested', function () {
+		this.client.sub('update-requested', function () {
 				console.log(new Date());
 				console.log('Requesting...');
 
