@@ -25,7 +25,7 @@ var UpdaterService = o.Class({
 			if (callback) {
 				callback(projs);
 			}
-		});	
+		});
 	},
 
 	init: function () {

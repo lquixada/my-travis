@@ -27,23 +27,3 @@ function formatSecs(secs) {
 
 	return stamp;
 }
-
-function convertInterval() {
-	var min, secs,
-		interval = Prefs.get('interval');
-
-	if (!interval) {
-		return;
-	}
-
-	secs = (interval? parseInt(interval, 10): 1);
-
-	if (secs <= 60) {
-		Prefs.set('intervalMin', 1);
-	} else {
-		min = Math.round(secs/60);
-		Prefs.set('intervalMin', min);
-	}
-	
-	Prefs.set('interval', undefined);
-}
