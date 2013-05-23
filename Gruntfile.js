@@ -1,12 +1,10 @@
 module.exports = function (grunt) {
 	
   grunt.initConfig({
-		projectName: 'mytravis',
-
 		compress: {
 			main: {
 				options: {
-					archive: 'build/<%=projectName%>.zip'
+					archive: 'build/<%=pkg.name%>.zip'
 				},
 				files: [{
 					src: ['**', '!build/**', '!node_modules/**', '!screenshots/**', '!spec/**'],
