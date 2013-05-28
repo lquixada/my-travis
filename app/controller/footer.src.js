@@ -1,42 +1,36 @@
-/*globals DOMController */
 
-var FooterController = o.Class({
-	extend: DOMController,
-	dom: 'footer#main-footer',
-
-	init: function (opt) {
-		this._super(opt);
+var FooterView = Backbone.View.extend({
+	el: 'footer#main-footer',
+	
+	events: {
+		'click a#author': '_publishAuthorClick',
+		'click :checkbox': '_toggleEditMode'
+	},
+	
+	initialize: function (opt) {
 		this.client = new LiteMQ.Client({name: 'FooterController'});
-		this._addBusListeners();
 	},
 
 	// private
-	
-	_addBusListeners: function () {
-		var that = this;
-		
-		this.client.sub('popup-window-load', function () {
-			that._addListeners();
-		});
+
+	_publishAuthorClick: function (evt) {
+		evt.preventDefault();
+		this.client.pub('link-author-clicked');
 	},
 
-	_addListeners: function () {
-		var that = this;
+	_toggleEditMode: function (evt) {
+		var checkbox = $(evt.currentTarget);
 
-		this.el('a#author').on('click', function (evt) {
-				evt.preventDefault();
-				that.client.pub('link-author-clicked');
-			})
-			.end()
-			.find(':checkbox').on('click', function () {
-				if ($(this).is(':checked')) {
-					that.client.pub('checkbox-manage-checked');	
-				} else {
-					that.client.pub('checkbox-manage-unchecked');	
-				}
-			});
+		if (checkbox.is(':checked')) {
+			this.client.pub('checkbox-manage-checked');	
+		} else {
+			this.client.pub('checkbox-manage-unchecked');	
+		}
 	}
 });
 
-new FooterController();
+$(document).ready(function () {
+	new FooterView();
+});
+
 
