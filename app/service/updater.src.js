@@ -8,7 +8,7 @@ var UpdaterService = o.Class({
 			users = Prefs.getUsers();
 
 		TravisAPI.get(users, function (projs) {
-			projs = Projs.convertAll(projs);
+			projs = ProjectModel.convertAll(projs);
 
 			users.forEach(function (user) {
 				if (!projs[user]) {
@@ -16,7 +16,9 @@ var UpdaterService = o.Class({
 				}
 			});
 
-			Projs.set(projs);
+			Projects.destroy();
+			Projects.reset(projs);
+			Projects.save();
 
 			console.log('Request done!');
 

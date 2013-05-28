@@ -38,12 +38,10 @@ var NotificationController = o.Class({
 	},
 	
 	update: function () {
-		var
-			projs = Projs.get(),
-			prefs = Prefs.get();
+		var	prefs = Prefs.get();
 
 		if (prefs.notifications) {
-			this._notify(projs);
+			this._notify(Projects);
 		}
 	},
   
@@ -116,8 +114,8 @@ var NotificationController = o.Class({
 	_format: function (projs) {
 		var formatted = {};
 
-		projs.forEach(function (proj) {
-			var slug = proj.user+'/'+proj.name;
+		projs.each(function (proj) {
+			var slug = proj.get('user')+'/'+proj.get('name');
 
 			formatted[slug] = this._getStatus(proj);
 		}, this);
@@ -126,11 +124,11 @@ var NotificationController = o.Class({
 	},
 
 	_getStatus: function (proj) {
-		if (proj.status==='errored') {
+		if (proj.get('status')==='errored') {
 			return 'failed';
 		}
 
-		return proj.status;
+		return proj.get('status');
 	},
 
 	_getStored: function () {

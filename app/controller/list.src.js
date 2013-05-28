@@ -78,7 +78,7 @@ var ListController = o.Class({
 					user = li.attr('user');
 				
 				Prefs.removeUser(user);
-				Projs.removeUser(user);
+				Projects.removeByUser(user);
 
 				that.client.pub('user-removed');
 
@@ -177,13 +177,16 @@ var ListController = o.Class({
 		var
 			ordered = [],
 			users = Prefs.getUsers(),
-			projs = Projs.get(),
 			iwindow = $('iframe#templates').get(0).contentWindow;
 
 		users.forEach(function (user) {
-			var projs = Projs.getFromUser(user);
+			var projects = Projects.findByUser(user);
 
-			ordered.push({user:user, projs:projs});
+			projects = projects.map(function (item) {
+				return item.attributes;
+			});
+
+			ordered.push({user:user, projs:projects});
 		});
 
 		iwindow.postMessage({context: ordered}, '*');

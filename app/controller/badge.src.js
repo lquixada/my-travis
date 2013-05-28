@@ -15,21 +15,20 @@ var BadgeController = o.Class({
 	update: function () {
 		var count, color,
 			failed = 0,
-			running = 0,
-			projs = Projs.get();
+			running = 0;
 
-		if (projs.length===0) {
+		if (Projects.length===0) {
 			this._clearChromeBadge();
 			return;
 		}
 
-		projs.forEach(function (proj) {
-			if (proj.status === 'failed') {
+		Projects.each(function (project) {
+			if (project.get('status') === 'failed') {
 				failed++;
 				return;
 			}
 
-			if (proj.status === 'started') {
+			if (project.get('status')=== 'started') {
 				running++;
 				return;
 			}
