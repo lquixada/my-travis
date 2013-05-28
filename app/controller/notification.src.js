@@ -38,9 +38,9 @@ var NotificationController = o.Class({
 	},
 	
 	update: function () {
-		var	prefs = Prefs.get();
+		var	notifications = Settings.get('notifications');
 
-		if (prefs.notifications) {
+		if (notifications) {
 			this._notify(Projects);
 		}
 	},

@@ -98,7 +98,7 @@ var FormUsersController = o.Class({
 
 			users = this.user.value.split(',');
 			users.reverse().forEach(function (user) {
-				Prefs.addUser(user);
+				Settings.addUser(user);
 			});
 
 			that._lock();
@@ -165,8 +165,8 @@ var FormPrefsController = o.Class({
 		this.el('form').on('submit', function (evt) {
 			evt.preventDefault();
 
-			Prefs.set('intervalMin', this.interval.value || 1);
-			Prefs.set('notifications', this.notifications.checked || false);
+			Settings.set('interval', this.interval.value || 1);
+			Settings.set('useNotifications', this.notifications.checked || false);
 
 			that._setStatus('saved');
 
@@ -179,10 +179,12 @@ var FormPrefsController = o.Class({
 	},
 
 	_restoreData: function () {
-		var prefs = Prefs.get();
+		var
+			interval = Settings.get('interval') || 1,
+			useNotifications = Settings.get('useNotifications') || false;
 		
-		this.el(':input[name=interval]').val(prefs.intervalMin || 1);
-		this.el(':input[name=notifications]').attr('checked', prefs.notifications || false);
+		this.el(':input[name=interval]').val(interval);
+		this.el(':input[name=notifications]').attr('checked', useNotifications);
 	}
 });
 

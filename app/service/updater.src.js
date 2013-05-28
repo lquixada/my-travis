@@ -5,7 +5,7 @@ var UpdaterService = o.Class({
 
 	exec: function (callback) {
 		var that = this,
-			users = Prefs.getUsers();
+			users = Settings.getUsers();
 
 		TravisAPI.get(users, function (projs) {
 			projs = ProjectModel.convertAll(projs);
@@ -49,8 +49,8 @@ var UpdaterService = o.Class({
 
 	start: function () {
 		var
-			users = Prefs.getUsers(),
-			interval = parseInt(Prefs.get('intervalMin'), 10) || 1;
+			users = Settings.getUsers(),
+			interval = parseInt(Settings.get('intervalMin'), 10) || 1;
 
 		if (users.length) {
 			this._createAlarm(interval);

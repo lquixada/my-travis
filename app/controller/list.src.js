@@ -11,7 +11,7 @@ var ListController = o.Class({
 	},
 
 	render: function () {
-		var users = Prefs.getUsers();
+		var users = Settings.getUsers();
 
 		if (users.length===0) {
 			this.client.pub('project-list-cleared');
@@ -77,7 +77,7 @@ var ListController = o.Class({
 				var li = $(this).closest('li'),
 					user = li.attr('user');
 				
-				Prefs.removeUser(user);
+				Settings.removeUser(user);
 				Projects.removeByUser(user);
 
 				that.client.pub('user-removed');
@@ -131,7 +131,7 @@ var ListController = o.Class({
 			stop: function () {
 				var users = that._grepUsersOrder();
 
-				Prefs.set('users', users.join(','));
+				Settings.setUsers(users);
 			}
 		});
 	},
@@ -176,7 +176,7 @@ var ListController = o.Class({
 	_requestTemplate: function () {
 		var
 			ordered = [],
-			users = Prefs.getUsers(),
+			users = Settings.getUsers(),
 			iwindow = $('iframe#templates').get(0).contentWindow;
 
 		users.forEach(function (user) {
