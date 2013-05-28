@@ -1,15 +1,13 @@
-/*globals DOMController */
+var AuthorView = Backbone.View.extend({
+	el: 'section#author',
 
-var AuthorController = o.Class({
-	extend: DOMController,
-	dom: 'section#author',
-
-	boot: function () {
-		this._addListeners();
+	events: {
+		'click': '_hide',
+		'click div#card': 'stopPropagation',
+		'click button#close': '_hide'
 	},
 
-	init: function (opt) {
-		this._super(opt);
+	initialize: function () {
 		this.client = new LiteMQ.Client({name: 'AuthorController'});
 
 		this._addBusListeners();
@@ -19,35 +17,28 @@ var AuthorController = o.Class({
 	_addBusListeners: function () {
 		var that = this;
 		
-		this.client.sub('popup-window-load', function () {
-				that._addListeners();
-			})
+		this.client
+			//.sub('popup-window-load', function () {
+				//new AuthorView();
+			//})
 			.sub('link-author-clicked', function () {
 				that._show();	
 			});
 	},
 
-	_addListeners: function () {
-		var that = this;
-
-		this.el().on('click', function () {
-				that._hide();
-			})
-			.on('click', 'div#card', function (evt) {
-				evt.stopPropagation();
-			})
-			.on('click', 'button#close', function () {
-				that._hide();
-			});
-	},
-
 	_hide: function () {
-		this.el().css('visibility', 'hidden');
+		this.$el.css('visibility', 'hidden');
 	},
 
 	_show: function () {
-		this.el().css('visibility', 'visible');
-	} 
+		this.$el.css('visibility', 'visible');
+	},
+
+	stopPropagation: function (evt) {
+		evt.stopPropagation();
+	}
 });
 
-new AuthorController();
+$(document).ready(function () {
+	new AuthorView();
+});
