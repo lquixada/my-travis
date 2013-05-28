@@ -1,9 +1,6 @@
-/*globals DOMController */
 
-var AnalyticsController = o.Class({
-	extend: DOMController,
-
-	init: function () {
+var AnalyticsView = Backbone.View.extend({
+	initialize: function () {
 		var that = this;
 
 		this.client = new LiteMQ.Client({name: 'AnalyticsController'});
@@ -28,5 +25,5 @@ var AnalyticsController = o.Class({
 	}
 });
 
-new AnalyticsController();
+new AnalyticsView();
 
