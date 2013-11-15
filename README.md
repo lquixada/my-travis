@@ -22,7 +22,10 @@ turn green.
 
 ## Screenshots
 
-(to be done)
+![Screenshot: Passing](screenshots/screenshot1.png)
+![Screenshot: 1 New Notification](screenshots/screenshot2.png)
+![Screenshot: Dashboard](screenshots/screenshot3.png)
+![Screenshot: Dashboard Settings](screenshots/screenshot4.png)
 
 
 ## Development
